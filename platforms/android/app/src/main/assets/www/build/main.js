@@ -9158,7 +9158,7 @@ var map = {
 		15
 	],
 	"../pages/juego-fer/juego-fer.module": [
-		823,
+		822,
 		14
 	],
 	"../pages/juego-quinteros/juego-quinteros.module": [
@@ -9166,7 +9166,7 @@ var map = {
 		13
 	],
 	"../pages/juego/juego.module": [
-		822,
+		824,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
@@ -9174,15 +9174,15 @@ var map = {
 		11
 	],
 	"../pages/listado-supervisor/listado-supervisor.module": [
-		824,
+		823,
 		10
 	],
 	"../pages/login/login.module": [
-		825,
+		826,
 		9
 	],
 	"../pages/mapa-de-ruta/mapa-de-ruta.module": [
-		826,
+		825,
 		8
 	],
 	"../pages/mis-reservas/mis-reservas.module": [
@@ -9190,7 +9190,7 @@ var map = {
 		7
 	],
 	"../pages/perfil/perfil.module": [
-		814,
+		815,
 		6
 	],
 	"../pages/principal/principal.module": [
@@ -9202,15 +9202,15 @@ var map = {
 		4
 	],
 	"../pages/reserva/reserva.module": [
-		815,
+		817,
 		3
 	],
 	"../pages/sala-de-juegos/sala-de-juegos.module": [
-		816,
+		814,
 		2
 	],
 	"../pages/splash/splash.module": [
-		817,
+		816,
 		1
 	],
 	"../pages/tomar-pedido/tomar-pedido.module": [
@@ -11061,19 +11061,19 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/juego-quinteros/juego-quinteros.module#JuegoQuinterosPageModule', name: 'JuegoQuinterosPage', segment: 'juego-quinteros', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-fer/juego-fer.module#JuegoFerPageModule', name: 'JuegoFerPage', segment: 'juego-fer', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-de-la-mesa/qr-de-la-mesa.module#QrDeLaMesaPageModule', name: 'QrDeLaMesaPage', segment: 'qr-de-la-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tomar-pedido/tomar-pedido.module#TomarPedidoPageModule', name: 'TomarPedidoPage', segment: 'tomar-pedido', priority: 'low', defaultHistory: [] }
@@ -11408,7 +11408,7 @@ var PrincipalPage = /** @class */ (function () {
     };
     PrincipalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-principal',template:/*ion-inline-start:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\principal\principal.html"*/'<ion-header>\n\n  <ion-navbar color="red">\n\n\n\n    <ion-buttons left>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n    <ion-title>{{usuario.tipo}}</ion-title>\n\n\n\n    <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="power"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n\n\n      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar color="red">\n\n      <ion-title>Menú</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n\n\n      <div>\n\n        <img src={{usuario.img}} class="img-menu" />\n\n        <div class="nombre-menu">{{usuario.apellido}}, {{usuario.nombre}} ({{usuario.tipo}})</div>\n\n      </div>\n\n\n\n      <hr class="hr-menu" />\n\n\n\n      <button ion-item *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">{{item.accion}}</button>\n\n      <button ion-item (click)="IrAPerfil()">Ver mi perfil</button>\n\n      <button ion-item (click)="AlternarSonidos()">\n\n        <ng-container *ngIf="sonidos != \'false\'; else activar">Desactivar sonidos</ng-container>\n\n        <ng-template #activar>Activar sonidos</ng-template>\n\n      </button>\n\n      <button ion-item (click)="Logout()" *ngIf="usuario.tipo != \'anonimo\'">Cerrar sesión</button>\n\n\n\n    </ion-list>\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n<ion-nav #content swipeBackEnabled="false"></ion-nav>\n\n\n\n<ion-content class="card-background-page" padding>\n\n\n\n  <button ion-button *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">\n\n    <div class="sombreado"></div>\n\n    <img src="../../assets/imgs/alfa/{{item.img}}" />\n\n    <span>{{item.accion}}</span>\n\n  </button>\n\n\n\n</ion-content>'/*ion-inline-end:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\principal\principal.html"*/,
+            selector: 'page-principal',template:/*ion-inline-start:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\principal\principal.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <ion-buttons left>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="beer"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n    <ion-title>{{usuario.tipo}}</ion-title>\n\n\n\n    <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n\n\n      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar color="dark">\n\n      <ion-title>Menú</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n\n\n      <div>\n\n        <img src={{usuario.img}} class="img-menu" />\n\n        <div class="nombre-menu">{{usuario.apellido}}, {{usuario.nombre}} ({{usuario.tipo}})</div>\n\n      </div>\n\n\n\n      <hr class="hr-menu" />\n\n\n\n      <button ion-item *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">{{item.accion}}</button>\n\n      <button ion-item (click)="IrAPerfil()">Ver mi perfil</button>\n\n      <button ion-item (click)="AlternarSonidos()">\n\n        <ng-container *ngIf="sonidos != \'false\'; else activar">Desactivar sonidos</ng-container>\n\n        <ng-template #activar>Activar sonidos</ng-template>\n\n      </button>\n\n      <button ion-item (click)="Logout()" *ngIf="usuario.tipo != \'anonimo\'">Cerrar sesión</button>\n\n\n\n    </ion-list>\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n<ion-nav #content swipeBackEnabled="false"></ion-nav>\n\n\n\n<ion-content class="card-background-page" padding>\n\n\n\n  <button ion-button *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">\n\n    <div class="sombreado"></div>\n\n    <img src="../../assets/imgs/alfa/{{item.img}}" />\n\n    <span>{{item.accion}}</span>\n\n  </button>\n\n\n\n</ion-content>'/*ion-inline-end:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\principal\principal.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_verificar_tipo_verificar_tipo__["a" /* VerificarTipoProvider */], __WEBPACK_IMPORTED_MODULE_8__providers_fcm_fcm__["a" /* FcmProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_audio__["a" /* NativeAudio */]])
     ], PrincipalPage);

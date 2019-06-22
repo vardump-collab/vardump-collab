@@ -41185,7 +41185,7 @@ page-perfil .ocultar {
 }
 
 page-principal .scroll-content {
-  background-color: #FCE5C6;
+  background-color: #cccccc;
 }
 
 page-principal ion-navbar {
@@ -41201,7 +41201,7 @@ page-principal ion-navbar ion-icon {
 }
 
 page-principal ion-menu .scroll-content {
-  background-color: #FCE5C6;
+  background-color: #cccccc;
 }
 
 page-principal ion-menu button {
@@ -41228,11 +41228,11 @@ page-principal .nombre-menu {
 }
 
 page-principal .hr-menu {
-  background-color: #CF4946;
+  background-color: #2f2f2f;
 }
 
 page-principal ion-icon {
-  color: #CF4946;
+  color: #2f2f2f;
   font-size: 0px;
 }
 
