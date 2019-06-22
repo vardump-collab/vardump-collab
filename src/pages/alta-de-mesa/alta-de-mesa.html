@@ -1,0 +1,110 @@
+      <ion-header>
+        <ion-navbar color="red" hideBackButton="true">
+
+          <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
+      
+          <ion-buttons end>
+           
+            <button ion-button (click)="Logout()">
+              <ion-icon name="power"></ion-icon>
+            </button>
+          </ion-buttons>
+      
+        </ion-navbar>
+      </ion-header>
+
+      <ion-content class ="content" *ngIf="probandingg">
+          <ion-row >
+         
+            <ion-col>
+
+              <ion-list-header style="background-color:#CF4946">
+                <div class="realizarEncuesta">Mesas en el restaurante</div>
+              </ion-list-header>
+
+            <div class="mesas">
+              <button ion-button color="red" class="mesa" *ngFor="let item of mesas">{{item.numeroMesa}}</button>
+            </div>
+          
+              
+            </ion-col>
+          
+          </ion-row>
+          <div >
+            
+              <ion-row>
+                <ion-col>
+                  <ion-list inset>
+                    
+                    <ion-item>
+                      <ion-input type="text" class="numeroMesa" placeholder="Número de mesa" name="email" [(ngModel)]="numeroMesa" ></ion-input>
+                    </ion-item>
+                    
+                    <ion-item>
+                      <ion-input type="text" class="cantidadComensales"  placeholder="Cantidad de comensales" name="password" [(ngModel)]="cantidadComensales"></ion-input>
+                    </ion-item>
+
+                      <select [(ngModel)]="tipo" style="margin: 0 30px 0 0;width: 70%;display: block;
+                      margin: 0 auto;">
+                       <option value="normal">Tipo de mesa normal</option>
+                        <option value="vip">Tipo de mesa VIP</option>
+                        <option value="discapacitados">Tipo de mesa discapacitados</option>
+                        
+                        
+                      </select>
+                       
+
+                        <img [src]="foto" alt="">
+                    
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+              
+              <ion-row>
+                <ion-col class="signup-col">
+
+                    <button ion-button outline color="red" class="sacarFoto" (click)="SacarFoto()">Sacar
+                        foto</button>
+      
+      
+                  <button ion-button color="red" class="botonAlta" (click)="Alta()" >Dar de alta la mesa</button>
+                  
+                </ion-col>
+              </ion-row>
+              
+           
+            <ion-row>
+              <ion-col class="signup-col">
+                
+                
+                
+              </ion-col>
+            </ion-row>
+            
+          </div>
+
+        </ion-content>
+
+            <ion-footer *ngIf="cerrarqr">
+              <ion-toolbar>
+                <ion-title>Footer</ion-title>
+                <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+              </ion-toolbar>
+            </ion-footer>
+
+
+            
+
+
+
+        
+
+    
+

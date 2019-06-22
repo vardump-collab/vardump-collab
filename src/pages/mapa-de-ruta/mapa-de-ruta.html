@@ -1,0 +1,146 @@
+
+
+<ion-header>
+
+
+  <ion-navbar color="red" hideBackButton="true">
+
+      
+
+
+    <ion-buttons start style="left: 3px;
+    position: absolute;">
+    <button ion-button (click)="volver()">
+  <ion-icon name="arrow-back"></ion-icon>
+   </button>
+  </ion-buttons>
+
+    
+
+    <ion-buttons end >
+
+       
+
+       
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content #content>
+
+  <div *ngIf="clientes">
+
+      <div class="asdasd" *ngIf="sinPedidos">
+          SIN PEDIDOS
+        </div>
+
+    <ion-list>
+
+        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->
+
+        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">
+          <div class="realizarEncuesta">Pedidos a entregar</div>
+        </ion-list-header>
+    
+       
+    
+      <ion-item *ngFor="let item of clientesConPedidos">
+        <ion-thumbnail item-start>
+          <!--<img src={{item.img}}>-->
+          <ion-icon name="contact"></ion-icon>
+        </ion-thumbnail>
+    
+      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+        <p>Cliente • {{item.tipo}}</p>-->
+        <h1 class="que">{{item.nombre}}</h1>
+        <p class="queDos">{{item.correo}}</p>
+
+        <button ion-button clear item-end (click)="chatear(item)">
+            <ion-icon name="chatboxes"></ion-icon>
+          </button>
+
+          <button ion-button clear item-end (click)="entregar(item)">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
+    
+    
+    
+    
+      </ion-item>
+    
+    
+    </ion-list>
+
+    </div>
+
+    <div *ngIf="chat">
+
+
+
+
+        <img src={{probando}} style="width: 100px;">
+    
+
+          <ion-label class="lb" >{{nombreCliente}}</ion-label>
+          <ion-label class="lb" >{{direccionCliente}}</ion-label>
+
+          
+
+        
+
+
+	<ion-list no-lines>
+
+		<ion-item *ngFor="let message of messagesList">
+		<!--	<h3>{{message.name}}</h3>
+      <p>{{message.message}}</p>-->
+
+      <div class="chat-message" text-right *ngIf="message.name === probanding">
+          <div class="right-bubble">
+            <span class="msg-name"></span>
+            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
+           <!-- <span class="msg-date">{{message.tiempo}}</span>-->
+            <p text-wrap>{{message.message}}</p>
+          </div>
+        </div>
+
+        <div class="chat-message" text-left *ngIf="message.name !== probanding">
+          <div class="left-bubble">
+            <span class="msg-name">{{message.name}}</span>
+            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
+            <p text-wrap>{{message.message}}</p>
+          </div>
+        </div>
+      
+
+
+
+
+
+
+
+    </ion-item>
+    
+
+
+
+  </ion-list>
+  
+
+</div>
+
+
+</ion-content>
+
+
+<ion-footer *ngIf="mandar">
+	<ion-item>
+		<ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>
+		<button ion-button clear item-right (click)="send()">Enviar</button>
+	</ion-item>
+</ion-footer>
