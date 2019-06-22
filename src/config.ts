@@ -1,11 +1,12 @@
 export const firebaseConfig = {
    fire: {
-        apiKey: "AIzaSyCfFyfD0HvlYR-hemHRBxN3Y_cQB1ihMLM",
-        authDomain: "comanda-4aa6a.firebaseapp.com",
-        databaseURL: "https://comanda-4aa6a.firebaseio.com",
-        projectId: "comanda-4aa6a",
-        storageBucket: "comanda-4aa6a.appspot.com",
-        messagingSenderId: "372543132419"    
+        apiKey: "AIzaSyDpKul2aEmTl7LBvWy3fCAzisXzetZs_l4",
+        authDomain: "proyecto-pps.firebaseapp.com",
+        databaseURL: "https://proyecto-pps.firebaseio.com",
+        projectId: "proyecto-pps",
+        storageBucket: "proyecto-pps.appspot.com",
+        messagingSenderId: "829486067560",
+        appId: "1:829486067560:web:ab3417090232202a"    
     }
 
 

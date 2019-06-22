@@ -1,14 +1,14 @@
 page-splash {
 
     ion-content {
-        background-image: url('../../assets/imgs/gamma/dssda.jpg');
+        background-color: rgb(26,26,26);
         background-size: cover; 
         background-position: center;
       }
 
 
     .parent {
-        background-color: #CF4946;
+        background-color:  rgb(26,26,26);
        // position: relative;
         //top: 0;
         //left: 0;
@@ -43,7 +43,7 @@ page-splash {
         padding: 5px;
         border-radius: 20px;
         //background-color: map-get($colors, primary);
-        background-color: #ff5e00;
+        background-color: rgb(26,26,26);
     }
     .image {
         position: absolute;

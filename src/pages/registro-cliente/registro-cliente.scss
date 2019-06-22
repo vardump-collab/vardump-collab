@@ -109,7 +109,7 @@ page-registro-cliente {
             width: 80%;
             left:10%;
             border-radius:5%;
-            background: red;
+            background: #2f2f2f;
        text-align: center;
        align-items: center;
        height: 200px;
@@ -134,7 +134,7 @@ page-registro-cliente {
     {
        // background-image:url("../assets/imgs/beta/fondo2.jpg");
         //background-repeat: repeat-x repeat-y;
-        background-color:#cf4946!important;
+        background-color:rgb(26,26,26)!important;
     }  
     .ocultar
     {
@@ -156,10 +156,10 @@ page-registro-cliente {
       .mensajeError h2
     {
         border-radius:8px;
-        border:1px solid red;
+        border:1px solid black;
         display:inline;
         padding:5%;
-        background-color:#ff0000!important;
+        background-color:#2f2f2f!important;
        
         color:white;
         font-family: 'Lobster', cursive;
@@ -184,10 +184,10 @@ page-registro-cliente {
     .mensajeError2 h2
     {
       border-radius:8px;
-      border:1px solid rgb(0, 47, 255);
+      border:1px solid black;
       display:inline;
       padding:5%;
-      background-color:#0004ff!important;
+      background-color:#2f2f2f!important;
       color:white;
       font-family: 'Lobster', cursive;
     
@@ -208,10 +208,10 @@ page-registro-cliente {
     .mensajeError3 h2
     {
       border-radius:8px;
-      border:1px solid rgb(72, 255, 0);
+      border:1px solid black;
       display:inline;
       padding:5%;
-      background-color:#2bff00!important;
+      background-color:#2f2f2f!important;
       color:white;
       font-family: 'Lobster', cursive;
     
@@ -302,7 +302,7 @@ page-registro-cliente {
         .btnCerrar
         {
             position: absolute!important;
-            background: firebrick!important;
+            background: transparent!important;
             width: 20px !important;
             top: 0!important;
             right: 0!important;
@@ -310,7 +310,7 @@ page-registro-cliente {
         #btnCerrar
         {
             position: absolute;
-            background: firebrick;
+            background: transparent;
             width: 20px;
             top: 0;
             right: 0;
@@ -399,7 +399,7 @@ page-registro-cliente {
         .form input[type=text]:focus
         {
             
-            border: 2px solid green;
+            border: 2px solid white;
             //background-color: rgba(255, 255, 255, 0.603);
         
             transition:.3s;
@@ -408,7 +408,7 @@ page-registro-cliente {
         .form input[type=number]:focus
         {
             
-            border: 2px solid green;
+            border: 2px solid white;
             //background-color: rgba(255, 255, 255, 0.603);
         
             transition:.3s;
@@ -417,7 +417,7 @@ page-registro-cliente {
         .form input[type=password]:focus
         {
             
-            border: 2px solid green;
+            border: 2px solid white;
            
             transition:.3s;
         }
@@ -488,7 +488,7 @@ page-registro-cliente {
         {
             font-family: 'Niramit', sans-serif;
             text-align:center;
-            background:#cf4946;
+            background:#2f2f2f;
             width: 80%;
     font-size: 2em;
     margin-left: 10%;

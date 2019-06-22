@@ -1,6 +1,6 @@
 @font-face {
-    src: url("../../assets/fonts/Lobster-Regular.ttf");
-    font-family: lobster;
+    src: url("../../assets/fonts/ALGER.ttf");
+    font-family: alger;
 }
 
 @keyframes rotar {
@@ -16,6 +16,7 @@ page-login {
 
     body {
         width: 100%;
+        background-color:rgb(26,26,26);
     }
 
     .ani {
@@ -30,6 +31,7 @@ page-login {
         justify-content: center;
         background-size: cover;
         font-family: roboto;
+        background-color:rgb(26,26,26);
     }
 
     div.horizontal-container {
@@ -38,7 +40,7 @@ page-login {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: #494949;
     }
 
     img.background {
@@ -70,7 +72,7 @@ page-login {
         margin-right: 25px;
         font-weight: 100;
         color: white;
-        font-family: lobster;
+        font-family: alger;
     }
 
     input, select {
@@ -83,7 +85,7 @@ page-login {
         transition-duration: .3s;
         transition-property: border-bottom-color font-size;
         background-color: rgba(255, 255, 255, 0.8);
-        caret-color: color($colors, red);
+        caret-color: color($colors, dark-grey);
     }
 
     select {
@@ -96,7 +98,7 @@ page-login {
 
     input:focus {
         transform: scale(1.2);
-        border-color: color($colors, red);;
+        border-color: color($colors, dark-grey);;
         background-color: rgb(255, 255, 255); 
     }
 
@@ -130,7 +132,7 @@ page-login {
             font-size: 30px;
             padding: 0;
             margin: 0;
-            background-color: color($colors, red);
+            background-color: color($colors, dark-grey);
         }
 
         div {
@@ -151,7 +153,7 @@ page-login {
                 border-radius: 0;
                 border-bottom: 1px solid rgba(255, 255, 255, .4);
                 text-align: left;
-                background-color: color($colors, red);
+                background-color: color($colors, dark-grey);
                 padding-left: 10px;
                 font-size: 20px;
             }

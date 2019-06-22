@@ -257,7 +257,8 @@ export class PrincipalPage {
   }
 
   Logout() {
-
+    console.log("LogOut");
+    console.log("usuario 1 = " + this.usuario.correo);
     let usuariosRef = this.firebase.database().ref("usuarios");
 
     usuariosRef.once("value", (snap) => {
@@ -265,9 +266,9 @@ export class PrincipalPage {
       let data = snap.val();
 
       for (let item in data) {
-
+        console.log(data[item].correo);
         if (data[item].correo == this.usuario.correo) {
-
+          console.log("usuario = " + this.usuario.correo);
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
