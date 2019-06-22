@@ -133,8 +133,8 @@ page-registro-cliente {
     ion-content
     {
        // background-image:url("../assets/imgs/beta/fondo2.jpg");
-        //background-repeat: repeat-x repeat-y;
-        background-color:rgb(26,26,26)!important;
+        background-repeat: repeat-x repeat-y;
+     //   background-color:rgb(26,26,26)!important;
     }  
     .ocultar
     {
@@ -237,6 +237,7 @@ page-registro-cliente {
          width:100%;
          position:relative;
          z-index: 1;
+         background-color: #cccccc;
         // background: url("../assets/imgs/beta/restaurante.jpg");
          //background-size:100% 100%;
         
