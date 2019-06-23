@@ -11,7 +11,8 @@
 page-listado-reservas {
 
     .scroll-content {
-        background-image: url('../../assets/imgs/alfa/encuesta-supervisor.jpg');
+        background-color: #cccccc;
+      //  background-image: url('../../assets/imgs/alfa/encuesta-supervisor.jpg');
         background-size: cover; 
         background-position: center;
     }
@@ -71,7 +72,7 @@ page-listado-reservas {
 
         font-family: cinzel;
         text-align: center;
-        background-color: rgba(207, 73, 70, 1);
+        background-color: #2f2f2f;
         color: white;
     }
 
@@ -105,12 +106,12 @@ page-listado-reservas {
 
         background-color: #FCE5C6;
         height: auto;
-        border-top: solid 5px color($colors, red); 
+        border-top: solid 5px color($colors, dark-grey); 
 
         h1 {
             margin: 15px 10px 15px 10px;
             text-align: center;
-            color: color($colors, red);
+            color: color($colors, dark-grey);
         }
 
     }
@@ -121,15 +122,15 @@ page-listado-reservas {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        border-top: solid color($colors, red) 1px;
-        border-bottom: solid color($colors, red) 1px;
+        border-top: solid color($colors, dark-grey) 1px;
+        border-bottom: solid color($colors, dark-grey) 1px;
     }
 
     .mesa {
         flex-grow: 1;
         width: 20%;
         height: 100px;
-        background-color: color($colors, red);
+        background-color: color($colors, dark-grey);
         margin: 10px;
         display: flex;
         align-items: center;

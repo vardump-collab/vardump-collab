@@ -36873,7 +36873,7 @@ page-alta-de-mesa ion-col {
 }
 
 page-alta-de-mesa ion-content {
-  background-image: url("../../assets/imgs/gamma/prob.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -36967,8 +36967,8 @@ page-alta-de-mesa .mesas {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  border-top: solid #CF4946 1px;
-  border-bottom: solid #CF4946 1px;
+  border-top: solid #2f2f2f 1px;
+  border-bottom: solid #2f2f2f 1px;
 }
 
 page-alta-de-mesa .mesa {
@@ -36978,7 +36978,7 @@ page-alta-de-mesa .mesa {
   flex-grow: 1;
   width: 20%;
   height: 50px;
-  background-color: #CF4946;
+  background-color: #2f2f2f;
   margin: 10px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -37020,7 +37020,7 @@ page-alta-de-mesa .titulo {
 }
 
 page-alta-duenio-supervisor ion-content {
-  background-image: url("../../assets/imgs/alfa/supervisor-bgn.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -37091,7 +37091,7 @@ page-alta-duenio-supervisor img {
 page-alta-duenio-supervisor h1 {
   font-size: 80px;
   font-weight: 100;
-  color: #CF4946;
+  color: #2f2f2f;
   font-family: lobster;
   margin-bottom: 25px;
 }
@@ -37101,7 +37101,7 @@ page-alta-duenio-supervisor h2 {
   padding: 10px 0 10px 0;
   font-family: cinzel;
   text-align: center;
-  background-color: #cf4946;
+  background-color: #2f2f2f;
   color: white;
 }
 
@@ -37116,7 +37116,7 @@ page-alta-duenio-supervisor input, page-alta-duenio-supervisor select {
   -webkit-transition-property: border-bottom-color font-size;
   transition-property: border-bottom-color font-size;
   background-color: rgba(255, 255, 255, 0.8);
-  caret-color: #CF4946;
+  caret-color: #2f2f2f;
 }
 
 page-alta-duenio-supervisor input:first-of-type {
@@ -37126,7 +37126,7 @@ page-alta-duenio-supervisor input:first-of-type {
 page-alta-duenio-supervisor input:focus {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
-  border-color: #CF4946;
+  border-color: #2f2f2f;
   background-color: white;
 }
 
@@ -37178,7 +37178,7 @@ page-alta-duenio-supervisor .animation-target {
 }
 
 page-alta-empleado ion-content {
-  background-image: url("../../assets/imgs/alfa/mozo.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -37248,7 +37248,7 @@ page-alta-empleado img {
 page-alta-empleado h1 {
   font-size: 80px;
   font-weight: 100;
-  color: #CF4946;
+  color: #2f2f2f;
   font-family: lobster;
   margin-bottom: 25px;
 }
@@ -37258,7 +37258,7 @@ page-alta-empleado h2 {
   padding: 10px 0 10px 0;
   font-family: cinzel;
   text-align: center;
-  background-color: #cf4946;
+  background-color: #2f2f2f;
   color: white;
 }
 
@@ -37273,7 +37273,7 @@ page-alta-empleado input, page-alta-empleado select {
   -webkit-transition-property: border-bottom-color font-size;
   transition-property: border-bottom-color font-size;
   background-color: rgba(255, 255, 255, 0.8);
-  caret-color: #CF4946;
+  caret-color: #2f2f2f;
 }
 
 page-alta-empleado input:first-of-type {
@@ -37283,7 +37283,7 @@ page-alta-empleado input:first-of-type {
 page-alta-empleado input:focus {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
-  border-color: #CF4946;
+  border-color: #2f2f2f;
   background-color: white;
 }
 
@@ -37350,7 +37350,7 @@ page-alta-platos ion-navbar ion-icon {
 }
 
 page-alta-platos ion-content {
-  background-image: url("../assets/imgs/beta/fondo2.jpg");
+  background-color: #cccccc;
   background-repeat: repeat-x repeat-y;
   overflow: scroll !important;
 }
@@ -37424,7 +37424,7 @@ page-alta-platos .alert3 {
   padding: 10%;
   left: 10%;
   border-radius: 5%;
-  background: #cf4946;
+  background: #2f2f2f;
   text-align: center;
   top: 36%;
   -webkit-box-pack: center;
@@ -37508,7 +37508,7 @@ page-alta-platos .tiempoDiv, page-alta-platos .precioDiv, page-alta-platos .boto
 page-alta-platos .radio-md .radio-inner {
   width: 25px;
   height: 25px;
-  background-color: #f53d3d;
+  background-color: #2f2f2f;
   top: 0;
   left: 0;
 }
@@ -37721,7 +37721,7 @@ page-alta-platos .Foto1 ion-icon, page-alta-platos .Foto2 ion-icon, page-alta-pl
 }
 
 page-cuenta .scroll-content {
-  background-image: url("../../assets/imgs/alfa/cuenta.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -37749,21 +37749,21 @@ page-cuenta h1 {
 page-cuenta .puntos {
   width: 100%;
   background-position: bottom;
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(20%, #CF4946), color-stop(0%, rgba(255, 255, 255, 0)));
-  background-image: linear-gradient(to right, #CF4946 20%, rgba(255, 255, 255, 0) 0%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(20%, #222), color-stop(0%, rgba(255, 255, 255, 0)));
+  background-image: linear-gradient(to right, #222 20%, rgba(255, 255, 255, 0) 0%);
   background-size: 10px 2px;
   background-repeat: repeat-x;
   height: 5px;
 }
 
 .ie9 page-cuenta .puntos {
-  border-bottom: 1px dotted #CF4946;
+  border-bottom: 1px dotted #222;
 }
 
 page-cuenta .cuenta {
   width: 100%;
-  border: solid 4px #CF4946;
-  outline: solid 2px #CF4946;
+  border: solid 4px #222;
+  outline: solid 2px #222;
   outline-offset: 5px;
   padding: 10px;
 }
@@ -37796,7 +37796,7 @@ page-cuenta .cuenta button[ion-button] {
 }
 
 page-cuenta .total {
-  color: #CF4946;
+  color: #222;
   font-size: 30px;
   text-transform: uppercase;
 }
@@ -37811,7 +37811,7 @@ page-cuenta ul {
 page-cuenta ul.rating li {
   padding: 5px 10px !important;
   background: none;
-  color: #CF4946;
+  color: #222;
 }
 
 page-cuenta ul.rating li ion-icon {
@@ -37861,7 +37861,7 @@ page-encuesta-cliente ion-navbar ion-icon {
 }
 
 page-encuesta-cliente ion-content {
-  background: url(../assets/imgs/beta/fondoQr.jpg);
+  background-color: #2f2f22;
   background-size: 100% 100%;
 }
 
@@ -37880,7 +37880,7 @@ page-encuesta-cliente .alert3 {
   padding: 10%;
   left: 10%;
   border-radius: 5%;
-  background: #cf4946;
+  background: #2f2f2f;
   text-align: center;
   top: 36%;
   -webkit-box-pack: center;
@@ -37915,7 +37915,7 @@ page-encuesta-cliente .canvas {
   display: none;
   position: absolute;
   z-index: 10000;
-  background: #e13838;
+  background: #2f2f2f;
   padding-top: 5%;
   padding-bottom: 5%;
 }
@@ -38000,7 +38000,7 @@ page-encuesta-cliente .contenido {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: url("../assets/imgs/beta/fondoQr.jpg");
+  background-color: #2f2f22;
   background-size: 100% 100%;
   position: relative;
   -webkit-box-pack: center;
@@ -38058,7 +38058,7 @@ page-encuesta-cliente .cerrarChartFotos {
   position: absolute;
   right: 5px;
   top: 0;
-  background: #e13838;
+  background: #2f2f2f;
 }
 
 page-encuesta-cliente .yaRespondido {
@@ -38087,13 +38087,13 @@ page-encuesta-cliente .pregunta1, page-encuesta-cliente .pregunta2, page-encuest
 }
 
 page-encuesta-cliente ion-item {
-  background: #e13838 !important;
+  background: #2f2f2f !important;
 }
 
 page-encuesta-cliente .laPregunta1, page-encuesta-cliente .laPregunta2, page-encuesta-cliente .laPregunta3, page-encuesta-cliente .laPregunta4, page-encuesta-cliente .laPregunta5, page-encuesta-cliente .laPregunta6 {
   width: 100%;
   height: 70%;
-  background: #e13838;
+  background: #2f2f2f;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: -webkit-box;
@@ -38282,7 +38282,7 @@ page-encuesta-de-empleado ion-item {
 }
 
 page-encuesta-de-empleado .cds {
-  background-image: url("../../assets/imgs/gamma/encuestafinal.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -38371,7 +38371,7 @@ page-encuesta-de-empleado .realizarEncuesta {
   text-align: center;
   font-family: 'Lobster', cursive;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  background: #CF4946;
+  background: #2f2f2f;
 }
 
 page-encuesta-de-empleado .resultadoEncuesta {
@@ -38420,7 +38420,7 @@ page-encuesta-supervisor h1 {
   text-align: center;
   margin-bottom: 20px;
   padding: 10px 20px 10px 20px;
-  background-color: #CF4946;
+  background-color: #2f2f2f;
   color: white;
   font-family: cinzel;
   margin-bottom: 0;
@@ -38460,7 +38460,7 @@ page-encuesta-supervisor .encuesta ion-list {
 
 page-encuesta-supervisor .encuesta ion-list ion-item {
   background-color: transparent !important;
-  border-color: red;
+  border-color: #cccccc;
 }
 
 page-encuesta-supervisor select {
@@ -38473,11 +38473,11 @@ page-encuesta-supervisor select {
 }
 
 page-encuesta-supervisor .item-inner {
-  border-color: #CF4946 !important;
+  border-color: #2f2f2f !important;
 }
 
 page-encuesta-supervisor textarea {
-  border-color: #CF4946;
+  border-color: #2f2f2f;
   border-style: solid;
   padding: 5px 10px 5px 10px;
   margin: auto;
@@ -38520,7 +38520,7 @@ page-encuesta-supervisor .comentarios {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 30px;
-  border-bottom: dashed orange 5px;
+  border-bottom: dashed slategray 5px;
   min-height: 120px;
 }
 
@@ -39491,7 +39491,7 @@ page-juego-quinteros .titulo2 {
 }
 
 page-listado-reservas .scroll-content {
-  background-image: url("../../assets/imgs/alfa/encuesta-supervisor.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -39570,7 +39570,7 @@ page-listado-reservas .titulo {
   padding: 10px 10px 10px 10px;
   font-family: cinzel;
   text-align: center;
-  background-color: #cf4946;
+  background-color: #2f2f2f;
   color: white;
 }
 
@@ -39613,13 +39613,13 @@ page-listado-reservas .interfaz-mesas {
   width: 100%;
   background-color: #FCE5C6;
   height: auto;
-  border-top: solid 5px #CF4946;
+  border-top: solid 5px #2f2f2f;
 }
 
 page-listado-reservas .interfaz-mesas h1 {
   margin: 15px 10px 15px 10px;
   text-align: center;
-  color: #CF4946;
+  color: #2f2f2f;
 }
 
 page-listado-reservas .mesas {
@@ -39637,8 +39637,8 @@ page-listado-reservas .mesas {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  border-top: solid #CF4946 1px;
-  border-bottom: solid #CF4946 1px;
+  border-top: solid #2f2f2f 1px;
+  border-bottom: solid #2f2f2f 1px;
 }
 
 page-listado-reservas .mesa {
@@ -39648,7 +39648,7 @@ page-listado-reservas .mesa {
   flex-grow: 1;
   width: 20%;
   height: 100px;
-  background-color: #CF4946;
+  background-color: #2f2f2f;
   margin: 10px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -39714,7 +39714,7 @@ page-listado-reservas .ocultar {
 }
 
 page-listado-supervisor .scroll-content {
-  background-image: url("../../assets/imgs/alfa/encuesta-supervisor.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -39785,7 +39785,7 @@ page-listado-supervisor .titulo {
   padding: 10px 0 10px 0;
   font-family: cinzel;
   text-align: center;
-  background-color: #cf4946;
+  background-color: #2f2f2f;
   color: white;
 }
 
@@ -40089,7 +40089,7 @@ page-mapa-de-ruta .ion-md-checkmark-circle:before {
 }
 
 page-mapa-de-ruta ion-content {
-  background-image: url("../../assets/imgs/gamma/cht.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -40209,7 +40209,7 @@ page-mapa-de-ruta .chat-status .chat-content-center {
 }
 
 page-mapa-de-ruta .home {
-  background-color: #f53d3d !important;
+  background-color: #2f2f2f !important;
 }
 
 page-mapa-de-ruta ion-item {
@@ -40262,7 +40262,7 @@ page-mapa-de-ruta .que {
 }
 
 page-mapa-de-ruta .queDos {
-  color: red !important;
+  color: #2f2f2f !important;
   font-size: 80%;
   margin-bottom: 0px !important;
   margin-top: 2px !important;
@@ -40302,7 +40302,7 @@ page-mapa-de-ruta .asdasd {
   padding-top: 5px !important;
   font-family: 'roboto';
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  background-color: #CF4946;
+  background-color: #2f2f2f;
   height: 100px;
   text-align: center;
   vertical-align: middle;
@@ -40324,7 +40324,7 @@ page-mapa-de-ruta .asdasd {
 }
 
 page-mis-reservas .scroll-content {
-  background-image: url("../../assets/imgs/alfa/encuesta-supervisor.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -40403,7 +40403,7 @@ page-mis-reservas .titulo {
   padding: 10px 10px 10px 10px;
   font-family: cinzel;
   text-align: center;
-  background-color: #cf4946;
+  background-color: #2f2f2f;
   color: white;
 }
 
@@ -40524,7 +40524,7 @@ page-pedir-platos .slide {
   width: 100%;
   height: 100%;
   top: 0;
-  background: orangered;
+  background: #2f2f2f;
 }
 
 page-pedir-platos .monto {
@@ -40646,7 +40646,7 @@ page-pedir-platos .alert {
   width: 80%;
   left: 10%;
   border-radius: 5%;
-  background: red;
+  background: #2f2f2f;
   text-align: center;
   top: 50%;
   display: none;
@@ -40694,7 +40694,7 @@ page-pedir-platos .elAlert2 {
 
 page-pedir-platos .alert2 {
   border-radius: 5%;
-  background: orangered;
+  background: #2f2f2f;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -40739,7 +40739,7 @@ page-pedir-platos .alert3 {
   width: 80%;
   padding: 10%;
   border-radius: 5%;
-  background: #ff1100;
+  background: #2f2f2f;
   text-align: center;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -40779,7 +40779,7 @@ page-pedir-platos .contenido {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: url("../assets/imgs/beta/madera.jpg");
+  background-color: #cccccc;
   background-repeat: repeat-y;
   background-size: 100%;
   background-repeat: repeat-y;
@@ -40791,7 +40791,7 @@ page-pedir-platos .tituloPag {
   text-align: center;
   color: white;
   font-size: 3em;
-  background: orangered;
+  background: #2f2f2f;
   margin-bottom: 20%;
 }
 
@@ -40905,7 +40905,7 @@ page-pedir-platos .platos {
   width: 100%;
   height: 75%;
   top: 24%;
-  background: orangered;
+  background: #2f2f2f;
   overflow: scroll;
 }
 
@@ -40957,7 +40957,7 @@ page-pedir-platos .elegido {
   z-index: 3000;
   width: 100%;
   height: 124px;
-  background-color: rgba(236, 15, 15, 0.61);
+  background-color: #2f2f2f;
   top: -17px;
 }
 
@@ -41047,7 +41047,7 @@ page-pedir-platos .cancelarBtn {
 }
 
 page-perfil .scroll-content {
-  background-image: url("../../assets/imgs/alfa/encuesta-supervisor.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -41122,7 +41122,7 @@ page-perfil h2 {
   padding: 10px 0 10px 0;
   font-family: cinzel;
   text-align: center;
-  background-color: #cf4946;
+  background-color: #2f2f2f;
   color: white;
   margin-bottom: 25px;
 }
@@ -42827,7 +42827,7 @@ body
 }
 
 page-reserva .scroll-content {
-  background-image: url("../../assets/imgs/alfa/reserva-background.jpg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -42928,7 +42928,7 @@ page-reserva div.inputs span {
 
 page-reserva ion-item {
   width: 230px !important;
-  background-color: #CF4946 !important;
+  background-color: #2f2f2f !important;
   margin-bottom: 10px !important;
 }
 
@@ -42961,11 +42961,11 @@ page-reserva input {
   -webkit-transition-property: border-bottom-color font-size;
   transition-property: border-bottom-color font-size;
   background-color: rgba(255, 255, 255, 0.8);
-  caret-color: #CF4946;
+  caret-color: #2f2f2f;
 }
 
 page-reserva input:focus {
-  border-color: #CF4946;
+  border-color: #2f2f2f;
   background-color: white;
 }
 
@@ -43001,7 +43001,7 @@ page-reserva .animation-target {
 }
 
 .picker-toolbar button {
-  color: #CF4946 !important;
+  color: #2f2f2f !important;
   text-transform: capitalize;
   font-size: 20px;
 }
@@ -43011,7 +43011,7 @@ page-reserva .animation-target {
 }
 
 .picker-wrapper .picker-opt-selected {
-  color: #CF4946 !important;
+  color: #2f2f2f !important;
 }
 
 page-sala-de-juegos .scroll-content {
@@ -43192,7 +43192,7 @@ page-tomar-pedido .list {
 }
 
 page-tomar-pedido .scroll-content {
-  background-image: url("../../assets/imgs/gamma/blue.jpeg");
+  background-color: #cccccc;
   background-size: cover;
   background-position: center;
 }
@@ -43275,7 +43275,7 @@ page-tomar-pedido .asdasd {
   padding-top: 5px !important;
   font-family: 'roboto';
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  background-color: #CF4946;
+  background-color: #2f2f2f;
   height: 100px;
   text-align: center;
   vertical-align: middle;

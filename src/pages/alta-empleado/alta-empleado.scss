@@ -1,7 +1,8 @@
 page-alta-empleado {
 
     ion-content {
-        background-image: url('../../assets/imgs/alfa/mozo.jpg');
+        background-color: #cccccc;
+    //    background-image: url('../../assets/imgs/alfa/mozo.jpg');
         background-size: cover; 
         background-position: center; 
     }
@@ -46,7 +47,7 @@ page-alta-empleado {
     h1 {
         font-size: 80px;
         font-weight: 100;
-        color: color($colors, red);
+        color: color($colors, dark-grey);
         font-family: lobster;
         margin-bottom: 25px;
     }
@@ -56,7 +57,7 @@ page-alta-empleado {
         padding: 10px 0 10px 0;
         font-family: cinzel;
         text-align: center;
-        background-color: rgba(207, 73, 70, 1);
+        background-color: #2f2f2f;
         color: white;
     }
 
@@ -69,7 +70,7 @@ page-alta-empleado {
         transition-duration: .3s;
         transition-property: border-bottom-color font-size;
         background-color: rgba(255, 255, 255, 0.8);
-        caret-color: color($colors, red);
+        caret-color: color($colors, dark-grey);
     }
 
     input:first-of-type {
@@ -78,7 +79,7 @@ page-alta-empleado {
 
     input:focus {
         transform: scale(1.2);
-        border-color: color($colors, red);;
+        border-color: color($colors, dark-grey);;
         background-color: rgb(255, 255, 255); 
     }
 

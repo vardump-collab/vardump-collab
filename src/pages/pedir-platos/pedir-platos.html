@@ -13,8 +13,8 @@
   <div class="alert2" >
     <h1>Ingrese por favor el n&uacute;mero de mesa</h1>
     <input type="number"[(ngModel)]="mesa">
-    <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
-    <button ion-button color="red" (click)="CancelarAlert2()">Cancelar</button>
+    <button ion-button color="dark" (click)="AceptarAlert2()">Aceptar</button>
+    <button ion-button color="dark" (click)="CancelarAlert2()">Cancelar</button>
   </div>
   </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
@@ -52,8 +52,8 @@
          
          </div>
     </div>
-       <button ion-button class="aceptarBtn" color="red" color="celeste" (click)="AceptarPedido()">Aceptar</button>
-       <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('plato')">Cancelar</button>
+       <button ion-button class="aceptarBtn" color="dark" color="celeste" (click)="AceptarPedido()">Aceptar</button>
+       <button ion-button class="cancelarBtn" color="dark" color="celeste" (click)="CancelarPedido('plato')">Cancelar</button>
 </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarBebidas}">
   <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
@@ -83,17 +83,17 @@
        
   </div>
   </div>
-     <button ion-button class="aceptarBtn" color="red" color="celeste" (click)="AceptarPedido()">Aceptar</button>
-     <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('bebida')">Cancelar</button>
+     <button ion-button class="aceptarBtn" color="dark" color="celeste" (click)="AceptarPedido()">Aceptar</button>
+     <button ion-button class="cancelarBtn" color="dark" color="celeste" (click)="CancelarPedido('bebida')">Cancelar</button>
 </div>
 
 <ion-header>
-  <ion-navbar color="red" hideBackButton="true">
+  <ion-navbar color="dark" hideBackButton="true">
 
       <ion-buttons start style="left: 3px;
       position: absolute;">
         <button ion-button (click)="Atras()">
-          <ion-icon name="arrow-back"></ion-icon>
+          <ion-icon name="arrow-dropleft"></ion-icon>
         </button>
       </ion-buttons>
 
@@ -101,7 +101,7 @@
 
     <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
       <button ion-button (click)="Logout()">
-        <ion-icon name="power"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
 

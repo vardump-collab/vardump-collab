@@ -14,7 +14,8 @@ page-alta-platos {
   
     ion-content
     {
-        background-image:url("../assets/imgs/beta/fondo2.jpg");
+        background-color: #cccccc;
+     //   background-image:url("../assets/imgs/beta/fondo2.jpg");
         background-repeat: repeat-x repeat-y;
         overflow:scroll!important;
     }
@@ -74,7 +75,7 @@ page-alta-platos {
        padding:10%;
        left: 10%;
        border-radius: 5%;
-       background: #cf4946;
+       background: #2f2f2f;
        text-align: center;
        top: 36%;
        justify-content: center;
@@ -140,7 +141,7 @@ page-alta-platos {
     {
         width: 25px;
         height: 25px;
-        background-color: #f53d3d;
+        background-color: #2f2f2f;
         top:0;
         left:0;
     }

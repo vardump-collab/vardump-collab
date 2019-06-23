@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="dark">
 
     <ion-buttons>
       <button ion-button (click)="VolverAtras()">
@@ -9,7 +9,7 @@
 
     <ion-buttons end>
       <button ion-button (click)="Logout()">
-        <ion-icon name="power"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -35,7 +35,7 @@
 
     <div class="mi-range">
 
-      <ion-range [(ngModel)]="conducta" color="red" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;"
+      <ion-range [(ngModel)]="conducta" color="dark" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;"
         (ngModelChange)="ModificarTextoRange()"></ion-range>
       <span>{{textoRange}}</span>
 
@@ -55,11 +55,11 @@
     <ion-list radio-group [(ngModel)]="inconveniente">
       <ion-item>
         <ion-label>Sí</ion-label>
-        <ion-radio color="red" value="1"></ion-radio>
+        <ion-radio color="dark" value="1"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>No</ion-label>
-        <ion-radio color="red" value="0"></ion-radio>
+        <ion-radio color="dark" value="0"></ion-radio>
       </ion-item>
     </ion-list>
 
@@ -78,17 +78,17 @@
 
       <ion-item>
         <ion-label>Mala conducta</ion-label>
-        <ion-checkbox color="red" [(ngModel)]="aspectos.item1"></ion-checkbox>
+        <ion-checkbox color="dark" [(ngModel)]="aspectos.item1"></ion-checkbox>
       </ion-item>
 
       <ion-item>
         <ion-label>Mala presentación</ion-label>
-        <ion-checkbox color="red" [(ngModel)]="aspectos.item2"></ion-checkbox>
+        <ion-checkbox color="dark" [(ngModel)]="aspectos.item2"></ion-checkbox>
       </ion-item>
 
       <ion-item>
         <ion-label>Poca formalidad</ion-label>
-        <ion-checkbox color="red" [(ngModel)]="aspectos.item3"></ion-checkbox>
+        <ion-checkbox color="dark" [(ngModel)]="aspectos.item3"></ion-checkbox>
       </ion-item>
 
     </ion-list>
@@ -119,7 +119,7 @@
 
   </div>
 
-  <button ion-button color="red" class="enviar" [disabled]="estadoBoton" (click)="HacerEncuesta()">Enviar encuesta</button>
+  <button ion-button color="dark" class="enviar" [disabled]="estadoBoton" (click)="HacerEncuesta()">Enviar encuesta</button>
 
   <h1 style="margin-bottom: 30px;" *ngIf="!ocultarSpinner && pregunta5.length > 1">Comentarios</h1>
 

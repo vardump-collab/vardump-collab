@@ -42,7 +42,8 @@ page-tomar-pedido {
     }
 
     .scroll-content {
-        background-image: url('../../assets/imgs/gamma/blue.jpeg');
+        background-color: #cccccc;
+      //  background-image: url('../../assets/imgs/gamma/blue.jpeg');
         background-size: cover; 
         background-position: center; 
     }
@@ -107,7 +108,7 @@ page-tomar-pedido {
         //text-align: center;
         font-family: 'roboto';
         text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-        background-color:#CF4946;
+        background-color:#2f2f2f;
         height:100px;
         text-align: center;
         vertical-align: middle;

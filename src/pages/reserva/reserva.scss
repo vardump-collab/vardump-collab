@@ -1,7 +1,8 @@
 page-reserva {
 
     .scroll-content {
-        background-image: url('../../assets/imgs/alfa/reserva-background.jpg');
+       background-color: #cccccc;
+       // background-image: url('../../assets/imgs/alfa/reserva-background.jpg');
         background-size: cover; 
         background-position: center; 
     }
@@ -68,7 +69,7 @@ page-reserva {
 
     ion-item {
         width: 230px !important;
-        background-color: color($colors, red) !important;
+        background-color: color($colors, dark-grey) !important;
         margin-bottom: 10px !important;
     }
 
@@ -99,11 +100,11 @@ page-reserva {
         transition-duration: .3s;
         transition-property: border-bottom-color font-size;
         background-color: rgba(255, 255, 255, 0.8);
-        caret-color: color($colors, red);
+        caret-color: color($colors, dark-grey);
     }
 
     input:focus {
-        border-color: color($colors, red);;
+        border-color: color($colors, dark-grey);;
         background-color: rgb(255, 255, 255); 
     }
 
@@ -136,7 +137,7 @@ page-reserva {
     background-color: #FCE5C6 !important;
 
     button {
-        color: color($colors, red) !important;
+        color: color($colors, dark-grey) !important;
         text-transform: capitalize;
         font-size: 20px;
     }
@@ -146,7 +147,7 @@ page-reserva {
     background-color: #FCE5C6 !important;
 
     .picker-opt-selected {
-        color: color($colors, red) !important;
+        color: color($colors, dark-grey) !important;
     }
 }
 

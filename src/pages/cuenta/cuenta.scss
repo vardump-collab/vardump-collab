@@ -23,7 +23,8 @@
 page-cuenta {
 
     .scroll-content {
-        background-image: url('../../assets/imgs/alfa/cuenta.jpg');
+        background-color: #cccccc;
+       // background-image: url('../../assets/imgs/alfa/cuenta.jpg');
         background-size: cover;
         background-position: center;
     }
@@ -48,14 +49,14 @@ page-cuenta {
 
     .puntos {
         width: 100%;
-        @include dottedBorder(color($colors, red), $orientation: horizontal, $position: bottom, $spacing: 10px, $size: 2px);
+        @include dottedBorder(color($colors, dark), $orientation: horizontal, $position: bottom, $spacing: 10px, $size: 2px);
         height: 5px;
     }
 
     .cuenta {
         width: 100%;
-        border: solid 4px color($colors, red);
-        outline: solid 2px color($colors, red);
+        border: solid 4px color($colors, dark);
+        outline: solid 2px color($colors, dark);
         outline-offset: 5px;
         padding: 10px;
 
@@ -80,7 +81,7 @@ page-cuenta {
     }
 
     .total {
-        color: color($colors, red);
+        color: color($colors, dark);
         font-size: 30px;
         text-transform: uppercase;
     }
@@ -94,7 +95,7 @@ page-cuenta {
         &.rating li {
           padding: 5px 10px !important;
           background: none;
-          color: color($colors, red);
+          color: color($colors, dark);
       
           ion-icon {
             font-size: 50px;

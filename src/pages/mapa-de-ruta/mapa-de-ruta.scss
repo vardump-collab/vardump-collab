@@ -37,7 +37,8 @@ ion-navbar ion-icon { font-size: 50px !important; }
 }
 
 ion-content {
-  background-image: url('../../assets/imgs/gamma/cht.jpg');
+  background-color: #cccccc;
+  //background-image: url('../../assets/imgs/gamma/cht.jpg');
   background-size: cover; 
   background-position: center;
 }
@@ -171,7 +172,7 @@ ion-content {
     */
 
     .home {
-        background-color: #f53d3d !important;
+        background-color: #2f2f2f !important;
       }
 
       ion-item {
@@ -240,7 +241,7 @@ ion-content {
 
   .queDos{
 
-    color: red!important;
+    color: #2f2f2f!important;
         font-size: 80%;
         margin-bottom: 0px !important;
         margin-top: 2px !important;
@@ -285,7 +286,7 @@ ion-content {
   //text-align: center;
   font-family: 'roboto';
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  background-color:#CF4946;
+  background-color:#2f2f2f;
   height:100px;
   text-align: center;
   vertical-align: middle;

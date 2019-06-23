@@ -26,7 +26,7 @@ page-encuesta-supervisor {
         text-align: center;
         margin-bottom: 20px;
         padding: 10px 20px 10px 20px;
-        background-color: color($colors, red);
+        background-color: color($colors, dark-grey);
         color: white;
         font-family: cinzel;
         margin-bottom: 0;
@@ -55,7 +55,7 @@ page-encuesta-supervisor {
             ion-item {
                 background-color: transparent !important;
 
-                border-color: red;
+                border-color: #cccccc;
             }
         }
 
@@ -71,11 +71,11 @@ page-encuesta-supervisor {
     }
 
     .item-inner {
-        border-color: color($colors, red) !important;
+        border-color: color($colors, dark-grey) !important;
     }
 
     textarea {
-        border-color: color($colors, red);
+        border-color: color($colors, dark-grey);
         border-style: solid;
         padding: 5px 10px 5px 10px;
         margin: auto;
@@ -106,7 +106,7 @@ page-encuesta-supervisor {
         padding-left: 10px;
         padding-right: 10px;
         margin-bottom: 30px;
-        border-bottom: dashed orange 5px;
+        border-bottom: dashed slategray 5px;
         min-height: 120px;
 
         img {

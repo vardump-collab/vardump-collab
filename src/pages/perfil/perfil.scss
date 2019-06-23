@@ -6,7 +6,8 @@
 page-perfil {
 
     .scroll-content {
-        background-image: url('../../assets/imgs/alfa/encuesta-supervisor.jpg');
+        background-color: #cccccc;
+     //   background-image: url('../../assets/imgs/alfa/encuesta-supervisor.jpg');
         background-size: cover; 
         background-position: center;
     }
@@ -58,7 +59,7 @@ page-perfil {
         padding: 10px 0 10px 0;
         font-family: cinzel;
         text-align: center;
-        background-color: rgba(207, 73, 70, 1);
+        background-color: #2f2f2f;
         color: white;
         margin-bottom: 25px;
     }

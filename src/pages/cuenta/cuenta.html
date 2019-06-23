@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="dark">
 
     <!-- <ion-title>{{usuario.tipo}}</ion-title> -->
 
     <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
       <button ion-button (click)="Logout()">
-        <ion-icon name="power"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -75,7 +75,7 @@
 
     <span class="rating">{{textoRate}} ({{propina}}% de propina)</span>
 
-    <button ion-button color="red" [disabled]="estadoBoton" (click)="Pagar()">{{textoDelBoton}}</button>
+    <button ion-button color="dark" [disabled]="estadoBoton" (click)="Pagar()">{{textoDelBoton}}</button>
 
   </div>
 
