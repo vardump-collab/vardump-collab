@@ -11,7 +11,8 @@
 Lograr una aplicación utilizando el hardware del dispositivo móvil para la gestión de información, enfocada en la experiencia de usuario. El enfoque va a estar dado por los usuarios de un *RESTAURANT*, el cual apunta todos sus esfuerzos en mejorar la utilización de su servicio por medio de una aplicación para celulares.
   
 #
-  
+<img src="./src/assets/imgs/readme/tipo5.png" width="150" height="150"/></p>
+
 ## Juan Manuel Figueiras :
 <table>
 <thead>
@@ -67,6 +68,8 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 </tbody>
 </table>
 
+#
+<img src="./src/assets/imgs/readme/tipo1.png" width="150" height="150"/></p>
 ## Federico Henseler :
 <table>
 <thead>
@@ -122,6 +125,8 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 </tbody>
 </table>
 
+#
+<img src="./src/assets/imgs/readme/tipo4.png" width="130" height="150"/></p>
 ## C. Javier Mollar :
 <table>
 <thead>
