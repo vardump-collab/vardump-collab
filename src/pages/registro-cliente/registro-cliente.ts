@@ -84,7 +84,7 @@ export class RegistroClientePage {
     }
 
     
-    if ( (this.dni < 1000000) && (this.dni > 99999999) ) {
+    if ( (this.dni < 1000000) || (this.dni > 99999999) ) {
       this.presentToast("El dni es inválido.");
       return;
     }
