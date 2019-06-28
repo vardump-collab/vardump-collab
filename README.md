@@ -182,3 +182,5 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 </tbody>
 </table>
 
+#
+<img src="./src/assets/imgs/readme/img-varias.png" /></p>
