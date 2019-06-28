@@ -108,7 +108,7 @@ page-qr-de-la-mesa {
         //background-image: url('../../assets/imgs/gamma/beigeqrmesa.jpg');
         background-size: cover; 
         background-position: center; 
-        background-color: lightblue;
+        background-color: #cccccc;
     }
 
     ion-navbar {
@@ -139,7 +139,7 @@ page-qr-de-la-mesa {
 
     ion-icon {
         //color: white;
-        color:rgb(179, 0, 0);
+        color:#2f2f2f;
         font-size: 30px;
     }
 }
@@ -149,7 +149,7 @@ page-qr-de-la-mesa {
     padding: 10px 0 10px 0;
     font-family: cinzel;
     text-align: center;
-    background-color: rgba(207, 73, 70, 1);
+    background-color:#2f2f2f;
     color: white;
 }
 
@@ -172,11 +172,11 @@ page-qr-de-la-mesa {
 {
 
         margin: 0 30px 0 0;width: 70%;display: block;
-        margin: 0 auto;  background-image: -webkit-linear-gradient(top, red, black);
-        background-image: -moz-linear-gradient(top, red, #2079b0);
-        background-image: -ms-linear-gradient(top, red, #2079b0);
-        background-image: -o-linear-gradient(top, red, #2079b0);
-        background-image: linear-gradient(to bottom, red, #2079b0);-webkit-border-radius: 28;
+        margin: 0 auto;  background-image: -webkit-linear-gradient(top, #cccccc, #2f2f2f);
+        background-image: -moz-linear-gradient(top, #cccccc, #2f2f2f);
+        background-image: -ms-linear-gradient(top, #cccccc, #2f2f2f);
+        background-image: -o-linear-gradient(top, #cccccc, #2f2f2f);
+        background-image: linear-gradient(to bottom, #cccccc, #2f2f2f);-webkit-border-radius: 28;
         -moz-border-radius: 28;
         border-radius: 28px;
         text-shadow: 3px 2px 1px #9daef5;
@@ -217,7 +217,7 @@ page-qr-de-la-mesa {
 
 .alert-message {
   width: 130px;
-  background-color: rgba(color($colors, red), .5);
+  background-color: rgba(color($colors, dark), .5);
   color: white;
   overflow: auto;
   text-align: center;
@@ -237,14 +237,14 @@ page-qr-de-la-mesa {
           font-size: 10px;
           color: white;
           border-radius: 0;
-          background-color: color($colors, red);
+          background-color: color($colors, dark);
           text-transform: none;
           border: none;
           width: 100%;
       }
 
       button[ion-button] + button[ion-button] {
-          border-left: 2px color($colors, red) solid;
+          border-left: 2px color($colors, dark) solid;
       }
   }
 
@@ -311,7 +311,7 @@ page-qr-de-la-mesa {
   //text-align: center;
   font-family: 'roboto';
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  background-color:#CF4946;
+  background-color:#2f2f2f;
   height:100px;
   text-align: center;
   vertical-align: middle;
@@ -330,7 +330,7 @@ page-qr-de-la-mesa {
   //text-align: center;
   font-family: 'roboto';
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  background-color:#CF4946;
+  background-color:#2f2f2f;
   height:100px;
   text-align: center;
   vertical-align: middle;
@@ -349,7 +349,7 @@ page-qr-de-la-mesa {
   //text-align: center;
   font-family: 'roboto';
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  background-color:#CF4946;
+  background-color:#2f2f2f;
   height:100px;
   text-align: center;
   vertical-align: middle;

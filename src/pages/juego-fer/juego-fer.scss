@@ -11,7 +11,7 @@ page-juego-fer {
     ion-navbar ion-icon { font-size: 50px !important; }
 
     ion-content {
-        background-image: url('../../assets/imgs/alfa/juego-bgn.jpg');
+        background-color: #cccccc;
         background-size: cover; 
         background-position: center; 
     }
@@ -24,7 +24,7 @@ page-juego-fer {
         margin-right: auto;
         margin-bottom: 50px;
         text-align: center;
-        background-color: color($colors, red);
+        background-color: color($colors, dark);
         font-size: 20px;
         color: white;
         padding: 15px;
@@ -40,7 +40,7 @@ page-juego-fer {
         padding-left: 10px; 
         padding-right: 10px;
         line-height: 1.6;
-        background-color: color($colors, red);
+        background-color: color($colors, dark);
         color: white;
         width: 100%;
     }
@@ -79,7 +79,7 @@ page-juego-fer {
     }
 
     .item:not(:last-child) {
-        border-bottom: solid 1px color($colors, red);
+        border-bottom: solid 1px color($colors, dark);
     }
 
     input, select {
@@ -91,11 +91,11 @@ page-juego-fer {
         margin: 7vh 0 7vh 0;
         font-size: 25px;
         transition-duration: .3s;
-        caret-color: color($colors, red);
+        caret-color: color($colors, dark);
     }
 
     input:focus {
-        border-color: color($colors, red);
+        border-color: color($colors, dark);
     }
 
     .ocultar {

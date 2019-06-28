@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="dark">
 
     <!-- <ion-title>{{usuario.tipo}}</ion-title> -->
 
     <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
       <button ion-button (click)="Logout()">
-        <ion-icon name="power"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -42,16 +42,16 @@
       </ion-item>
       <ion-item>
         <ion-label>{{preguntaSeleccionada.opcion2}}</ion-label>
-        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion2}}"></ion-radio>
+        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion2}}"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>{{preguntaSeleccionada.opcion3}}</ion-label>
-        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion3}}"></ion-radio>
+        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion3}}"></ion-radio>
       </ion-item>
 
       <ion-item>
         <ion-label>{{preguntaSeleccionada.opcion4}}</ion-label>
-        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>
+        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>
       </ion-item>
     </ion-list>
 

@@ -48,7 +48,7 @@ page-juego-quinteros {
     ion-navbar ion-icon { font-size: 30px !important; }
 
     .scroll-content {
-        background-image: url('../../assets/imgs/gamma/pinki.jpg');
+        background-color: #2f2f2f;
        // background-color: #000000 !important;
         background-size: cover; 
         background-position: center; 
@@ -62,7 +62,7 @@ page-juego-quinteros {
     .reward-font {
         font-family: 'Handlee', cursive;
         font-size: 40px;
-        color: #B5022F;
+        color: white;
         font-weight: bold;
     }
     .game-title {
@@ -119,7 +119,7 @@ page-juego-quinteros {
         .reward-font {
             font-family: 'Handlee', cursive;
             font-size: 23px;
-            color: #B5022F;
+            color: white;
             font-weight: bold;
         }
         .blackboard {
@@ -157,11 +157,11 @@ page-juego-quinteros {
     {
 
             margin: 0 30px 0 0;width: 70%;display: block;
-            margin: 0 auto;  background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
-            background-image: -moz-linear-gradient(top, #eb94d0, #2079b0);
-            background-image: -ms-linear-gradient(top, #eb94d0, #2079b0);
-            background-image: -o-linear-gradient(top, #eb94d0, #2079b0);
-            background-image: linear-gradient(to bottom, #eb94d0, #2079b0);-webkit-border-radius: 28;
+            margin: 0 auto;  background-image: -webkit-linear-gradient(top,  #2f2f2f, #cccccc);
+            background-image: -moz-linear-gradient(top, #2f2f2f, #cccccc);
+            background-image: -ms-linear-gradient(top, #2f2f2f, #cccccc);
+            background-image: -o-linear-gradient(top, #2f2f2f, #cccccc);
+            background-image: linear-gradient(to bottom,  #2f2f2f, #cccccc);-webkit-border-radius: 28;
             -moz-border-radius: 28;
             border-radius: 28px;
             text-shadow: 3px 2px 1px #9daef5;
@@ -213,7 +213,7 @@ page-juego-quinteros {
       
       .alert-message {
         width: 130px;
-        background-color: rgba(color($colors, red), .5);
+        background-color: rgba(color($colors, dark), .5);
         color: white;
         overflow: auto;
         text-align: center;
@@ -233,14 +233,14 @@ page-juego-quinteros {
                 font-size: 10px;
                 color: white;
                 border-radius: 0;
-                background-color: color($colors, red);
+                background-color: color($colors, dark);
                 text-transform: none;
                 border: none;
                 width: 100%;
             }
       
             button[ion-button] + button[ion-button] {
-                border-left: 2px color($colors, red) solid;
+                border-left: 2px color($colors, dark) solid;
             }
         }
       

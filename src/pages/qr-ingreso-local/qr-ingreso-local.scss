@@ -65,7 +65,7 @@ page-qr-ingreso-local {
         height: 100%!important;
         display: flex;
         flex-direction: column;
-        background: url("../assets/imgs/beta/fondoQr.jpg");
+        background-color: #2f2f2f;
         background-size:100% 100%;
         position:relative;
     }
@@ -128,7 +128,7 @@ page-qr-ingreso-local {
     .regAnonimo
     {
        
-        border: 3px solid #f53d3d;
+        border: 3px solid black;
         width: 90%;
         display: flex;
         flex-direction: column;
@@ -250,7 +250,7 @@ page-qr-ingreso-local {
        padding:10%;
        left: 10%;
        border-radius: 5%;
-       background-color: red!important;
+       background-color: #2f2f2f!important;
        text-align: center;
        top: 36%;
        justify-content: center;
@@ -344,7 +344,7 @@ page-qr-ingreso-local {
         width: 90%;
         color: white;
         /* left: 5%; */
-        background-color: rgba(250, 24, 24, 0.54);
+        background-color: #2f2f2f;
         font-size: 2.8em;
         padding: 0%;
         padding: 2%;
@@ -432,7 +432,7 @@ page-qr-ingreso-local {
         text-transform: lowercase;      /* text-align: center; */
         margin-bottom: 8%;
         color: white;
-        border-bottom: 4px groove #db1814;
+        border-bottom: 4px groove black;
         letter-spacing: 1px;
        
         padding-bottom: 20px;
