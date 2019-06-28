@@ -26,17 +26,17 @@
 </tr>
 <tr>
 <td>QR Mesa<td>
-<td>Size of marker icon</td>
-<td><a href="http://leafletjs.com/reference.html#point">Point</a></td>
-<td>[22, 22]</td>
-<td><a href="http://leafletjs.com/reference.html#icon-options">Icon Options</a></td>
+<td>Se llevo a cabo el componente para poder leer los códigos QR de la mesa, se realizaron pruebas de testing sobre el mismo. </td>
+<td>HIGH</td>
+<td>5hs</td>
+<td>27 de Mayo</td>
 </tr>
 <tr>
-<td>iconAnchor</td>
-<td>Anchor size of marker</td>
-<td><a href="http://leafletjs.com/reference.html#point">Point</a></td>
-<td>[11, 10]</td>
-<td><a href="http://leafletjs.com/reference.html#icon-options">Icon Options</a></td>
+<td>Encuesta del empleado</td>
+<td>Se efectuó el modulo encargado de realizar la encuesta dirigida al empleado luego de sus correspondientes horas de trabajo</td>
+<td>MEDIUM</td>
+<td>3hs</td>
+<td>29 de Mayo</td>
 </tr>
 <tr>
 <td>iconShape</td>
