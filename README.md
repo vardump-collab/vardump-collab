@@ -25,7 +25,7 @@
 <td>20 de Mayo</td>
 </tr>
 <tr>
-<td>QR Mesa<td>
+<td>QR Mesa</td>
 <td>Se llevo a cabo el componente para poder leer los códigos QR de la mesa, se realizaron pruebas de testing sobre el mismo. </td>
 <td>HIGH</td>
 <td>5hs</td>
