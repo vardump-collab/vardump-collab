@@ -152,8 +152,8 @@ export class CuentaPage {
         break;
     }
 
-    this.propinaTotal = (this.subTotal * this.propina) / 100;
-    this.total = this.subTotal + this.propinaTotal;
+    //this.propinaTotal = (this.subTotal * this.propina) / 100;
+    this.total = this.subTotal + ((this.subTotal * this.propina) / 100);
 
     if (this.rate > 1)
       this.textoDelBoton = "Verificar mesa";
