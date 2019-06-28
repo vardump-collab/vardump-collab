@@ -116,3 +116,59 @@
 </tr>
 </tbody>
 </table>
+
+## C. Javier Mollar :
+<table>
+<thead>
+<th>Tarea</th>
+<th>Descripción</th>
+<th>Prioridad</th>
+<th>Horas de trabajo</th>
+<th>Fecha de commit</th>
+</thead>
+<tbody>
+<tr>
+<td>Alta del cliente</td>
+<td>Desarrollo de un componente para realizar el registro de clientes en la base de datos de la comanda</td>
+<td>HIGH</td>
+<td>3hs</td>
+<td>18 de Mayo</td>
+</tr>
+<tr>
+<td>QR Propina</td>
+<td>Se llevo a cabo el componente para poder leer los códigos QR de la propina, se realizaron pruebas de testing sobre el mismo. </td>
+<td>HIGH</td>
+<td>4hs</td>
+<td>23 de Mayo</td>
+</tr>
+<tr>
+<td>QR Supervisor</td>
+<td>Se llevo a cabo el componente para poder leer los códigos QR del supervisor, se realizaron pruebas de testing sobre el mismo.</td>
+<td>HIGH</td>
+<td>1hs</td>
+<td>27 de Mayo</td>
+</tr>
+<tr>
+<td>Reservas</td>
+<td>Se realizo el componente encargado de las reservas de los clientes</td>
+<td>HIGH</td>
+<td>5hs</td>
+<td>4 de Junio</td>
+</tr>
+<tr>
+<td>Push notif. reserva/delivery</td>
+<td>Se desarrolló el componente push notificación que indica al usuario información relacionada a la reserva/delivery</td>
+<td>LOW</td>
+<td>0.5hs</td>
+<td>4 de Junio</td>
+</tr>
+<tr>
+<td>Pedidos por GPS</td>
+<td>Configuración completa global del GPS y su vinculación con la aplicación</td>
+<td>HIGH</td>
+<td>15hs</td>
+<td>8 de Junio</td>
+</tr>
+</tbody>
+</table>
+
