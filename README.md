@@ -2,8 +2,13 @@
 <p align="center">
 <img src="./src/assets/imgs/readme/logo-readme.png"></p>
 <br>
-<p align="center">
-<img src="https://img.shields.io/github/license/TheTeamByte/Markdown-Master.svg"></p>
+  
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)  <img src="https://img.shields.io/github/license/TheTeamByte/Markdown-Master.svg">
+
+
+
+## Objetivo de la aplicación:
+Lograr una aplicación utilizando el hardware del dispositivo móvil para la gestión de información, enfocada en la experiencia de usuario. El enfoque va a estar dado por los usuarios de un *RESTAURANT*, el cual apunta todos sus esfuerzos en mejorar la utilización de su servicio por medio de una aplicación para celulares.
   
 #
   
