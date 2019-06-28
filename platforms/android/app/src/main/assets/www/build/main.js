@@ -3613,8 +3613,8 @@ var CuentaPage = /** @class */ (function () {
                         return valorAnterior.cantidad * valorAnterior.precio + valorActual.cantidad * valorActual.precio;
                 });
                 if (data.desc) {
-                    _this.descuento = _this.total * 0.1;
-                    _this.total -= _this.descuento;
+                    _this.descuento = _this.subTotal * 0.1;
+                    _this.subTotal -= _this.descuento;
                 }
                 _this.estado = "cuenta";
                 _this.ocultarSpinner = true;
@@ -9136,7 +9136,7 @@ webpackEmptyAsyncContext.id = 274;
 
 var map = {
 	"../pages/alta-de-mesa/alta-de-mesa.module": [
-		818,
+		819,
 		20
 	],
 	"../pages/alta-duenio-supervisor/alta-duenio-supervisor.module": [
@@ -9144,7 +9144,7 @@ var map = {
 		19
 	],
 	"../pages/alta-empleado/alta-empleado.module": [
-		819,
+		818,
 		18
 	],
 	"../pages/cuenta/cuenta.module": [
@@ -9168,7 +9168,7 @@ var map = {
 		13
 	],
 	"../pages/juego/juego.module": [
-		823,
+		825,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
@@ -9180,11 +9180,11 @@ var map = {
 		10
 	],
 	"../pages/login/login.module": [
-		825,
+		823,
 		9
 	],
 	"../pages/mapa-de-ruta/mapa-de-ruta.module": [
-		826,
+		827,
 		8
 	],
 	"../pages/mis-reservas/mis-reservas.module": [
@@ -9196,7 +9196,7 @@ var map = {
 		6
 	],
 	"../pages/principal/principal.module": [
-		827,
+		826,
 		5
 	],
 	"../pages/qr-de-la-mesa/qr-de-la-mesa.module": [
@@ -11067,16 +11067,16 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-fer/juego-fer.module#JuegoFerPageModule', name: 'JuegoFerPage', segment: 'juego-fer', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-de-la-mesa/qr-de-la-mesa.module#QrDeLaMesaPageModule', name: 'QrDeLaMesaPage', segment: 'qr-de-la-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tomar-pedido/tomar-pedido.module#TomarPedidoPageModule', name: 'TomarPedidoPage', segment: 'tomar-pedido', priority: 'low', defaultHistory: [] }
                     ]

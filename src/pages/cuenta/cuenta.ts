@@ -104,8 +104,8 @@ export class CuentaPage {
         });
 
         if (data.desc) {
-          this.descuento = this.total * 0.1;
-          this.total -= this.descuento;
+          this.descuento = this.subTotal * 0.1;
+          this.subTotal -= this.descuento;
         }
 
         this.estado = "cuenta";
