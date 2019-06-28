@@ -82,6 +82,13 @@ export class RegistroClientePage {
       this.presentToast("Todos los campos deben ser completados.");
       return;
     }
+
+    
+    if ( (this.dni < 1000000) && (this.dni > 99999999) ) {
+      this.presentToast("El dni es inválido.");
+      return;
+    }
+
     this.mostrarSpinner=true;
     let usuariosRef = firebase.database().ref("usuarios");
 
