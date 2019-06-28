@@ -17,7 +17,7 @@
        under the License.
  */
 
-package io.ionic.comanda;
+package com.asgardianos.comanda;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

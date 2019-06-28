@@ -247,7 +247,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-login',template:/*ion-inline-start:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\login\login.html"*/'<!--<img class="background" src="../../assets/imgs/alfa/background.jpg" />-->\n\n\n\n<div class="usuarios">\n\n      \n\n    <button [class]="botonUsuarios" (click)="DesplegarUsuarios()">\n\n      <ion-icon name="arrow-down"></ion-icon>\n\n    </button>  \n\n    <div [class]="agrandar">\n\n      <button (click)="SetearUsuario(\'admin@gmail.com\', \'111111\')">Dueño</button>\n\n      <button (click)="SetearUsuario(\'supervisor@gmail.com\', \'222222\')">Supervisor</button>\n\n      <button (click)="SetearUsuario(\'mozo@gmail.com\', \'333333\')">Mozo</button>\n\n      <button (click)="SetearUsuario(\'cocinero@gmail.com\', \'444444\')">Cocinero</button>\n\n      <button (click)="SetearUsuario(\'bartender@gmail.com\', \'555555\')">Bartender</button>\n\n      <button (click)="SetearUsuario(\'metre@gmail.com\', \'666666\')">Metre</button>\n\n      <button (click)="SetearUsuario(\'repartidor@gmail.com\', \'777777\')">Repartidor</button>\n\n      <button (click)="SetearUsuario(\'fernandohugolareu@hotmail.com\', \'888888\')">Cliente</button>\n\n      <button (click)="SetearUsuario(\'cjaviermollar@gmail.com\', \'111111\')">Cliente 2</button>\n\n      <button (click)="IngresarComoAnonimo()">Anonimo</button>\n\n    </div> \n\n\n\n  </div>\n\n\n\n<div class="vertical-container" (click)="NoDesplegarUsuarios()">\n\n\n\n  <div class="horizontal-container">\n\n    <div class="header">\n\n      <h1>Inicio</h1>\n\n      <img src="../../assets/imgs/alfa/logo.png" [class]="animation" />\n\n    </div>\n\n\n\n    <input type="text" placeholder="Correo electrónico" [(ngModel)]="correo" />\n\n    <input type="password" placeholder="Contraseña" [(ngModel)]="clave" />\n\n\n\n    <span>\n\n      ¿No tienes una cuenta?\n\n      <a (click)="Redireccionar()">Registrate</a>\n\n    </span>\n\n\n\n    <button ion-button outline color="light" (click)="Login()" \n\n      [disabled]="estadoBoton">{{textoDelBoton}}</button>\n\n   \n\n\n\n  </div>\n\n</div>'/*ion-inline-end:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\login\login.html"*/'<!--<img class="background" src="../../assets/imgs/alfa/background.jpg" />-->\n\n\n\n<div class="usuarios">\n\n      \n\n    <button [class]="botonUsuarios" (click)="DesplegarUsuarios()">\n\n      <ion-icon name="arrow-down"></ion-icon>\n\n    </button>  \n\n    <div [class]="agrandar">\n\n      <button (click)="SetearUsuario(\'tec.jmfigueiras@gmail.com\', \'123456\')">Dueño</button>\n\n      <button (click)="SetearUsuario(\'fhenserle3@gmail.com\', \'123456\')">Supervisor</button>\n\n      <button (click)="SetearUsuario(\'mozo@gmail.com\', \'123456\')">Mozo</button>\n\n      <button (click)="SetearUsuario(\'cocinero@gmail.com\', \'123456\')">Cocinero</button>\n\n      <button (click)="SetearUsuario(\'bartender@gmail.com\', \'123456\')">Bartender</button>\n\n      <button (click)="SetearUsuario(\'metre@gmail.com\', \'123456\')">Metre</button>\n\n      <button (click)="SetearUsuario(\'repartidor@gmail.com\', \'123456\')">Repartidor</button>\n\n      <button (click)="SetearUsuario(\'cjaviermollar@gmail.com\', \'123456\')">Cliente</button>\n\n      <button (click)="IngresarComoAnonimo()">Anonimo</button>\n\n    </div> \n\n\n\n  </div>\n\n\n\n<div class="vertical-container" (click)="NoDesplegarUsuarios()">\n\n\n\n  <div class="horizontal-container">\n\n    <div class="header">\n\n      <h1>Inicio</h1>\n\n      <img src="../../assets/imgs/alfa/logo.png" [class]="animation" />\n\n    </div>\n\n\n\n    <input type="text" placeholder="Correo electrónico" [(ngModel)]="correo" />\n\n    <input type="password" placeholder="Contraseña" [(ngModel)]="clave" />\n\n\n\n    <span>\n\n      ¿No tienes una cuenta?\n\n      <a (click)="Redireccionar()">Registrate</a>\n\n    </span>\n\n\n\n    <button ion-button outline color="light" (click)="Login()" \n\n      [disabled]="estadoBoton">{{textoDelBoton}}</button>\n\n   \n\n\n\n  </div>\n\n</div>'/*ion-inline-end:"E:\javii\Documents\Facultad\PPS\LaComandaPPS.V3\vardump-collab\src\pages\login\login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
@@ -9134,7 +9134,7 @@ webpackEmptyAsyncContext.id = 274;
 
 var map = {
 	"../pages/alta-de-mesa/alta-de-mesa.module": [
-		818,
+		819,
 		20
 	],
 	"../pages/alta-duenio-supervisor/alta-duenio-supervisor.module": [
@@ -9142,15 +9142,15 @@ var map = {
 		19
 	],
 	"../pages/alta-empleado/alta-empleado.module": [
-		819,
+		818,
 		18
 	],
 	"../pages/cuenta/cuenta.module": [
-		820,
+		821,
 		17
 	],
 	"../pages/encuesta-de-empleado/encuesta-de-empleado.module": [
-		821,
+		820,
 		16
 	],
 	"../pages/encuesta-supervisor/encuesta-supervisor.module": [
@@ -9206,11 +9206,11 @@ var map = {
 		3
 	],
 	"../pages/sala-de-juegos/sala-de-juegos.module": [
-		817,
+		816,
 		2
 	],
 	"../pages/splash/splash.module": [
-		816,
+		817,
 		1
 	],
 	"../pages/tomar-pedido/tomar-pedido.module": [
@@ -11063,12 +11063,12 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-fer/juego-fer.module#JuegoFerPageModule', name: 'JuegoFerPage', segment: 'juego-fer', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },

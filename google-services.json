@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "372543132419",
-    "firebase_url": "https://comanda-4aa6a.firebaseio.com",
-    "project_id": "comanda-4aa6a",
-    "storage_bucket": "comanda-4aa6a.appspot.com"
+    "project_number": "829486067560",
+    "firebase_url": "https://proyecto-pps.firebaseio.com",
+    "project_id": "proyecto-pps",
+    "storage_bucket": "proyecto-pps.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:372543132419:android:f3a40908bd574b9b",
+        "mobilesdk_app_id": "1:829486067560:android:ab5bf5aa2c8a8940",
         "android_client_info": {
-          "package_name": "io.ionic.comanda"
+          "package_name": "com.asgardianos.comanda"
         }
       },
       "oauth_client": [
         {
-          "client_id": "372543132419-02oq1vo1hee41iuumro5dhlu5ogf8nof.apps.googleusercontent.com",
+          "client_id": "829486067560-duvm0gdflg76pi6556krj8mfq4jeu2qk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDg6n5cAEIVVXsDdDxU3U3NoQBkNeQxD8I"
+          "current_key": "AIzaSyCUIMNBuEzy2zckyHW5bG3mDYOPj80XxBM"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829486067560-duvm0gdflg76pi6556krj8mfq4jeu2qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
