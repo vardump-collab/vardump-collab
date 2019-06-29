@@ -4027,12 +4027,12 @@ var ListadoReservasPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SalaDeJuegosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__juego_fer_juego_fer__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__juego_uno_juego_uno__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__juego_juego__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__juego_quinteros_juego_quinteros__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__juego_dos_juego_dos__ = __webpack_require__(229);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4056,9 +4056,9 @@ var SalaDeJuegosPage = /** @class */ (function () {
         this.firebase = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a;
         this.usuario = JSON.parse(localStorage.getItem("usuario"));
         this.juegos = [
-            { accion: "Preguntas y respuestas", img: "preguntas-respuestas.jpg", ruta: __WEBPACK_IMPORTED_MODULE_2__juego_fer_juego_fer__["a" /* JuegoFerPage */] },
+            { accion: "Preguntas y respuestas", img: "preguntas-respuestas.jpg", ruta: __WEBPACK_IMPORTED_MODULE_2__juego_uno_juego_uno__["a" /* JuegoUnoPage */] },
             { accion: "Juego de la memoria", img: "memoria.jpg", ruta: __WEBPACK_IMPORTED_MODULE_5__juego_juego__["a" /* JuegoPage */] },
-            { accion: "Agilidad aritmética", img: "agilidad-aritmetica.jpg", ruta: __WEBPACK_IMPORTED_MODULE_6__juego_quinteros_juego_quinteros__["a" /* JuegoQuinterosPage */] }
+            { accion: "Agilidad aritmética", img: "agilidad-aritmetica.jpg", ruta: __WEBPACK_IMPORTED_MODULE_6__juego_dos_juego_dos__["a" /* JuegoDosPage */] }
         ];
     }
     SalaDeJuegosPage.prototype.ionViewDidLoad = function () {
@@ -4115,7 +4115,7 @@ var SalaDeJuegosPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JuegoFerPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JuegoUnoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_audio__ = __webpack_require__(77);
@@ -4136,8 +4136,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var JuegoFerPage = /** @class */ (function () {
-    function JuegoFerPage(navCtrl, navParams, toastCtrl, nativeAudio) {
+var JuegoUnoPage = /** @class */ (function () {
+    function JuegoUnoPage(navCtrl, navParams, toastCtrl, nativeAudio) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -4204,13 +4204,13 @@ var JuegoFerPage = /** @class */ (function () {
         this.preguntaSeleccionada = this.preguntas[this.indice];
         this.respuestaUsuario = this.preguntaSeleccionada.opcion1;
     }
-    JuegoFerPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad JuegoFerPage');
+    JuegoUnoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad JuegoUnoPage');
     };
-    JuegoFerPage.prototype.ionViewDidLeave = function () {
+    JuegoUnoPage.prototype.ionViewDidLeave = function () {
         clearInterval(this.intervalID);
     };
-    JuegoFerPage.prototype.Validar = function () {
+    JuegoUnoPage.prototype.Validar = function () {
         console.log(this.respuestaUsuario);
         if (this.respuestaUsuario == this.preguntaSeleccionada.respuesta) {
             this.NuevaPregunta();
@@ -4219,7 +4219,7 @@ var JuegoFerPage = /** @class */ (function () {
             this.Perder("¡Respuesta incorrecta!");
         }
     };
-    JuegoFerPage.prototype.NuevaPregunta = function () {
+    JuegoUnoPage.prototype.NuevaPregunta = function () {
         var _this = this;
         this.preguntasAcertadas++;
         if (localStorage.getItem("sonidos") != "false") {
@@ -4258,11 +4258,11 @@ var JuegoFerPage = /** @class */ (function () {
             this.segundos = 10;
         }
     };
-    JuegoFerPage.prototype.EmpezarJuego = function () {
+    JuegoUnoPage.prototype.EmpezarJuego = function () {
         this.OcultarAlert();
         this.Timer();
     };
-    JuegoFerPage.prototype.Perder = function (titulo) {
+    JuegoUnoPage.prototype.Perder = function (titulo) {
         var _this = this;
         if (localStorage.getItem("sonidos") != "false") {
             this.nativeAudio.play('fallo').catch(function (error) { });
@@ -4278,7 +4278,7 @@ var JuegoFerPage = /** @class */ (function () {
             }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
         }
     };
-    JuegoFerPage.prototype.Timer = function () {
+    JuegoUnoPage.prototype.Timer = function () {
         var _this = this;
         this.intervalID = setInterval(function () {
             _this.segundos--;
@@ -4287,20 +4287,20 @@ var JuegoFerPage = /** @class */ (function () {
             }
         }, 1000);
     };
-    JuegoFerPage.prototype.MostrarAlert = function (titulo, mensaje, mensajeBoton, handler) {
+    JuegoUnoPage.prototype.MostrarAlert = function (titulo, mensaje, mensajeBoton, handler) {
         this.ocultarAlert = false;
         this.alertTitulo = titulo;
         this.alertMensaje = mensaje;
         this.alertMensajeBoton = mensajeBoton;
         this.alertHandler = handler;
     };
-    JuegoFerPage.prototype.OcultarAlert = function () {
+    JuegoUnoPage.prototype.OcultarAlert = function () {
         this.ocultarAlert = true;
     };
-    JuegoFerPage.prototype.Volver = function () {
+    JuegoUnoPage.prototype.Volver = function () {
         this.navCtrl.pop();
     };
-    JuegoFerPage.prototype.presentToast = function (mensaje) {
+    JuegoUnoPage.prototype.presentToast = function (mensaje) {
         var toast = this.toastCtrl.create({
             message: mensaje,
             duration: 3000,
@@ -4309,7 +4309,7 @@ var JuegoFerPage = /** @class */ (function () {
         });
         toast.present();
     };
-    JuegoFerPage.prototype.Logout = function () {
+    JuegoUnoPage.prototype.Logout = function () {
         var _this = this;
         var usuariosRef = this.firebase.database().ref("usuarios");
         usuariosRef.once("value", function (snap) {
@@ -4340,16 +4340,16 @@ var JuegoFerPage = /** @class */ (function () {
             }
         });
     };
-    JuegoFerPage = __decorate([
+    JuegoUnoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-juego-fer',template:/*ion-inline-start:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-fer\juego-fer.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->\n\n\n\n    <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n\n\n      <button ion-button outline [disabled]="estadoBoton" (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <div class="puntos">\n\n    <span>Aciertos: <span class="preguntas-acertadas">{{preguntasAcertadas}}</span>/5</span><br>\n\n    <span>Tiempo restante: {{segundos}} segundos</span>\n\n  </div>\n\n\n\n  <h1 class="pregunta">{{preguntaSeleccionada.pregunta}}</h1>\n\n\n\n  <div class="interfaz">\n\n    <ion-list radio-group [(ngModel)]="respuestaUsuario">\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion1}}</ion-label>\n\n        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion1}}"></ion-radio>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion2}}</ion-label>\n\n        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion2}}"></ion-radio>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion3}}</ion-label>\n\n        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion3}}"></ion-radio>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion4}}</ion-label>\n\n        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n    <button ion-button color="btn-verde" (click)="Validar()">Responder</button>\n\n\n\n  </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':ocultarSpinner}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-fer\juego-fer.html"*/,
+            selector: 'page-juego-uno',template:/*ion-inline-start:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-uno\juego-uno.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->\n\n\n\n    <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n\n\n      <button ion-button outline [disabled]="estadoBoton" (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <div class="puntos">\n\n    <span>Aciertos: <span class="preguntas-acertadas">{{preguntasAcertadas}}</span>/5</span><br>\n\n    <span>Tiempo restante: {{segundos}} segundos</span>\n\n  </div>\n\n\n\n  <h1 class="pregunta">{{preguntaSeleccionada.pregunta}}</h1>\n\n\n\n  <div class="interfaz">\n\n    <ion-list radio-group [(ngModel)]="respuestaUsuario">\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion1}}</ion-label>\n\n        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion1}}"></ion-radio>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion2}}</ion-label>\n\n        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion2}}"></ion-radio>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion3}}</ion-label>\n\n        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion3}}"></ion-radio>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>{{preguntaSeleccionada.opcion4}}</ion-label>\n\n        <ion-radio item-left color="dark" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n    <button ion-button color="btn-verde" (click)="Validar()">Responder</button>\n\n\n\n  </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':ocultarSpinner}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-uno\juego-uno.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_audio__["a" /* NativeAudio */]])
-    ], JuegoFerPage);
-    return JuegoFerPage;
+    ], JuegoUnoPage);
+    return JuegoUnoPage;
 }());
 
-//# sourceMappingURL=juego-fer.js.map
+//# sourceMappingURL=juego-uno.js.map
 
 /***/ }),
 
@@ -4657,7 +4657,7 @@ var JuegoPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JuegoQuinterosPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JuegoDosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(13);
@@ -4676,14 +4676,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the JuegoQuinterosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var JuegoQuinterosPage = /** @class */ (function () {
-    function JuegoQuinterosPage(navCtrl, navParams) {
+var JuegoDosPage = /** @class */ (function () {
+    function JuegoDosPage(navCtrl, navParams) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -4710,10 +4704,10 @@ var JuegoQuinterosPage = /** @class */ (function () {
         });
         this.getNewQuestion();
     }
-    JuegoQuinterosPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad JuegoQuinterosPage');
+    JuegoDosPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad JuegoDosPage');
     };
-    JuegoQuinterosPage.prototype.Timer = function () {
+    JuegoDosPage.prototype.Timer = function () {
         var _this = this;
         this.asd = setInterval(function () {
             _this.segundos--;
@@ -4726,7 +4720,7 @@ var JuegoQuinterosPage = /** @class */ (function () {
             }
         }, 1000);
     };
-    JuegoQuinterosPage.prototype.getNewQuestion = function () {
+    JuegoDosPage.prototype.getNewQuestion = function () {
         if (this.primeraVezJugando == 0) {
             this.Timer();
         }
@@ -4752,7 +4746,7 @@ var JuegoQuinterosPage = /** @class */ (function () {
             default:
         }
     };
-    JuegoQuinterosPage.prototype.onSubmitAnswer = function () {
+    JuegoDosPage.prototype.onSubmitAnswer = function () {
         var _this = this;
         if (!this.userAnswer) {
             //alert("No escribio ninguna respuesta");
@@ -4804,21 +4798,21 @@ var JuegoQuinterosPage = /** @class */ (function () {
             this.navCtrl.pop();
         }
     };
-    JuegoQuinterosPage.prototype.MostrarAlert = function (titulo, mensaje, mensajeBoton, handler) {
+    JuegoDosPage.prototype.MostrarAlert = function (titulo, mensaje, mensajeBoton, handler) {
         this.ocultarAlert = false;
         this.alertTitulo = titulo;
         this.alertMensaje = mensaje;
         this.alertMensajeBoton = mensajeBoton;
         this.alertHandler = handler;
     };
-    JuegoQuinterosPage.prototype.limpiar = function () {
+    JuegoDosPage.prototype.limpiar = function () {
         this.ocultarAlert = true;
     };
-    JuegoQuinterosPage.prototype.volver = function () {
+    JuegoDosPage.prototype.volver = function () {
         clearInterval(this.asd);
         this.navCtrl.pop();
     };
-    JuegoQuinterosPage.prototype.Logout = function () {
+    JuegoDosPage.prototype.Logout = function () {
         var _this = this;
         var usuariosRef = this.firebase.database().ref("usuarios");
         usuariosRef.once("value", function (snap) {
@@ -4836,16 +4830,16 @@ var JuegoQuinterosPage = /** @class */ (function () {
             }
         });
     };
-    JuegoQuinterosPage = __decorate([
+    JuegoDosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-juego-quinteros',template:/*ion-inline-start:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-quinteros\juego-quinteros.html"*/'<!--\n\n  Generated template for the JuegoQuinterosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar color="dark" hideBackButton="true">\n\n      <ion-title class="titulo2">\n\n        {{usuario.tipo}}\n\n      </ion-title>\n\n\n\n      <ion-buttons start style="left: 3px;\n\n          position: absolute;">\n\n          <button ion-button (click)="volver()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n         </button>\n\n        </ion-buttons>\n\n\n\n\n\n\n\n  \n\n      <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n\n\n       \n\n        <button ion-button (click)="Logout()">\n\n          <ion-icon name="close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n  \n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n               \n\n                  \n\n                   \n\n\n\n           \n\n\n\n\n\n\n\n            <div class="container">\n\n\n\n                    \n\n                            \n\n                                    <!--<span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>-->\n\n\n\n                                    <h2 class="asd">Tiempo restante: {{segundos}}</h2>\n\n\n\n                                    <h4 class="asd" >Acierte 3 veces para ganar</h4>\n\n\n\n                                    <h4 class="asd" >Puntaje: {{puntajeMaximo}}</h4>\n\n\n\n                  \n\n\n\n                                    <!--<p class="question">{{question}}</p>-->\n\n                                    <p style="text-align:center;font-size:70px;background-color:white;border-radius: 70px;">{{question}}</p>\n\n            \n\n                                    <div class="laPregunta5">\n\n\n\n                                    <ion-item>\n\n                                        <ion-input type="text" class="respuestitaa" placeholder="¡Respondé acá!"  [(ngModel)]="userAnswer" ></ion-input>\n\n                                      </ion-item>\n\n\n\n                                    </div>\n\n                                \n\n                                   \n\n                               \n\n                              \n\n                                \n\n                                \n\n                                    <button  class="botonJuego" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>\n\n                               \n\n                         \n\n                                \n\n                          \n\n                \n\n                        \n\n                \n\n                      </div>\n\n\n\n\n\n</ion-content>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n    <div class="alert-message animation-target">\n\n      <h1>{{alertTitulo}}</h1>\n\n      <p>{{alertMensaje}}</p>\n\n      <div class="botones">\n\n  \n\n        <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n      </div>\n\n    </div>\n\n  \n\n  </div>\n\n\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-quinteros\juego-quinteros.html"*/,
+            selector: 'page-juego-dos',template:/*ion-inline-start:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-dos\juego-dos.html"*/'<!--\n\n  Generated template for the JuegoQuinterosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar color="dark" hideBackButton="true">\n\n      <ion-title class="titulo2">\n\n        {{usuario.tipo}}\n\n      </ion-title>\n\n\n\n      <ion-buttons start style="left: 3px;\n\n          position: absolute;">\n\n          <button ion-button (click)="volver()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n         </button>\n\n        </ion-buttons>\n\n\n\n\n\n\n\n  \n\n      <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n\n\n       \n\n        <button ion-button (click)="Logout()">\n\n          <ion-icon name="close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n  \n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n               \n\n                  \n\n                   \n\n\n\n           \n\n\n\n\n\n\n\n            <div class="container">\n\n\n\n                    \n\n                            \n\n                                    <!--<span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>-->\n\n\n\n                                    <h2 class="asd">Tiempo restante: {{segundos}}</h2>\n\n\n\n                                    <h4 class="asd" >Acierte 3 veces para ganar</h4>\n\n\n\n                                    <h4 class="asd" >Puntaje: {{puntajeMaximo}}</h4>\n\n\n\n                  \n\n\n\n                                    <!--<p class="question">{{question}}</p>-->\n\n                                    <p style="text-align:center;font-size:70px;background-color:white;border-radius: 70px;">{{question}}</p>\n\n            \n\n                                    <div class="laPregunta5">\n\n\n\n                                    <ion-item>\n\n                                        <ion-input type="text" class="respuestitaa" placeholder="¡Respondé acá!"  [(ngModel)]="userAnswer" ></ion-input>\n\n                                      </ion-item>\n\n\n\n                                    </div>\n\n                                \n\n                                   \n\n                               \n\n                              \n\n                                \n\n                                \n\n                                    <button  class="botonJuego" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>\n\n                               \n\n                         \n\n                                \n\n                          \n\n                \n\n                        \n\n                \n\n                      </div>\n\n\n\n\n\n</ion-content>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n    <div class="alert-message animation-target">\n\n      <h1>{{alertTitulo}}</h1>\n\n      <p>{{alertMensaje}}</p>\n\n      <div class="botones">\n\n  \n\n        <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n      </div>\n\n    </div>\n\n  \n\n  </div>\n\n\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\vardump-collab\src\pages\juego-dos\juego-dos.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
-    ], JuegoQuinterosPage);
-    return JuegoQuinterosPage;
+    ], JuegoDosPage);
+    return JuegoDosPage;
 }());
 
-//# sourceMappingURL=juego-quinteros.js.map
+//# sourceMappingURL=juego-dos.js.map
 
 /***/ }),
 
@@ -8871,7 +8865,7 @@ var MapaDeRutaPage = /** @class */ (function () {
     ], MapaDeRutaPage.prototype, "content", void 0);
     MapaDeRutaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-mapa-de-ruta',template:/*ion-inline-start:"C:\Users\Fede\Desktop\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/'<!--\n\n  Generated template for the MapaDeRutaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>mapaDeRuta</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n\n\n\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n\n\n      \n\n\n\n    \n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n    position: absolute;">\n\n    <button ion-button (click)="volver()">\n\n  <ion-icon name="arrow-dropleft"></ion-icon>\n\n   </button>\n\n  </ion-buttons>\n\n\n\n    \n\n\n\n    <ion-buttons end >\n\n\n\n       \n\n\n\n       \n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<!--<ion-content padding class="home">\n\n\n\n    <ion-row class="logo-row">\n\n       \n\n        <ion-col>\n\n            <img src="assets/imgs/gamma/mapaderuta.jpg"/>\n\n          \n\n        </ion-col>\n\n        \n\n      </ion-row>\n\n\n\n      \n\n      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>\n\n      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>\n\n      \n\n  \n\n\n\n   <ion-list>\n\n     <ion-item *ngFor="let chat of ListadoDeChats">\n\n\n\n   \n\n     <div class="chat-message" text-right >\n\n       <div class="right-bubble">\n\n         <span class="msg-name">Yo</span>\n\n         <span class="msg-date">asdasd</span>\n\n         <p text-wrap>fdsfs</p>\n\n       </div>\n\n     </div>\n\n\n\n     <div class="chat-message" text-left >\n\n       <div class="left-bubble">\n\n         <span class="msg-name">Cliente:Juan Perez</span>\n\n         <span class="msg-date">sdfs</span>\n\n         <p text-wrap>asdasd</p>\n\n       </div>\n\n     </div>\n\n\n\n   \n\n   </ion-item>\n\n </ion-list>\n\n   \n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n<ion-footer no-shadow >\n\n  <ion-toolbar position="bottom" color="light">\n\n    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">\n\n      <ion-row>\n\n            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>\n\n            <ion-buttons end>\n\n                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">\n\n                    <ion-icon name="arrow-round-forward"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n      </ion-row>\n\n    </form>\n\n  </ion-toolbar>\n\n</ion-footer>-->\n\n\n\n\n\n\n\n\n\n<ion-content #content>\n\n\n\n  <div *ngIf="clientes">\n\n\n\n      <div class="asdasd" *ngIf="sinPedidos">\n\n          SIN PEDIDOS\n\n        </div>\n\n        <div class="mapouter" *ngIf="!sinPedidos">\n\n          <div class="gmap_canvas">\n\n            <iframe width="600" height="500" id="gmap_canvas" \n\n              src="https://maps.google.com/maps?q=mitre%20750&t=&z=19&ie=UTF8&iwloc=&output=embed" \n\n              frameborder="0" scrolling="no" marginheight="0" marginwidth="0">\n\n            </iframe>Google Maps by ASGARDIANOS</div>\n\n            <style>\n\n              .mapouter{\n\n                position:relative;\n\n                text-align:right;\n\n                height:500px;\n\n                width:600px;\n\n                }\n\n              .gmap_canvas {\n\n                overflow:hidden;\n\n                background:none!important;\n\n                height:500px;\n\n                width:600px;\n\n              }\n\n            </style>\n\n      </div>\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">\n\n          <div class="realizarEncuesta">Pedidos a entregar</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of clientesConPedidos">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="entregar(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n    </div>\n\n\n\n    <div *ngIf="chat">\n\n\n\n\n\n\n\n\n\n        <img src={{probando}} style="width: 100px;">\n\n    \n\n\n\n          <ion-label class="lb" >{{nombreCliente}}</ion-label>\n\n          <ion-label class="lb" >{{direccionCliente}}</ion-label>\n\n\n\n          \n\n\n\n        \n\n\n\n\n\n	<ion-list no-lines>\n\n\n\n		<ion-item *ngFor="let message of messagesList">\n\n		<!--	<h3>{{message.name}}</h3>\n\n      <p>{{message.message}}</p>-->\n\n\n\n      <div class="chat-message" text-right *ngIf="message.name === probanding">\n\n          <div class="right-bubble">\n\n            <span class="msg-name"></span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n           <!-- <span class="msg-date">{{message.tiempo}}</span>-->\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n\n\n        <div class="chat-message" text-left *ngIf="message.name !== probanding">\n\n          <div class="left-bubble">\n\n            <span class="msg-name">{{message.name}}</span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-item>\n\n    \n\n\n\n\n\n\n\n  </ion-list>\n\n  \n\n\n\n</div>\n\n\n\n\n\n\n\n</ion-content>\n\n\n\n\n\n<ion-footer *ngIf="mandar">\n\n	<ion-item>\n\n		<ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>\n\n		<button ion-button clear item-right (click)="send()">Enviar</button>\n\n	</ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/,
+            selector: 'page-mapa-de-ruta',template:/*ion-inline-start:"C:\Users\Fede\Desktop\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/'<!--\n\n  Generated template for the MapaDeRutaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>mapaDeRuta</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n\n\n\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n\n\n      \n\n\n\n    \n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n    position: absolute;">\n\n    <button ion-button (click)="volver()">\n\n  <ion-icon name="arrow-dropleft"></ion-icon>\n\n   </button>\n\n  </ion-buttons>\n\n\n\n    \n\n\n\n    <ion-buttons end >\n\n\n\n       \n\n\n\n       \n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<!--<ion-content padding class="home">\n\n\n\n    <ion-row class="logo-row">\n\n       \n\n        <ion-col>\n\n            <img src="assets/imgs/gamma/mapaderuta.jpg"/>\n\n          \n\n        </ion-col>\n\n        \n\n      </ion-row>\n\n\n\n      \n\n      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>\n\n      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>\n\n      \n\n  \n\n\n\n   <ion-list>\n\n     <ion-item *ngFor="let chat of ListadoDeChats">\n\n\n\n   \n\n     <div class="chat-message" text-right >\n\n       <div class="right-bubble">\n\n         <span class="msg-name">Yo</span>\n\n         <span class="msg-date">asdasd</span>\n\n         <p text-wrap>fdsfs</p>\n\n       </div>\n\n     </div>\n\n\n\n     <div class="chat-message" text-left >\n\n       <div class="left-bubble">\n\n         <span class="msg-name">Cliente:Juan Perez</span>\n\n         <span class="msg-date">sdfs</span>\n\n         <p text-wrap>asdasd</p>\n\n       </div>\n\n     </div>\n\n\n\n   \n\n   </ion-item>\n\n </ion-list>\n\n   \n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n<ion-footer no-shadow >\n\n  <ion-toolbar position="bottom" color="light">\n\n    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">\n\n      <ion-row>\n\n            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>\n\n            <ion-buttons end>\n\n                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">\n\n                    <ion-icon name="arrow-round-forward"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n      </ion-row>\n\n    </form>\n\n  </ion-toolbar>\n\n</ion-footer>-->\n\n\n\n\n\n\n\n\n\n<ion-content #content>\n\n\n\n  <div *ngIf="clientes">\n\n\n\n      <div class="asdasd" *ngIf="sinPedidos">\n\n          SIN PEDIDOS\n\n        </div>\n\n        \n\n        <div class="mapouter" *ngIf="!sinPedidos">\n\n          <div class="gmap_canvas">\n\n            <iframe width="600" height="500" id="gmap_canvas" \n\n              src="https://maps.google.com/maps?q=mitre%20750&t=&z=19&ie=UTF8&iwloc=&output=embed" \n\n              frameborder="0" scrolling="no" marginheight="0" marginwidth="0">\n\n            </iframe>Google Maps by ASGARDIANOS</div>\n\n            <style>\n\n              .mapouter{\n\n                position:relative;\n\n                text-align:right;\n\n                height:500px;\n\n                width:600px;\n\n                }\n\n              .gmap_canvas {\n\n                overflow:hidden;\n\n                background:none!important;\n\n                height:500px;\n\n                width:600px;\n\n              }\n\n            </style>\n\n      </div>\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">\n\n          <div class="realizarEncuesta">Pedidos a entregar</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of clientesConPedidos">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="entregar(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n    </div>\n\n\n\n    <div *ngIf="chat">\n\n\n\n\n\n\n\n\n\n        <img src={{probando}} style="width: 100px;">\n\n    \n\n\n\n          <ion-label class="lb" >{{nombreCliente}}</ion-label>\n\n          <ion-label class="lb" >{{direccionCliente}}</ion-label>\n\n\n\n          \n\n\n\n        \n\n\n\n\n\n	<ion-list no-lines>\n\n\n\n		<ion-item *ngFor="let message of messagesList">\n\n		<!--	<h3>{{message.name}}</h3>\n\n      <p>{{message.message}}</p>-->\n\n\n\n      <div class="chat-message" text-right *ngIf="message.name === probanding">\n\n          <div class="right-bubble">\n\n            <span class="msg-name"></span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n           <!-- <span class="msg-date">{{message.tiempo}}</span>-->\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n\n\n        <div class="chat-message" text-left *ngIf="message.name !== probanding">\n\n          <div class="left-bubble">\n\n            <span class="msg-name">{{message.name}}</span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-item>\n\n    \n\n\n\n\n\n\n\n  </ion-list>\n\n  \n\n\n\n</div>\n\n\n\n\n\n\n\n</ion-content>\n\n\n\n\n\n<ion-footer *ngIf="mandar">\n\n	<ion-item>\n\n		<ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>\n\n		<button ion-button clear item-right (click)="send()">Enviar</button>\n\n	</ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__["AngularFireAuth"]])
     ], MapaDeRutaPage);
@@ -9159,12 +9153,12 @@ var map = {
 		810,
 		15
 	],
-	"../pages/juego-fer/juego-fer.module": [
-		822,
+	"../pages/juego-dos/juego-dos.module": [
+		811,
 		14
 	],
-	"../pages/juego-quinteros/juego-quinteros.module": [
-		811,
+	"../pages/juego-uno/juego-uno.module": [
+		822,
 		13
 	],
 	"../pages/juego/juego.module": [
@@ -9204,15 +9198,15 @@ var map = {
 		4
 	],
 	"../pages/reserva/reserva.module": [
-		817,
+		815,
 		3
 	],
 	"../pages/sala-de-juegos/sala-de-juegos.module": [
-		815,
+		816,
 		2
 	],
 	"../pages/splash/splash.module": [
-		816,
+		817,
 		1
 	],
 	"../pages/tomar-pedido/tomar-pedido.module": [
@@ -10918,7 +10912,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_mis_reservas_mis_reservas__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_cuenta_cuenta__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_listado_reservas_listado_reservas__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_juego_fer_juego_fer__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_juego_uno_juego_uno__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_sala_de_juegos_sala_de_juegos__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_registro_cliente_registro_cliente__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_alta_platos_alta_platos__ = __webpack_require__(465);
@@ -10952,7 +10946,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__pipes_el_el__ = __webpack_require__(795);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_components_module__ = __webpack_require__(796);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49_ionic2_rating__ = __webpack_require__(798);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__pages_juego_quinteros_juego_quinteros__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__pages_juego_dos_juego_dos__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__pipes_tiempo_desde_ahora_tiempo_desde_ahora__ = __webpack_require__(800);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__providers_ruteo_ruteo__ = __webpack_require__(801);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11045,12 +11039,12 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_25__pages_encuesta_cliente_encuesta_cliente__["a" /* EncuestaClientePage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_pedir_platos_pedir_platos__["a" /* PedirPlatosPage */],
                 __WEBPACK_IMPORTED_MODULE_18__pages_cuenta_cuenta__["a" /* CuentaPage */],
-                __WEBPACK_IMPORTED_MODULE_50__pages_juego_quinteros_juego_quinteros__["a" /* JuegoQuinterosPage */],
+                __WEBPACK_IMPORTED_MODULE_50__pages_juego_dos_juego_dos__["a" /* JuegoDosPage */],
                 __WEBPACK_IMPORTED_MODULE_51__pipes_tiempo_desde_ahora_tiempo_desde_ahora__["a" /* TiempoDesdeAhoraPipe */],
                 __WEBPACK_IMPORTED_MODULE_19__pages_listado_reservas_listado_reservas__["a" /* ListadoReservasPage */],
                 __WEBPACK_IMPORTED_MODULE_45__pages_juego_juego__["a" /* JuegoPage */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_mis_reservas_mis_reservas__["a" /* MisReservasPage */],
-                __WEBPACK_IMPORTED_MODULE_20__pages_juego_fer_juego_fer__["a" /* JuegoFerPage */],
+                __WEBPACK_IMPORTED_MODULE_20__pages_juego_uno_juego_uno__["a" /* JuegoUnoPage */],
                 __WEBPACK_IMPORTED_MODULE_21__pages_sala_de_juegos_sala_de_juegos__["a" /* SalaDeJuegosPage */],
                 __WEBPACK_IMPORTED_MODULE_47__pipes_el_el__["a" /* ElPipe */]
             ],
@@ -11060,18 +11054,18 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/alta-duenio-supervisor/alta-duenio-supervisor.module#AltaDuenioSupervisorPageModule', name: 'AltaDuenioSupervisorPage', segment: 'alta-duenio-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-supervisor/encuesta-supervisor.module#EncuestaSupervisorPageModule', name: 'EncuestaSupervisorPage', segment: 'encuesta-supervisor', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego-quinteros/juego-quinteros.module#JuegoQuinterosPageModule', name: 'JuegoQuinterosPage', segment: 'juego-quinteros', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego-dos/juego-dos.module#JuegoQuinterosPageModule', name: 'JuegoDosPage', segment: 'juego-dos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego-fer/juego-fer.module#JuegoFerPageModule', name: 'JuegoFerPage', segment: 'juego-fer', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
@@ -11115,11 +11109,11 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_33__pages_tomar_pedido_tomar_pedido__["a" /* TomarPedidoPage */],
                 __WEBPACK_IMPORTED_MODULE_36__pages_mapa_de_ruta_mapa_de_ruta__["a" /* MapaDeRutaPage */],
                 __WEBPACK_IMPORTED_MODULE_18__pages_cuenta_cuenta__["a" /* CuentaPage */],
-                __WEBPACK_IMPORTED_MODULE_50__pages_juego_quinteros_juego_quinteros__["a" /* JuegoQuinterosPage */],
+                __WEBPACK_IMPORTED_MODULE_50__pages_juego_dos_juego_dos__["a" /* JuegoDosPage */],
                 __WEBPACK_IMPORTED_MODULE_19__pages_listado_reservas_listado_reservas__["a" /* ListadoReservasPage */],
                 __WEBPACK_IMPORTED_MODULE_45__pages_juego_juego__["a" /* JuegoPage */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_mis_reservas_mis_reservas__["a" /* MisReservasPage */],
-                __WEBPACK_IMPORTED_MODULE_20__pages_juego_fer_juego_fer__["a" /* JuegoFerPage */],
+                __WEBPACK_IMPORTED_MODULE_20__pages_juego_uno_juego_uno__["a" /* JuegoUnoPage */],
                 __WEBPACK_IMPORTED_MODULE_21__pages_sala_de_juegos_sala_de_juegos__["a" /* SalaDeJuegosPage */]
             ],
             providers: [

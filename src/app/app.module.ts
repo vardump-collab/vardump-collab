@@ -20,7 +20,7 @@ import { ReservaPage } from "../pages/reserva/reserva";
 import { MisReservasPage } from "../pages/mis-reservas/mis-reservas";
 import { CuentaPage } from "../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
-import { JuegoFerPage } from "../pages/juego-fer/juego-fer";
+import { JuegoUnoPage } from "../pages/juego-uno/juego-uno";
 import { SalaDeJuegosPage } from "../pages/sala-de-juegos/sala-de-juegos";
 
 import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente';
@@ -60,7 +60,7 @@ import { ElPipe } from '../pipes/el/el';
 import { ComponentsModule } from "../components/components.module";
 import { Ionic2RatingModule } from 'ionic2-rating';
 
-import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
+import { JuegoDosPage } from '../pages/juego-dos/juego-dos';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
 import { RuteoProvider } from '../providers/ruteo/ruteo';
 
@@ -91,12 +91,12 @@ import { RuteoProvider } from '../providers/ruteo/ruteo';
     EncuestaClientePage,
     PedirPlatosPage,
     CuentaPage,
-    JuegoQuinterosPage,
+    JuegoDosPage,
     TiempoDesdeAhoraPipe,
     ListadoReservasPage,
     JuegoPage,
     MisReservasPage,
-    JuegoFerPage,
+    JuegoUnoPage,
     SalaDeJuegosPage,
     ElPipe
   ],
@@ -137,11 +137,11 @@ import { RuteoProvider } from '../providers/ruteo/ruteo';
     TomarPedidoPage,
     MapaDeRutaPage,
     CuentaPage,
-    JuegoQuinterosPage,
+    JuegoDosPage,
     ListadoReservasPage,
     JuegoPage,
     MisReservasPage,
-    JuegoFerPage,
+    JuegoUnoPage,
     SalaDeJuegosPage
   ],
   providers: [

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { JuegoFerPage } from "../juego-fer/juego-fer";
+import { JuegoUnoPage } from "../juego-uno/juego-uno";
 
 import { LoginPage } from "../login/login";
 
 import firebase from "firebase";
 import { JuegoPage } from '../juego/juego';
-import { JuegoQuinterosPage } from '../juego-quinteros/juego-quinteros';
+import { JuegoDosPage } from '../juego-dos/juego-dos';
 
 @IonicPage()
 @Component({
@@ -25,9 +25,9 @@ export class SalaDeJuegosPage {
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     this.juegos = [
-      { accion: "Preguntas y respuestas", img: "preguntas-respuestas.jpg", ruta: JuegoFerPage },
+      { accion: "Preguntas y respuestas", img: "preguntas-respuestas.jpg", ruta: JuegoUnoPage },
       { accion: "Juego de la memoria", img: "memoria.jpg", ruta: JuegoPage },
-      { accion: "Agilidad aritmética", img: "agilidad-aritmetica.jpg", ruta: JuegoQuinterosPage }
+      { accion: "Agilidad aritmética", img: "agilidad-aritmetica.jpg", ruta: JuegoDosPage }
     ]
 
   }

@@ -19,7 +19,7 @@ import { EncuestaDeEmpleadoPage } from '../../pages/encuesta-de-empleado/encuest
 import { QrDeLaMesaPage } from '../../pages/qr-de-la-mesa/qr-de-la-mesa';
 import { TomarPedidoPage } from '../../pages/tomar-pedido/tomar-pedido';
 import { MapaDeRutaPage } from '../../pages/mapa-de-ruta/mapa-de-ruta';
-import { JuegoQuinterosPage } from "../../pages/juego-quinteros/juego-quinteros";
+import { JuegoDosPage } from "../../pages/juego-dos/juego-dos";
 import { JuegoPage } from "../../pages/juego/juego";
 
 @Injectable()
