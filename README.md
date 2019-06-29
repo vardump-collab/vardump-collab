@@ -183,4 +183,57 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 </table>
 
 #
+
+## Códigos QR :
+
+# Mesa 1
+<img src="./src/assets/imgs/gamma/1.png" /></p>
+#
+
+# Mesa 2
+<img src="./src/assets/imgs/gamma/2.png" /></p>
+#
+
+# Mesa 3
+<img src="./src/assets/imgs/gamma/3.png" /></p>
+#
+
+# Mesa 4
+<img src="./src/assets/imgs/gamma/4.png" /></p>
+#
+
+# Mesa 5
+<img src="./src/assets/imgs/gamma/5.png" /></p>
+#
+
+# Agua Mineral
+<img src="./src/assets/imgs/gamma/agua.jpeg" /></p>
+#
+
+# Bienvenido - Puerta
+<img src="./src/assets/imgs/gamma/bienvenido.png" /></p>
+#
+
+# Cerveza
+<img src="./src/assets/imgs/gamma/cerveza.jpeg" /></p>
+#
+
+# Coca Cola
+<img src="./src/assets/imgs/gamma/cocacola.jpeg" /></p>
+#
+
+# Jugo de Naranja
+<img src="./src/assets/imgs/gamma/jugonaranja.jpeg" /></p>
+#
+
+# Casos de Uso
+<img src="./src/assets/imgs/readme/casosdeuso.jpg" /></p>
+#
+
+#
 <img src="./src/assets/imgs/readme/img-varias.png" /></p>
+
+
+
+
+
