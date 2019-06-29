@@ -207,7 +207,7 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 #
 
 # Agua Mineral
-<img src="./src/assets/imgs/gamma/agua.png" /></p>
+<img src="./src/assets/imgs/gamma/agua.jpeg" /></p>
 #
 
 # Bienvenido - Puerta
@@ -215,15 +215,15 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 #
 
 # Cerveza
-<img src="./src/assets/imgs/gamma/cerveza.png" /></p>
+<img src="./src/assets/imgs/gamma/cerveza.jpeg" /></p>
 #
 
 # Coca Cola
-<img src="./src/assets/imgs/gamma/cocacola.png" /></p>
+<img src="./src/assets/imgs/gamma/cocacola.jpeg" /></p>
 #
 
 # Jugo de Naranja
-<img src="./src/assets/imgs/gamma/jugonaranja.png" /></p>
+<img src="./src/assets/imgs/gamma/jugonaranja.jpeg" /></p>
 #
 
 #
