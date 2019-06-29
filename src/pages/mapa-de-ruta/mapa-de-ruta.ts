@@ -5,14 +5,19 @@ import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 import { LoginPage } from '../login/login';
-//import { Content } from 'ionic-angular';
 
-/**
- * Generated class for the MapaDeRutaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {
+	GoogleMaps,
+	GoogleMap,
+	GoogleMapsEvent,
+	GoogleMapOptions,
+	CameraPosition,
+	MarkerOptions,
+	Marker,
+	Environment
+  } from '@ionic-native/google-maps';
+
+import { ElementRef } from '@angular/core';
 
 @IonicPage()
 @Component({
@@ -23,6 +28,37 @@ import { LoginPage } from '../login/login';
 export class MapaDeRutaPage {
 	//@ViewChild('content') content:any
 	//@ViewChild(Content) content: Content;
+
+  map: GoogleMap;
+
+  @ViewChild('map') mapElement: ElementRef;
+  appName = 'Ionic App';
+
+   initMap(){
+    //const location = new google.maps.LatLng(20.623736, -87.073395);
+    let myLatLng = {lat: 20.623736, lng: -87.073395};
+    console.log(location);
+    const option ={
+         center :myLatLng ,
+         zoom : 15  ,
+         //streetViewControl : false ,
+         //mapTypeId :'roadMap'
+    } ;
+	//console.log(this.mapElement)
+
+    const map = new GoogleMap(this.mapElement.nativeElement ,option ) ;
+    this.addMarker(myLatLng, map);
+  }
+
+  
+  addMarker(position , map){
+     return new map.Marker({
+        position: position,
+        map: map,
+        title: 'Hello World!'
+      });
+   }
+
   ref;
 	name;
 	newmessage;
@@ -386,6 +422,7 @@ export class MapaDeRutaPage {
 
   ionViewDidLoad() 
   {
+	this.initMap();
 	//alert(this.usuario.tipo);
 	//this.content.scrollToBottom(300);
     //console.log('ionViewDidLoad MapaDeRutaPage');

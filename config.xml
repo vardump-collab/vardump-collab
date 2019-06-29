@@ -90,4 +90,6 @@
     <plugin name="phonegap-plugin-barcodescanner" spec="^8.0.0">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyAsEX8_NzxMM_SFaDgLVDES0XPOyZ5oRnI" />
+    <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyAsEX8_NzxMM_SFaDgLVDES0XPOyZ5oRnI" />
 </widget>

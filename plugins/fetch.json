@@ -74,5 +74,13 @@
     "variables": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+"
     }
+  },
+  "cordova-plugin-googlemaps": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-googlemaps"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
