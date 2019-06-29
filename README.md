@@ -226,6 +226,10 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 <img src="./src/assets/imgs/gamma/jugonaranja.jpeg" /></p>
 #
 
+# Casos de Uso
+<img src="./src/assets/imgs/readme/casosdeuso.png" /></p>
+#
+
 #
 <img src="./src/assets/imgs/readme/img-varias.png" /></p>
 
