@@ -28,14 +28,14 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 <td>Desarrollo de un componente para realizar el registro de productos en la base de datos de la comanda</td>
 <td>HIGH</td>
 <td>6hs</td>
-<td>20 de Mayo</td>
+<td>17 de Mayo</td>
 </tr>
 <tr>
 <td>QR Mesa</td>
 <td>Se llevo a cabo el componente para poder leer los códigos QR de la mesa, se realizaron pruebas de testing sobre el mismo. </td>
 <td>HIGH</td>
 <td>5hs</td>
-<td>27 de Mayo</td>
+<td>28 de Mayo</td>
 </tr>
 <tr>
 <td>Encuesta del empleado</td>
@@ -49,21 +49,21 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 <td>Se realizo el componente responsable de tomar los pedidos de los clientes para comenzar con el recorrido mínimo que debe hacer el mismo</td>
 <td>HIGH</td>
 <td>7hs</td>
-<td>5 de Junio</td>
+<td>11 de Junio</td>
 </tr>
 <tr>
 <td>Push notificación pedido</td>
 <td>Se desarrolló el componente push notificación que indica al usuario información relacionada al pedido</td>
 <td>LOW</td>
 <td>2hs</td>
-<td>11 de Junio</td>
+<td>19 de Junio</td>
 </tr>
 <tr>
 <td>Configuración Firebase</td>
 <td>Configuración completa de Firebase y su vinculación con la aplicación</td>
 <td>HIGH</td>
 <td>4hs</td>
-<td>N/A</td>
+<td>24 de Junio</td>
 </tr>
 </tbody>
 </table>
@@ -85,14 +85,14 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 <td>Desarrollo de un componente para realizar el registro de empleados en la base de datos de la comanda</td>
 <td>HIGH</td>
 <td>5hs</td>
-<td>24 de Mayo</td>
+<td>17 de Mayo</td>
 </tr>
 <tr>
 <td>QR Ingreso</td>
 <td>Se llevo a cabo el componente para poder leer los códigos QR en el ingreso, se realizaron pruebas de testing sobre el mismo. </td>
 <td>HIGH</td>
 <td>8hs</td>
-<td>29 de Mayo</td>
+<td>25 de Mayo</td>
 </tr>
 <tr>
 <td>Encuesta del cliente</td>
@@ -113,14 +113,14 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 <td>Se desarrolló el componente push notificación que indica al usuario información relacionada a la mesa</td>
 <td>LOW</td>
 <td>2hs</td>
-<td>8 de Junio</td>
+<td>15 de Junio</td>
 </tr>
 <tr>
 <td>Mapas</td>
 <td>Configuración completa de mapeo y su vinculación con la aplicación</td>
 <td>HIGH</td>
 <td>15hs</td>
-<td>13 de Junio</td>
+<td>27 de Junio</td>
 </tr>
 </tbody>
 </table>
@@ -142,42 +142,42 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 <td>Desarrollo de un componente para realizar el registro de clientes en la base de datos de la comanda</td>
 <td>HIGH</td>
 <td>3hs</td>
-<td>18 de Mayo</td>
+<td>17 de Mayo</td>
 </tr>
 <tr>
 <td>QR Propina</td>
 <td>Se llevo a cabo el componente para poder leer los códigos QR de la propina, se realizaron pruebas de testing sobre el mismo. </td>
 <td>HIGH</td>
 <td>4hs</td>
-<td>23 de Mayo</td>
+<td>29 de Mayo</td>
 </tr>
 <tr>
 <td>QR Supervisor</td>
 <td>Se llevo a cabo el componente para poder leer los códigos QR del supervisor, se realizaron pruebas de testing sobre el mismo.</td>
 <td>HIGH</td>
 <td>1hs</td>
-<td>27 de Mayo</td>
+<td>30 de Mayo</td>
 </tr>
 <tr>
 <td>Reservas</td>
 <td>Se realizo el componente encargado de las reservas de los clientes</td>
 <td>HIGH</td>
 <td>5hs</td>
-<td>4 de Junio</td>
+<td>9 de Junio</td>
 </tr>
 <tr>
 <td>Push notif. reserva/delivery</td>
 <td>Se desarrolló el componente push notificación que indica al usuario información relacionada a la reserva/delivery</td>
 <td>LOW</td>
 <td>0.5hs</td>
-<td>4 de Junio</td>
+<td>20 de Junio</td>
 </tr>
 <tr>
 <td>Pedidos por GPS</td>
 <td>Configuración completa global del GPS y su vinculación con la aplicación</td>
 <td>HIGH</td>
 <td>15hs</td>
-<td>8 de Junio</td>
+<td>29 de Junio</td>
 </tr>
 </tbody>
 </table>
