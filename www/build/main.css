@@ -4890,6 +4890,10 @@ textarea::-webkit-input-placeholder {
   padding-left: 2px;
 }
 
+textarea::-moz-placeholder {
+  padding-left: 2px;
+}
+
 textarea::-ms-input-placeholder {
   padding-left: 2px;
 }
@@ -37493,6 +37497,10 @@ page-alta-platos .nombrePlato::-webkit-input-placeholder, page-alta-platos .desc
   color: black !important;
 }
 
+page-alta-platos .nombrePlato::-moz-placeholder, page-alta-platos .descripcion::-moz-placeholder, page-alta-platos .tiempo::-moz-placeholder, page-alta-platos .precio::-moz-placeholder {
+  color: black !important;
+}
+
 page-alta-platos .nombrePlato::-ms-input-placeholder, page-alta-platos .descripcion::-ms-input-placeholder, page-alta-platos .tiempo::-ms-input-placeholder, page-alta-platos .precio::-ms-input-placeholder {
   color: black !important;
 }
@@ -37523,6 +37531,11 @@ page-alta-platos .botones {
 }
 
 page-alta-platos .nombrePlato::-webkit-input-placeholder {
+  font-family: 'Rancho', cursive;
+  color: black;
+}
+
+page-alta-platos .nombrePlato::-moz-placeholder {
   font-family: 'Rancho', cursive;
   color: black;
 }
@@ -38218,6 +38231,10 @@ page-encuesta-cliente .laFoto3 {
 }
 
 page-encuesta-cliente .miInput::-webkit-input-placeholder {
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+page-encuesta-cliente .miInput::-moz-placeholder {
   font-family: 'Sorts Mill Goudy', serif;
 }
 
@@ -40873,6 +40890,12 @@ page-pedir-platos .inpDireccion {
 }
 
 page-pedir-platos .inpDireccion::-webkit-input-placeholder {
+  font-size: 1.5em;
+  font-family: 'Boogaloo', cursive;
+  text-align: center;
+}
+
+page-pedir-platos .inpDireccion::-moz-placeholder {
   font-size: 1.5em;
   font-family: 'Boogaloo', cursive;
   text-align: center;
