@@ -227,7 +227,7 @@ Lograr una aplicación utilizando el hardware del dispositivo móvil para la ges
 #
 
 # Casos de Uso
-<img src="./src/assets/imgs/readme/cosaloca.png" /></p>
+<img src="./src/assets/imgs/readme/casosdeuso.png" /></p>
 #
 
 #
