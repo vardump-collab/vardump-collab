@@ -11,7 +11,7 @@ import { SalaDeJuegosPage } from "../../pages/sala-de-juegos/sala-de-juegos";
 import { RegistroClientePage } from '../../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../../pages/alta-platos/alta-platos';
 import { QrIngresoLocalPage } from '../../pages/qr-ingreso-local/qr-ingreso-local';
-import {  EncuestaClientePage } from '../../pages/encuesta-cliente/encuesta-cliente';
+import { EncuestaClientePage } from '../../pages/encuesta-cliente/encuesta-cliente';
 import { PedirPlatosPage } from '../../pages/pedir-platos/pedir-platos';
 
 import { AltaDeMesaPage } from '../../pages/alta-de-mesa/alta-de-mesa';
@@ -55,7 +55,7 @@ export class VerificarTipoProvider {
 
       case "mozo":
         acciones = [
-          { accion: "Ocupar una mesa", img: "ocupar-mesa.jpg", ruta: QrDeLaMesaPage },
+          { accion: "Gestionar Mesas", img: "ocupar-mesa.jpg", ruta: QrDeLaMesaPage },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
           { accion: "Agregar un cliente", img: "nuevo-cliente.jpg", ruta: RegistroClientePage }
           // { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
@@ -93,25 +93,25 @@ export class VerificarTipoProvider {
 
         case "cliente":
         acciones = [
-          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
-          { accion: "Ingresar al local", img: "entrada.jpg", ruta: QrIngresoLocalPage },
-          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
-          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
-          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaClientePage },
-          { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage },
-          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage },
-          { accion: "Hablar con el repartidor", img: "chat.jpg", ruta: MapaDeRutaPage }
+          /*0*/{ accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
+          /*1*/{ accion: "Ingresar al local", img: "entrada.jpg", ruta: QrIngresoLocalPage },
+          /*2*/{ accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
+          /*3*/{ accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
+          /*4*/{ accion: "Realizar encuesta", img: "encuesta.jpg", ruta: EncuestaClientePage },
+          /*5*/{ accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage },
+          /*6*/{ accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage },
+          /*7*/{ accion: "Hablar con el repartidor", img: "chat.jpg", ruta: MapaDeRutaPage }
 
         ];
         break;
 
         case "anonimo":
         acciones = [
-          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
-          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
-          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
-          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
+          /*0*/{ accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
+          /*1*/{ accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
+          /*2*/{ accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
+          /*3*/{ accion: "Realizar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
+          /*4*/{ accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
         ];
         break;
     }

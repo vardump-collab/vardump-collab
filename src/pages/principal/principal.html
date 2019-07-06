@@ -9,7 +9,7 @@
 
     <ion-title>{{usuario.tipo}}</ion-title>
 
-    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
+    <ion-buttons end >
       <button ion-button (click)="Logout()">
         <ion-icon name="close"></ion-icon>
       </button>
@@ -53,7 +53,7 @@
         <ng-container *ngIf="sonidos != 'false'; else activar">Desactivar sonidos</ng-container>
         <ng-template #activar>Activar sonidos</ng-template>
       </button>
-      <button ion-item (click)="Logout()" *ngIf="usuario.tipo != 'anonimo'">Cerrar sesión</button>
+      <button ion-item (click)="Logout()">Cerrar sesión</button>
 
     </ion-list>
   </ion-content>

@@ -126,8 +126,8 @@
             <button class="btnBebidas"  (click)="Bebidas()" ion-button color="danger" ><img src="assets/imgs/beta/bebidas.png">Bebidas</button>
       </div>
 
-        <input type="text" class="inpDireccion" placeholder="Escriba su dirección..." [(ngModel)]="direccion">
-        <input type="text" class="inpDireccion" placeholder="Escriba su localidad..." [(ngModel)]="localidad">
+        <input *ngIf="delivery" type="text" class="inpDireccion" placeholder="Escriba su dirección..." [(ngModel)]="direccion">
+        <input *ngIf="delivery"  type="text" class="inpDireccion" placeholder="Escriba su localidad..." [(ngModel)]="localidad">
         <button class="btnPedir" (click)="PedirFinal()" ion-button color="danger" >¡Pedir!</button>
 
       <!--input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n"-->

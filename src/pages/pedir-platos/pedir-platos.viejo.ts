@@ -75,6 +75,7 @@ export class PedirPlatosPage {
   montoBebidas=0;
   ocultarElMonto:boolean=false;
   mostrarSpinnerPlatos:boolean=false;
+  public delivery:boolean;
 contador;
   constructor
   (
@@ -85,7 +86,8 @@ contador;
        private toastCtrl: ToastController,
       )
        {
-
+         this.delivery = false;
+         
         this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     this.ocultarPlatos = true;
@@ -101,18 +103,21 @@ contador;
 
     this.correo =(JSON.parse(this.correo)).correo;
     this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
-this.foto="";
-//DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!!!
-//this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
-if(this.tipo1=="mozo")
-{
-  this.mostrarAlert2=true;
- 
-  return
-}
-    this.TraerTipoMesa();
-   
-  }
+    this.foto="";
+    //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!!!
+    //this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+    if(this.tipo1=="mozo")
+    {
+      this.mostrarAlert2=true;
+     
+      return
+    }
+        this.TraerTipoMesa();
+       
+      }
+
+
+
   onChangeTime(value)
   {
     this.cantidad=value;
@@ -825,6 +830,7 @@ TraerClaveMozo()
             //Le pongo estado al cliente como delivery
             let usuario= data[key];
             usuario.estado="delivery";
+            this.delivery = true;
           
             console.log(usuario);
            
