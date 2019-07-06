@@ -276,7 +276,7 @@ public sinPedidosParaEntregar;
                 console.log("a", a.val());
                 console.log("a val", a.val());
                 if(a.val().cantidad != undefined && a.val().nombre != undefined){
-                  mensaje += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "\n";
+                  mensaje += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "<br>";
                 } 
 
                   
@@ -1690,13 +1690,19 @@ public sinPedidosParaEntregar;
         var data = snap.val();
         for(var key in data){
             if (mesa == data[key].mesa) {
-              data[key].estado = "aceptado";
+              data[key].estado = "atendido";
              
               ref.child(key).update(data[key]);
-              //alert("Listo,se relaciono al cliente con la mesa " + text);
-              this.MostrarAlert("Éxito!", "Se acepto el pedido de la mesa." + mesa, "Aceptar", this.limpiar);
-              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
-              //COMENTE ESTO
+              
+              this.firebase.database().ref("pedidos/"+mesa).child("cocinero").update({estado: "aceptado"}).then(()=>{
+
+              });
+
+              
+              this.firebase.database().ref("pedidos/"+mesa).child("bartender").update({estado: "aceptado"}).then(()=>{
+                  this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", this.limpiar);
+
+              });
               return;   
             };                  
         }

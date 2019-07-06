@@ -461,7 +461,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
@@ -496,7 +496,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -560,7 +560,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-           if(result[k].estado == "aceptado")
+           if(result[k].estado != "aceptado")
            //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
@@ -593,7 +593,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -660,7 +660,7 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
@@ -699,7 +699,7 @@ export class TomarPedidoPage {
            if(k=="bartender")
            {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -764,7 +764,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -798,7 +798,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -866,7 +866,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -899,7 +899,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -962,7 +962,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -996,7 +996,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1060,7 +1060,7 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1094,7 +1094,7 @@ export class TomarPedidoPage {
            if(k=="bartender")
            {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1157,7 +1157,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1191,7 +1191,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1251,7 +1251,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1284,7 +1284,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1342,7 +1342,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
@@ -1374,7 +1374,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "aceptado")
+            if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
               break;
