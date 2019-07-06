@@ -95,19 +95,29 @@ export class CuentaPage {
           }
         }
 
-        this.total = this.subTotal = this.pedidos.reduce((valorAnterior, valorActual, indice) => {
+        for(let item of this.pedidos){
+          this.subTotal += item.precio * item.cantidad;
+        } 
+        this.total = this.subTotal;
+     /*   this.total = this.subTotal = this.pedidos.reduce((valorAnterior, valorActual, indice) => {
 
-          if (indice > 1)
-            return valorAnterior + valorActual.cantidad * valorActual.precio;
-          else
-            return valorAnterior.cantidad * valorAnterior.precio + valorActual.cantidad * valorActual.precio;
-        });
+          if (indice > 1){
+            return valorAnterior.precio + valorActual.cantidad 
+            * valorActual.precio;
+          }
+          else{
+            return valorAnterior.cantidad * valorAnterior.precio 
+            + valorActual.cantidad * valorActual.precio;
+          }
+        });*/
+        console.log("TOTAL 1: ", this.total);
 
         if (data.desc) {
           this.descuento = this.subTotal * 0.1;
-          this.subTotal -= this.descuento;
+          this.total = this.subTotal -= this.descuento;
         }
 
+        console.log("TOTAL 2: ", this.total);
         this.estado = "cuenta";
         this.ocultarSpinner = true;
 
@@ -148,12 +158,14 @@ export class CuentaPage {
         break;
 
       default:
+      this. propina = 0;
         this.textoRate = "Hola";
         break;
     }
 
     //this.propinaTotal = (this.subTotal * this.propina) / 100;
     this.total = this.subTotal + ((this.subTotal * this.propina) / 100);
+        console.log("TOTAL 3: ", this.total);
 
     if (this.rate > 1)
       this.textoDelBoton = "Verificar mesa";
@@ -189,7 +201,7 @@ export class CuentaPage {
 
       pedidoRef.remove().then(() => {
 
-        clienteRef.child("estado").remove().then(() => {
+        clienteRef.child("estado").update({estado: "pago"}).then(() => {
 
           clienteRef.child("comensales").remove().then(() => {
 

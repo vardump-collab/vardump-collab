@@ -69,6 +69,7 @@ export class PrincipalPage {
 
 
     this.acciones = this.verificarTipo.RetornarAcciones();
+    console.log("ACCIONES 1:", this.acciones);
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     this.sonidos = localStorage.getItem("sonidos");
 

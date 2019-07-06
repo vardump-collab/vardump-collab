@@ -258,7 +258,8 @@ export class LoginPage {
     this.animation = "ani";
     this.NoDesplegarUsuarios();
 
-    this.authInstance.auth.signInWithEmailAndPassword("anonimo@gmail.com", "123456").then(() => {
+    this.authInstance.auth.signInWithEmailAndPassword("anonimo@yopmail.com", "123456").then(() => {
+
 
       localStorage.setItem("anonimo", "true");
 

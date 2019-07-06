@@ -130,9 +130,7 @@
         
         <div class="mapouter" *ngIf="!sinPedidos">
           <div class="gmap_canvas">
-            <iframe width="600" height="500" id="gmap_canvas" 
-              src="https://maps.google.com/maps?q=mitre%20750&t=&z=19&ie=UTF8&iwloc=&output=embed" 
-              frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+            <iframe width="600" height="500" id="gmap_canvas" [src]="urlSanit" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
             </iframe>Google Maps by ASGARDIANOS</div>
             <style>
               .mapouter{
@@ -170,6 +168,8 @@
         <p>Cliente • {{item.tipo}}</p>-->
         <h1 class="que">{{item.nombre}}</h1>
         <p class="queDos">{{item.correo}}</p>
+        <p class="queDos">{{item.direccion}}</p>
+        <p class="queDos">{{item.localidad}}</p>
 
         <button ion-button clear item-end (click)="chatear(item)">
             <ion-icon name="chatboxes"></ion-icon>
@@ -205,10 +205,10 @@
         
 
 
-	<ion-list no-lines>
+  <ion-list no-lines>
 
-		<ion-item *ngFor="let message of messagesList">
-		<!--	<h3>{{message.name}}</h3>
+    <ion-item *ngFor="let message of messagesList">
+    <!--  <h3>{{message.name}}</h3>
       <p>{{message.message}}</p>-->
 
       <div class="chat-message" text-right *ngIf="message.name === probanding">
@@ -251,8 +251,8 @@
 
 
 <ion-footer *ngIf="mandar">
-	<ion-item>
-		<ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>
-		<button ion-button clear item-right (click)="send()">Enviar</button>
-	</ion-item>
+  <ion-item>
+    <ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>
+    <button ion-button clear item-right (click)="send()">Enviar</button>
+  </ion-item>
 </ion-footer>

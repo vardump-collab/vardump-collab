@@ -39,6 +39,7 @@ export class QrDeLaMesaPage {
   public usuarios: Array<any>;
   public espera: Array<any>;
   public atendidos: Array<any>;
+  public ParaValidar: Array<any>;
   
   public tiempopedidos;
 
@@ -71,11 +72,11 @@ public pedidosPruebaSiete : Array<any>;
 public pedidosPruebaOcho : Array<any>;
 public pedidosPruebaNueve : Array<any>;
 public pedidosPruebaDiez : Array<any>;
-
 public moment = moment;
-
+public mensajeValidar: Array<any>;
 public sinPersonasEnEspera;
 public sinPersonasAtendidas;
+public sinPedidosValidar;
 
 public sinPedidosParaEntregar;
 
@@ -126,6 +127,7 @@ public sinPedidosParaEntregar;
    this.sinPersonasEnEspera=false;
    this.sinPersonasAtendidas=false;
    this.sinPedidosParaEntregar=false;
+   this.sinPedidosValidar = false;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
@@ -177,6 +179,7 @@ public sinPedidosParaEntregar;
     this.usuarios = [];
     this.espera = [];
     this.atendidos = [];
+    this.ParaValidar=[];
     this.pedidosPruebaUno=[];
     this.pedidosPruebaDos=[];
     this.pedidosPruebaTres=[];
@@ -187,7 +190,7 @@ public sinPedidosParaEntregar;
     this.pedidosPruebaOcho=[];
     this.pedidosPruebaNueve=[];
     this.pedidosPruebaDiez=[];
-
+    this.mensajeValidar = [];
 
     //let genteRef = this.firebase.database().ref("usuarios/clientes");
    /* let genteRef = this.firebase.database().ref("usuarios");
@@ -258,7 +261,54 @@ public sinPedidosParaEntregar;
        return item.estado=="atendido";
       });
 
+      this.ParaValidar = this.usuarios.filter(item => {
+
+        if(item.estado=="pidio")
+        {
+          this.sinPedidosValidar = true;
+        let mensaje = "";
+        let ped = this.firebase.database().ref("pedidos/" + item.mesa).on("value", (snap) =>{
+            console.log("snap", snap);
+            snap.forEach(val =>{
+              console.log("val", val);
+              console.log("val val", val.val());
+              val.forEach(a =>{
+                console.log("a", a.val());
+                console.log("a val", a.val());
+                if(a.val().cantidad != undefined && a.val().nombre != undefined){
+                  mensaje += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "\n";
+                } 
+
+                  
+                });
+
+              });
+              if(mensaje != ""){
+              console.log("mensaje", mensaje);
+                  this.mensajeValidar.push(mensaje);
+                  mensaje = "";
+
+              }
+              return false;
+            });
+
+          console.log("mensaje validar", this.mensajeValidar);
+            /*let val = snap.val();
+            console.log("val", val);
+            for(let item of val){
+              console.log("item", item);
+              mensaje += item.cantidad + item.nombre + "\n";
+            console.log("mensaje parcial", mensaje);
+            }
+            console.log("mensaje final", mensaje);
+        });  
+*/
+        }
+       return item.estado=="pidio";
+      });
+
       console.log(this.usuarios);
+      console.log("Para validar", this.ParaValidar);  
 
 
     });
@@ -1634,40 +1684,23 @@ public sinPedidosParaEntregar;
   MostrarPedidos(mesa)
   {
 
-                   this.pedidos=true;
-
-                          
-                          var reftres = this.firebase.database().ref("probandopedidos");
+      var ref = this.firebase.database().ref("usuarios");
              
-                            reftres.once('value', (snap) => {
-                                var data = snap.val();
-                                for(var key in data){
-                                   // if ("1" == data[key]) 
-                                  // alert(key);
-                                  if(key==mesa)
-                                  {
-                                    alert("El tiempo de espera es " + data[key].tiempo + " minutos")
-                                    break;
-
-                                  }
-                                  else
-                                  {
-                                    alert("No hicieron ningún pedido todavía.");
-                                    break;
-
-                                  }
-                                  // if(parseInt(data[key])==3)
-                                  // {
-                                        //data[key].mesa = 3;
-                                       
-                                        //ref.child(key).update(data[key]);
-                                       
-                                        
+      ref.once('value', (snap) => {
+        var data = snap.val();
+        for(var key in data){
+            if (mesa == data[key].mesa) {
+              data[key].estado = "aceptado";
              
-                                   // }                
-                                }
-                            });
-
+              ref.child(key).update(data[key]);
+              //alert("Listo,se relaciono al cliente con la mesa " + text);
+              this.MostrarAlert("Éxito!", "Se acepto el pedido de la mesa." + mesa, "Aceptar", this.limpiar);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //COMENTE ESTO
+              return;   
+            };                  
+        }
+      });
 
 
 
