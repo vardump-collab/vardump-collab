@@ -356,7 +356,7 @@ this.gano=false;
             this.yaJugo=false;
 
             this.jugadorActual= data[key];
-            this.jugadorActual.juegoFacu="si";
+            this.jugadorActual.juegoFacu=true;
             this.claveJugador=   key;
            
          
@@ -365,7 +365,7 @@ this.gano=false;
           else
           {
             this.jugadorActual= data[key];
-            this.jugadorActual.juegoFacu="si";
+            this.jugadorActual.juegoFacu=true;
             this.claveJugador=   key;
             this.yaJugo=true;
           }

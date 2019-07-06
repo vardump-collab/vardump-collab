@@ -97,7 +97,7 @@ export class JuegoUnoPage {
       { pregunta: "¿Cómo se llama la ciencia que estudia los mapas?", respuesta: "Cartografía", opcion1: "Cartografía", opcion2: "Geografía", opcion3: "Oceanografía", opcion4: "Ciencias sociales" },
       { pregunta: "¿Cuál es el lugar más frío de la tierra?", respuesta: "La Antártida", opcion1: "Polo sur", opcion2: "Polo norte", opcion3: "Tierra del Fuego", opcion4: "La Antártida" },
       { pregunta: "¿En qué país se encuentra la torre de Pisa?", respuesta: "Italia", opcion1: "Grecia", opcion2: "Francia", opcion3: "Portugal", opcion4: "Italia" },
-      { pregunta: "¿En qué año llegó Cristóbal Colón a América?", respuesta: "1942", opcion1: "1940", opcion2: "1942", opcion3: "1937", opcion4: "1945" },
+      { pregunta: "¿En qué año llegó Cristóbal Colón a América?", respuesta: "1492", opcion1: "1940", opcion2: "1492", opcion3: "1937", opcion4: "1945" },
       { pregunta: "¿Dónde se encuentra la famosa \"Torre Eiffel\"?", respuesta: "Francia", opcion1: "Francia", opcion2: "Grecia", opcion3: "Portugal", opcion4: "Italia" },
       { pregunta: "¿En qué lugar del cuerpo se produce la insulina?", respuesta: "En el pancreas", opcion1: "En el apéndice", opcion2: "En la vejiga", opcion3: "En el estómago", opcion4: "En el pancreas" },
       { pregunta: "¿Qué rama de la biología estudia los animales?", respuesta: "La zoología", opcion1: "La zoología", opcion2: "La ictiología", opcion3: "La entomología", opcion4: "La ornitología" }
@@ -164,7 +164,7 @@ export class JuegoUnoPage {
       } else {
 
         clearInterval(this.intervalID);
-        this.MostrarAlert("¡Ganaste!", "", "Volver", this.Volver);
+        this.MostrarAlert("¡Ganaste pero no tenés postre!", "", "Volver", this.Volver);
       }
     } else {
 

@@ -1972,387 +1972,6 @@ var FcmProvider = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EncuestaSupervisorPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chart_js__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chart_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var EncuestaSupervisorPage = /** @class */ (function () {
-    function EncuestaSupervisorPage(navCtrl, navParams, toastCtrl) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.toastCtrl = toastCtrl;
-        this.pregunta1Labels = ['Pésimo', 'Malo', 'Mediocre', 'Bueno', 'Excelente'];
-        this.pregunta1Data = [0, 0, 0, 0, 0];
-        this.pregunta2Labels = ['Sí', 'No'];
-        this.pregunta2Data = [0, 0];
-        this.pregunta3Labels = ['Mala conducta', 'Mala presentación', 'Poca formalidad'];
-        this.pregunta3Data = [0, 0, 0];
-        this.pregunta4Labels = ['Sí', 'No'];
-        this.pregunta4Data = [0, 0];
-        this.pregunta5 = [];
-        this.doughnutChartType = 'doughnut';
-        this.firebase = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a;
-        this.moment = __WEBPACK_IMPORTED_MODULE_3_moment__;
-        this.conducta = 3;
-        this.textoRange = "Mediocre";
-        this.inconveniente = "0";
-        this.aspectos = { item1: false, item2: false, item3: false };
-        this.prescencia = "1";
-        this.image = "";
-        this.ocultarImagen = true;
-        __WEBPACK_IMPORTED_MODULE_2_chart_js__["Chart"].defaults.global.legend.display = false;
-        this.usuario = navParams.get("usuario");
-        this.usuarioLogueado = JSON.parse(localStorage.getItem("usuario"));
-        var usuariosRef = this.firebase.database().ref("usuarios");
-        this.estadoBoton = true;
-        usuariosRef.once("value", function (snap) {
-            var data = snap.val();
-            for (var item in data) {
-                if (data[item].correo == _this.usuario.correo) {
-                    _this.pregunta1Data = [
-                        data[item].encuesta.pregunta1.pesimo,
-                        data[item].encuesta.pregunta1.malo,
-                        data[item].encuesta.pregunta1.mediocre,
-                        data[item].encuesta.pregunta1.bueno,
-                        data[item].encuesta.pregunta1.excelente
-                    ];
-                    _this.pregunta2Data = [
-                        data[item].encuesta.pregunta2.si,
-                        data[item].encuesta.pregunta2.no
-                    ];
-                    _this.pregunta3Data = [
-                        data[item].encuesta.pregunta3.item1,
-                        data[item].encuesta.pregunta3.item2,
-                        data[item].encuesta.pregunta3.item3
-                    ];
-                    _this.pregunta4Data = [
-                        data[item].encuesta.pregunta4.si,
-                        data[item].encuesta.pregunta4.no
-                    ];
-                    _this.pregunta5 = data[item].encuesta.pregunta5;
-                    _this.pregunta5.splice(0, 1);
-                    _this.pregunta5 = _this.pregunta5.reverse();
-                    break;
-                }
-            }
-            _this.estadoBoton = false;
-        });
-    }
-    // events
-    EncuestaSupervisorPage.prototype.chartClicked = function (e) {
-        console.log(e);
-    };
-    EncuestaSupervisorPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad EncuestaSupervisorPage');
-    };
-    EncuestaSupervisorPage.prototype.ModificarTextoRange = function () {
-        var arrayAux = ['Pésimo', 'Malo', 'Mediocre', 'Bueno', 'Excelente'];
-        this.textoRange = arrayAux[this.conducta - 1];
-    };
-    EncuestaSupervisorPage.prototype.HacerEncuesta = function () {
-        var _this = this;
-        var usuariosRef = this.firebase.database().ref("usuarios");
-        this.estadoBoton = true;
-        usuariosRef.once("value", function (snap) {
-            var data = snap.val();
-            for (var item in data) {
-                if (data[item].correo == _this.usuario.correo) {
-                    console.clear();
-                    var pregunta1 = [data[item].encuesta.pregunta1.pesimo, data[item].encuesta.pregunta1.malo, data[item].encuesta.pregunta1.mediocre, data[item].encuesta.pregunta1.bueno, data[item].encuesta.pregunta1.excelente];
-                    pregunta1[_this.conducta - 1]++;
-                    var pregunta2 = [data[item].encuesta.pregunta2.no, data[item].encuesta.pregunta2.si];
-                    pregunta2[_this.inconveniente]++;
-                    var pregunta3 = [];
-                    pregunta3[0] = (_this.aspectos.item1) ? data[item].encuesta.pregunta3.item1 + 1 : data[item].encuesta.pregunta3.item1;
-                    pregunta3[1] = (_this.aspectos.item2) ? data[item].encuesta.pregunta3.item2 + 1 : data[item].encuesta.pregunta3.item2;
-                    pregunta3[2] = (_this.aspectos.item3) ? data[item].encuesta.pregunta3.item3 + 1 : data[item].encuesta.pregunta3.item3;
-                    var pregunta4 = [data[item].encuesta.pregunta4.no, data[item].encuesta.pregunta4.si];
-                    pregunta4[_this.prescencia]++;
-                    var pregunta5 = data[item].encuesta.pregunta5;
-                    if (_this.opinion) {
-                        var momentoActual = __WEBPACK_IMPORTED_MODULE_3_moment__(new Date());
-                        pregunta5.push({ nombre: _this.usuarioLogueado.apellido + ", " + _this.usuarioLogueado.nombre, fecha: momentoActual.format("DD/MM/YYYY HH:mm"), comentario: _this.opinion, img: _this.usuarioLogueado.img });
-                    }
-                    usuariosRef.child(item).update({
-                        "encuesta": {
-                            "pregunta1": {
-                                "pesimo": pregunta1[0],
-                                "malo": pregunta1[1],
-                                "mediocre": pregunta1[2],
-                                "bueno": pregunta1[3],
-                                "excelente": pregunta1[4]
-                            },
-                            "pregunta2": {
-                                "si": pregunta2[0],
-                                "no": pregunta2[1]
-                            },
-                            "pregunta3": {
-                                "item1": pregunta3[0],
-                                "item2": pregunta3[1],
-                                "item3": pregunta3[2]
-                            },
-                            "pregunta4": {
-                                "si": pregunta4[0],
-                                "no": pregunta4[1]
-                            },
-                            "pregunta5": pregunta5
-                        }
-                    }).then(function () {
-                        _this.estadoBoton = false;
-                        _this.presentToast("Se ha cargado correctamente la encuesta.");
-                        // this.navCtrl.pop();
-                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                    break;
-                }
-            }
-        });
-    };
-    EncuestaSupervisorPage.prototype.MostrarImagen = function (imagen) {
-        this.image = imagen;
-        this.ocultarImagen = false;
-    };
-    EncuestaSupervisorPage.prototype.OcultarImagen = function () {
-        this.ocultarImagen = true;
-    };
-    EncuestaSupervisorPage.prototype.VolverAtras = function () {
-        this.navCtrl.pop();
-    };
-    EncuestaSupervisorPage.prototype.presentToast = function (mensaje) {
-        var toast = this.toastCtrl.create({
-            message: mensaje,
-            duration: 3000,
-            position: 'top',
-            cssClass: "infoToast"
-        });
-        toast.present();
-    };
-    EncuestaSupervisorPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-encuesta-supervisor',template:/*ion-inline-start:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\encuesta-supervisor\encuesta-supervisor.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <ion-buttons>\n\n      <button ion-button (click)="VolverAtras()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n    <ion-buttons end>\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div class="imagen" [ngClass]="{\'ocultar\':ocultarImagen,\'opacidad\':true}">\n\n\n\n  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>\n\n  <img [src]="image" alt="">\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <h1>Califique la conducta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>\n\n\n\n  <div class="encuesta">\n\n    <div id="divCanvas" class="canvas">\n\n      <canvas baseChart [data]="pregunta1Data" [labels]="pregunta1Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <div class="mi-range">\n\n\n\n      <ion-range [(ngModel)]="conducta" color="dark" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;"\n\n        (ngModelChange)="ModificarTextoRange()"></ion-range>\n\n      <span>{{textoRange}}</span>\n\n\n\n    </div>\n\n  </div>\n\n\n\n  <h1>¿Tuvo algún inconveniente con {{usuario.apellido}}, {{usuario.nombre}} en horas de servicio?</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <div id="divCanvas" class="canvas">\n\n\n\n      <canvas baseChart [data]="pregunta2Data" [labels]="pregunta2Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <ion-list radio-group [(ngModel)]="inconveniente">\n\n      <ion-item>\n\n        <ion-label>Sí</ion-label>\n\n        <ion-radio color="dark" value="1"></ion-radio>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>No</ion-label>\n\n        <ion-radio color="dark" value="0"></ion-radio>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n  </div>\n\n\n\n  <h1>Seleccione el/los aspectos a tener en cuenta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <div id="divCanvas" class="canvas">\n\n      <canvas baseChart [data]="pregunta3Data" [labels]="pregunta3Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <ion-list style="left: -75px;">\n\n\n\n      <ion-item>\n\n        <ion-label>Mala conducta</ion-label>\n\n        <ion-checkbox color="dark" [(ngModel)]="aspectos.item1"></ion-checkbox>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>Mala presentación</ion-label>\n\n        <ion-checkbox color="dark" [(ngModel)]="aspectos.item2"></ion-checkbox>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>Poca formalidad</ion-label>\n\n        <ion-checkbox color="dark" [(ngModel)]="aspectos.item3"></ion-checkbox>\n\n      </ion-item>\n\n\n\n    </ion-list>\n\n\n\n  </div>\n\n\n\n  <h1>¿Le gustaría que {{usuario.apellido}}, {{usuario.nombre}} siguiese presentandose en el restaurante?</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <div id="divCanvas" class="canvas">\n\n      <canvas baseChart [data]="pregunta4Data" [labels]="pregunta4Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <select [(ngModel)]="prescencia">\n\n      <option value="1">Sí, definitivamente.</option>\n\n      <option value="0">No, en absoluto.</option>\n\n    </select>\n\n\n\n  </div>\n\n\n\n  <h1>Escriba su comentario.</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <textarea rows="4" cols="50" placeholder="Escribe tu comentario aquí..." [(ngModel)]="opinion"></textarea>\n\n\n\n  </div>\n\n\n\n  <button ion-button color="dark" class="enviar" [disabled]="estadoBoton" (click)="HacerEncuesta()">Enviar encuesta</button>\n\n\n\n  <h1 style="margin-bottom: 30px;" *ngIf="!ocultarSpinner && pregunta5.length > 1">Comentarios</h1>\n\n\n\n    <div class="comentarios" *ngFor="let item of pregunta5">\n\n\n\n      <img src="{{item.img}}" (click)="MostrarImagen(item.img)" />\n\n      <h2>{{item.nombre}}</h2>\n\n      <h5>({{item.fecha}} Hs.)</h5>\n\n      <p>{{item.comentario}}</p>\n\n\n\n    </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':!estadoBoton}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\encuesta-supervisor\encuesta-supervisor.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
-    ], EncuestaSupervisorPage);
-    return EncuestaSupervisorPage;
-}());
-
-//# sourceMappingURL=encuesta-supervisor.js.map
-
-/***/ }),
-
-/***/ 219:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JuegoDosPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var JuegoDosPage = /** @class */ (function () {
-    function JuegoDosPage(navCtrl, navParams) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.puntajeMaximo = 0;
-        this.primeraVezJugando = 0;
-        this.meta = 3;
-        this.estadoBoton = false;
-        this.ocultarAlert = true;
-        this.firebase = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a;
-        this.puedeGanarBebida = true;
-        this.usuario = JSON.parse(localStorage.getItem("usuario"));
-        var usuariosRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios");
-        usuariosRef.once("value", function (snap) {
-            var data = snap.val();
-            for (var item in data) {
-                if (data[item].correo == _this.usuario.correo) {
-                    _this.usuarioKey = item;
-                    _this.usuarioMesa = data[item].mesa;
-                    if (data[item].juegoAxel) {
-                        _this.puedeGanarBebida = false;
-                    }
-                }
-            }
-        });
-        this.getNewQuestion();
-    }
-    JuegoDosPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad JuegoDosPage');
-    };
-    JuegoDosPage.prototype.Timer = function () {
-        var _this = this;
-        this.asd = setInterval(function () {
-            _this.segundos--;
-            if (_this.segundos == 0) {
-                _this.MostrarAlert("¡Perdió!", "Se le acabó el tiempo para responder.", "Aceptar", _this.limpiar);
-                __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios").child(_this.usuarioKey).update({ juegoAxel: true });
-                //alert("Se acabo el tiempo");
-                clearInterval(_this.asd);
-                _this.navCtrl.pop();
-            }
-        }, 1000);
-    };
-    JuegoDosPage.prototype.getNewQuestion = function () {
-        if (this.primeraVezJugando == 0) {
-            this.Timer();
-        }
-        this.segundos = 15;
-        this.operador = Math.floor(Math.random() * (4 - 1)) + 1;
-        this.n1 = Math.floor(Math.random() * (50 - 1)) + 1;
-        this.n2 = Math.floor(Math.random() * (50 - 1)) + 1;
-        switch (this.operador) {
-            case 1:
-                this.question = this.n1 + " + " + this.n2 + " = ";
-                this.answer = this.n1 + this.n2;
-                break;
-            case 2:
-                this.question = this.n1 + " - " + this.n2 + " = ";
-                this.answer = this.n1 - this.n2;
-                break;
-            case 3:
-                this.n1 = this.operador = Math.floor(Math.random() * (10 - 1)) + 1;
-                this.n2 = this.operador = Math.floor(Math.random() * (10 - 1)) + 1;
-                this.question = this.n1 + " X " + this.n2 + " = ";
-                this.answer = this.n1 * this.n2;
-                break;
-            default:
-        }
-    };
-    JuegoDosPage.prototype.onSubmitAnswer = function () {
-        var _this = this;
-        if (!this.userAnswer) {
-            //alert("No escribio ninguna respuesta");
-            this.MostrarAlert("¡Error!", "No escribió ninguna respuesta.", "Aceptar", this.limpiar);
-            return;
-        }
-        if (parseInt(this.userAnswer) == this.answer) {
-            //alert("respuesta correcta");
-            this.MostrarAlert("¡Respuesta correcta!", "Tiene que acertar 3 veces.", "Aceptar", this.limpiar);
-            this.userAnswer = "";
-            this.puntajeMaximo++;
-            this.primeraVezJugando++;
-            this.getNewQuestion();
-            if (this.puntajeMaximo == this.meta) {
-                //alert("Enhorabuena,usted gano el juego");
-                //this.MostrarAlert("Gano!!", "Se gano su bebida gratis", "Aceptar", this.limpiar);
-                this.question == "";
-                this.segundos == 0;
-                clearInterval(this.asd);
-                if (this.puedeGanarBebida) {
-                    this.estadoBoton = true;
-                    //this.ocultarSpinner = false;
-                    this.MostrarAlert("¡Ganaste!", "¡Tu bebida gratis aguarda!", "Volver", this.limpiar);
-                    __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true }).then(function () {
-                        __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("pedidos").child(_this.usuarioMesa).child("cocinero").push({
-                            cantidad: 1,
-                            nombre: "bebida gratuita",
-                            precio: 0
-                        }).then(function () {
-                            __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("pedidos").child(_this.usuarioMesa).child("cocinero").update({ estado: "tomado" }).then(function () {
-                                _this.estadoBoton = false;
-                                // this.ocultarSpinner = true;
-                                //this.navCtrl.pop();
-                            });
-                        });
-                    });
-                }
-                else {
-                    this.MostrarAlert("¡Ganaste!", "", "Volver", this.limpiar);
-                    this.navCtrl.pop();
-                }
-            }
-        }
-        else {
-            //alert("respuesta incorrecta");
-            this.MostrarAlert("¡Perdió!", "¡Escribió un número incorrecto.", "Aceptar", this.limpiar);
-            __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true });
-            clearInterval(this.asd);
-            this.navCtrl.pop();
-        }
-    };
-    JuegoDosPage.prototype.MostrarAlert = function (titulo, mensaje, mensajeBoton, handler) {
-        this.ocultarAlert = false;
-        this.alertTitulo = titulo;
-        this.alertMensaje = mensaje;
-        this.alertMensajeBoton = mensajeBoton;
-        this.alertHandler = handler;
-    };
-    JuegoDosPage.prototype.limpiar = function () {
-        this.ocultarAlert = true;
-    };
-    JuegoDosPage.prototype.volver = function () {
-        clearInterval(this.asd);
-        this.navCtrl.pop();
-    };
-    JuegoDosPage.prototype.Logout = function () {
-        var _this = this;
-        var usuariosRef = this.firebase.database().ref("usuarios");
-        usuariosRef.once("value", function (snap) {
-            var data = snap.val();
-            for (var item in data) {
-                if (data[item].correo == _this.usuario.correo) {
-                    usuariosRef.child(item).update({
-                        logueado: false
-                    }).then(function () {
-                        localStorage.clear();
-                        _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
-                    });
-                    break;
-                }
-            }
-        });
-    };
-    JuegoDosPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-juego-dos',template:/*ion-inline-start:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\juego-dos\juego-dos.html"*/'<!--\n\n  Generated template for the JuegoQuinterosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar color="dark" hideBackButton="true">\n\n      <ion-title class="titulo2">\n\n        {{usuario.tipo}}\n\n      </ion-title>\n\n\n\n      <ion-buttons start style="left: 3px;\n\n          position: absolute;">\n\n          <button ion-button (click)="volver()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n         </button>\n\n        </ion-buttons>\n\n\n\n\n\n\n\n  \n\n      <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n\n\n       \n\n        <button ion-button (click)="Logout()">\n\n          <ion-icon name="close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n  \n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n               \n\n                  \n\n                   \n\n\n\n           \n\n\n\n\n\n\n\n            <div class="container">\n\n\n\n                    \n\n                            \n\n                                    <!--<span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>-->\n\n\n\n                                    <h2 class="asd">Tiempo restante: {{segundos}}</h2>\n\n\n\n                                    <h4 class="asd" >Acierte 3 veces para ganar</h4>\n\n\n\n                                    <h4 class="asd" >Puntaje: {{puntajeMaximo}}</h4>\n\n\n\n                  \n\n\n\n                                    <!--<p class="question">{{question}}</p>-->\n\n                                    <p style="text-align:center;font-size:70px;background-color:white;border-radius: 70px;">{{question}}</p>\n\n            \n\n                                    <div class="laPregunta5">\n\n\n\n                                    <ion-item>\n\n                                        <ion-input type="text" class="respuestitaa" placeholder="¡Respondé acá!"  [(ngModel)]="userAnswer" ></ion-input>\n\n                                      </ion-item>\n\n\n\n                                    </div>\n\n                                \n\n                                   \n\n                               \n\n                              \n\n                                \n\n                                \n\n                                    <button  class="botonJuego" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>\n\n                               \n\n                         \n\n                                \n\n                          \n\n                \n\n                        \n\n                \n\n                      </div>\n\n\n\n\n\n</ion-content>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n    <div class="alert-message animation-target">\n\n      <h1>{{alertTitulo}}</h1>\n\n      <p>{{alertMensaje}}</p>\n\n      <div class="botones">\n\n  \n\n        <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n      </div>\n\n    </div>\n\n  \n\n  </div>\n\n\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\juego-dos\juego-dos.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
-    ], JuegoDosPage);
-    return JuegoDosPage;
-}());
-
-//# sourceMappingURL=juego-dos.js.map
-
-/***/ }),
-
-/***/ 220:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AltaDuenioSupervisorPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
@@ -2633,7 +2252,7 @@ var AltaDuenioSupervisorPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 221:
+/***/ 219:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2978,19 +2597,19 @@ var AltaEmpleadoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 222:
+/***/ 220:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListadoSupervisorPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__encuesta_supervisor_encuesta_supervisor__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__encuesta_supervisor_encuesta_supervisor__ = __webpack_require__(221);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase_firestore__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_chart_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3352,14 +2971,205 @@ var ListadoSupervisorPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 223:
+/***/ 221:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EncuestaSupervisorPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chart_js__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chart_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var EncuestaSupervisorPage = /** @class */ (function () {
+    function EncuestaSupervisorPage(navCtrl, navParams, toastCtrl) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.toastCtrl = toastCtrl;
+        this.pregunta1Labels = ['Pésimo', 'Malo', 'Mediocre', 'Bueno', 'Excelente'];
+        this.pregunta1Data = [0, 0, 0, 0, 0];
+        this.pregunta2Labels = ['Sí', 'No'];
+        this.pregunta2Data = [0, 0];
+        this.pregunta3Labels = ['Mala conducta', 'Mala presentación', 'Poca formalidad'];
+        this.pregunta3Data = [0, 0, 0];
+        this.pregunta4Labels = ['Sí', 'No'];
+        this.pregunta4Data = [0, 0];
+        this.pregunta5 = [];
+        this.doughnutChartType = 'doughnut';
+        this.firebase = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a;
+        this.moment = __WEBPACK_IMPORTED_MODULE_3_moment__;
+        this.conducta = 3;
+        this.textoRange = "Mediocre";
+        this.inconveniente = "0";
+        this.aspectos = { item1: false, item2: false, item3: false };
+        this.prescencia = "1";
+        this.image = "";
+        this.ocultarImagen = true;
+        __WEBPACK_IMPORTED_MODULE_2_chart_js__["Chart"].defaults.global.legend.display = false;
+        this.usuario = navParams.get("usuario");
+        this.usuarioLogueado = JSON.parse(localStorage.getItem("usuario"));
+        var usuariosRef = this.firebase.database().ref("usuarios");
+        this.estadoBoton = true;
+        usuariosRef.once("value", function (snap) {
+            var data = snap.val();
+            for (var item in data) {
+                if (data[item].correo == _this.usuario.correo) {
+                    _this.pregunta1Data = [
+                        data[item].encuesta.pregunta1.pesimo,
+                        data[item].encuesta.pregunta1.malo,
+                        data[item].encuesta.pregunta1.mediocre,
+                        data[item].encuesta.pregunta1.bueno,
+                        data[item].encuesta.pregunta1.excelente
+                    ];
+                    _this.pregunta2Data = [
+                        data[item].encuesta.pregunta2.si,
+                        data[item].encuesta.pregunta2.no
+                    ];
+                    _this.pregunta3Data = [
+                        data[item].encuesta.pregunta3.item1,
+                        data[item].encuesta.pregunta3.item2,
+                        data[item].encuesta.pregunta3.item3
+                    ];
+                    _this.pregunta4Data = [
+                        data[item].encuesta.pregunta4.si,
+                        data[item].encuesta.pregunta4.no
+                    ];
+                    _this.pregunta5 = data[item].encuesta.pregunta5;
+                    _this.pregunta5.splice(0, 1);
+                    _this.pregunta5 = _this.pregunta5.reverse();
+                    break;
+                }
+            }
+            _this.estadoBoton = false;
+        });
+    }
+    // events
+    EncuestaSupervisorPage.prototype.chartClicked = function (e) {
+        console.log(e);
+    };
+    EncuestaSupervisorPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad EncuestaSupervisorPage');
+    };
+    EncuestaSupervisorPage.prototype.ModificarTextoRange = function () {
+        var arrayAux = ['Pésimo', 'Malo', 'Mediocre', 'Bueno', 'Excelente'];
+        this.textoRange = arrayAux[this.conducta - 1];
+    };
+    EncuestaSupervisorPage.prototype.HacerEncuesta = function () {
+        var _this = this;
+        var usuariosRef = this.firebase.database().ref("usuarios");
+        this.estadoBoton = true;
+        usuariosRef.once("value", function (snap) {
+            var data = snap.val();
+            for (var item in data) {
+                if (data[item].correo == _this.usuario.correo) {
+                    console.clear();
+                    var pregunta1 = [data[item].encuesta.pregunta1.pesimo, data[item].encuesta.pregunta1.malo, data[item].encuesta.pregunta1.mediocre, data[item].encuesta.pregunta1.bueno, data[item].encuesta.pregunta1.excelente];
+                    pregunta1[_this.conducta - 1]++;
+                    var pregunta2 = [data[item].encuesta.pregunta2.no, data[item].encuesta.pregunta2.si];
+                    pregunta2[_this.inconveniente]++;
+                    var pregunta3 = [];
+                    pregunta3[0] = (_this.aspectos.item1) ? data[item].encuesta.pregunta3.item1 + 1 : data[item].encuesta.pregunta3.item1;
+                    pregunta3[1] = (_this.aspectos.item2) ? data[item].encuesta.pregunta3.item2 + 1 : data[item].encuesta.pregunta3.item2;
+                    pregunta3[2] = (_this.aspectos.item3) ? data[item].encuesta.pregunta3.item3 + 1 : data[item].encuesta.pregunta3.item3;
+                    var pregunta4 = [data[item].encuesta.pregunta4.no, data[item].encuesta.pregunta4.si];
+                    pregunta4[_this.prescencia]++;
+                    var pregunta5 = data[item].encuesta.pregunta5;
+                    if (_this.opinion) {
+                        var momentoActual = __WEBPACK_IMPORTED_MODULE_3_moment__(new Date());
+                        pregunta5.push({ nombre: _this.usuarioLogueado.apellido + ", " + _this.usuarioLogueado.nombre, fecha: momentoActual.format("DD/MM/YYYY HH:mm"), comentario: _this.opinion, img: _this.usuarioLogueado.img });
+                    }
+                    usuariosRef.child(item).update({
+                        "encuesta": {
+                            "pregunta1": {
+                                "pesimo": pregunta1[0],
+                                "malo": pregunta1[1],
+                                "mediocre": pregunta1[2],
+                                "bueno": pregunta1[3],
+                                "excelente": pregunta1[4]
+                            },
+                            "pregunta2": {
+                                "si": pregunta2[0],
+                                "no": pregunta2[1]
+                            },
+                            "pregunta3": {
+                                "item1": pregunta3[0],
+                                "item2": pregunta3[1],
+                                "item3": pregunta3[2]
+                            },
+                            "pregunta4": {
+                                "si": pregunta4[0],
+                                "no": pregunta4[1]
+                            },
+                            "pregunta5": pregunta5
+                        }
+                    }).then(function () {
+                        _this.estadoBoton = false;
+                        _this.presentToast("Se ha cargado correctamente la encuesta.");
+                        // this.navCtrl.pop();
+                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                    break;
+                }
+            }
+        });
+    };
+    EncuestaSupervisorPage.prototype.MostrarImagen = function (imagen) {
+        this.image = imagen;
+        this.ocultarImagen = false;
+    };
+    EncuestaSupervisorPage.prototype.OcultarImagen = function () {
+        this.ocultarImagen = true;
+    };
+    EncuestaSupervisorPage.prototype.VolverAtras = function () {
+        this.navCtrl.pop();
+    };
+    EncuestaSupervisorPage.prototype.presentToast = function (mensaje) {
+        var toast = this.toastCtrl.create({
+            message: mensaje,
+            duration: 3000,
+            position: 'top',
+            cssClass: "infoToast"
+        });
+        toast.present();
+    };
+    EncuestaSupervisorPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-encuesta-supervisor',template:/*ion-inline-start:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\encuesta-supervisor\encuesta-supervisor.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <ion-buttons>\n\n      <button ion-button (click)="VolverAtras()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n    <ion-buttons end>\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div class="imagen" [ngClass]="{\'ocultar\':ocultarImagen,\'opacidad\':true}">\n\n\n\n  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>\n\n  <img [src]="image" alt="">\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <h1>Califique la conducta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>\n\n\n\n  <div class="encuesta">\n\n    <div id="divCanvas" class="canvas">\n\n      <canvas baseChart [data]="pregunta1Data" [labels]="pregunta1Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <div class="mi-range">\n\n\n\n      <ion-range [(ngModel)]="conducta" color="dark" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;"\n\n        (ngModelChange)="ModificarTextoRange()"></ion-range>\n\n      <span>{{textoRange}}</span>\n\n\n\n    </div>\n\n  </div>\n\n\n\n  <h1>¿Tuvo algún inconveniente con {{usuario.apellido}}, {{usuario.nombre}} en horas de servicio?</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <div id="divCanvas" class="canvas">\n\n\n\n      <canvas baseChart [data]="pregunta2Data" [labels]="pregunta2Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <ion-list radio-group [(ngModel)]="inconveniente">\n\n      <ion-item>\n\n        <ion-label>Sí</ion-label>\n\n        <ion-radio color="dark" value="1"></ion-radio>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>No</ion-label>\n\n        <ion-radio color="dark" value="0"></ion-radio>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n  </div>\n\n\n\n  <h1>Seleccione el/los aspectos a tener en cuenta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <div id="divCanvas" class="canvas">\n\n      <canvas baseChart [data]="pregunta3Data" [labels]="pregunta3Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <ion-list style="left: -75px;">\n\n\n\n      <ion-item>\n\n        <ion-label>Mala conducta</ion-label>\n\n        <ion-checkbox color="dark" [(ngModel)]="aspectos.item1"></ion-checkbox>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>Mala presentación</ion-label>\n\n        <ion-checkbox color="dark" [(ngModel)]="aspectos.item2"></ion-checkbox>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>Poca formalidad</ion-label>\n\n        <ion-checkbox color="dark" [(ngModel)]="aspectos.item3"></ion-checkbox>\n\n      </ion-item>\n\n\n\n    </ion-list>\n\n\n\n  </div>\n\n\n\n  <h1>¿Le gustaría que {{usuario.apellido}}, {{usuario.nombre}} siguiese presentandose en el restaurante?</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <div id="divCanvas" class="canvas">\n\n      <canvas baseChart [data]="pregunta4Data" [labels]="pregunta4Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"\n\n        (chartClick)="chartClicked($event)"></canvas>\n\n    </div>\n\n\n\n    <select [(ngModel)]="prescencia">\n\n      <option value="1">Sí, definitivamente.</option>\n\n      <option value="0">No, en absoluto.</option>\n\n    </select>\n\n\n\n  </div>\n\n\n\n  <h1>Escriba su comentario.</h1>\n\n\n\n  <div class="encuesta">\n\n\n\n    <textarea rows="4" cols="50" placeholder="Escribe tu comentario aquí..." [(ngModel)]="opinion"></textarea>\n\n\n\n  </div>\n\n\n\n  <button ion-button color="dark" class="enviar" [disabled]="estadoBoton" (click)="HacerEncuesta()">Enviar encuesta</button>\n\n\n\n  <h1 style="margin-bottom: 30px;" *ngIf="!ocultarSpinner && pregunta5.length > 1">Comentarios</h1>\n\n\n\n    <div class="comentarios" *ngFor="let item of pregunta5">\n\n\n\n      <img src="{{item.img}}" (click)="MostrarImagen(item.img)" />\n\n      <h2>{{item.nombre}}</h2>\n\n      <h5>({{item.fecha}} Hs.)</h5>\n\n      <p>{{item.comentario}}</p>\n\n\n\n    </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':!estadoBoton}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\encuesta-supervisor\encuesta-supervisor.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
+    ], EncuestaSupervisorPage);
+    return EncuestaSupervisorPage;
+}());
+
+//# sourceMappingURL=encuesta-supervisor.js.map
+
+/***/ }),
+
+/***/ 222:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReservaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_mis_reservas_mis_reservas__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_mis_reservas_mis_reservas__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
@@ -3570,7 +3380,7 @@ var ReservaPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 224:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3733,7 +3543,7 @@ var MisReservasPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 225:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3977,7 +3787,7 @@ var CuentaPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 226:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4219,19 +4029,19 @@ var ListadoReservasPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 227:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SalaDeJuegosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__juego_uno_juego_uno__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__juego_uno_juego_uno__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__juego_juego__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__juego_dos_juego_dos__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__juego_juego__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__juego_dos_juego_dos__ = __webpack_require__(229);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4310,7 +4120,7 @@ var SalaDeJuegosPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 228:
+/***/ 227:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4393,7 +4203,7 @@ var JuegoUnoPage = /** @class */ (function () {
             { pregunta: "¿Cómo se llama la ciencia que estudia los mapas?", respuesta: "Cartografía", opcion1: "Cartografía", opcion2: "Geografía", opcion3: "Oceanografía", opcion4: "Ciencias sociales" },
             { pregunta: "¿Cuál es el lugar más frío de la tierra?", respuesta: "La Antártida", opcion1: "Polo sur", opcion2: "Polo norte", opcion3: "Tierra del Fuego", opcion4: "La Antártida" },
             { pregunta: "¿En qué país se encuentra la torre de Pisa?", respuesta: "Italia", opcion1: "Grecia", opcion2: "Francia", opcion3: "Portugal", opcion4: "Italia" },
-            { pregunta: "¿En qué año llegó Cristóbal Colón a América?", respuesta: "1942", opcion1: "1940", opcion2: "1942", opcion3: "1937", opcion4: "1945" },
+            { pregunta: "¿En qué año llegó Cristóbal Colón a América?", respuesta: "1492", opcion1: "1940", opcion2: "1492", opcion3: "1937", opcion4: "1945" },
             { pregunta: "¿Dónde se encuentra la famosa \"Torre Eiffel\"?", respuesta: "Francia", opcion1: "Francia", opcion2: "Grecia", opcion3: "Portugal", opcion4: "Italia" },
             { pregunta: "¿En qué lugar del cuerpo se produce la insulina?", respuesta: "En el pancreas", opcion1: "En el apéndice", opcion2: "En la vejiga", opcion3: "En el estómago", opcion4: "En el pancreas" },
             { pregunta: "¿Qué rama de la biología estudia los animales?", respuesta: "La zoología", opcion1: "La zoología", opcion2: "La ictiología", opcion3: "La entomología", opcion4: "La ornitología" }
@@ -4445,7 +4255,7 @@ var JuegoUnoPage = /** @class */ (function () {
             }
             else {
                 clearInterval(this.intervalID);
-                this.MostrarAlert("¡Ganaste!", "", "Volver", this.Volver);
+                this.MostrarAlert("¡Ganaste pero no tenés postre!", "", "Volver", this.Volver);
             }
         }
         else {
@@ -4552,7 +4362,7 @@ var JuegoUnoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 229:
+/***/ 228:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4802,12 +4612,12 @@ var JuegoPage = /** @class */ (function () {
                     if (data[key].juegoFacu == undefined) {
                         _this.yaJugo = false;
                         _this.jugadorActual = data[key];
-                        _this.jugadorActual.juegoFacu = "si";
+                        _this.jugadorActual.juegoFacu = true;
                         _this.claveJugador = key;
                     } //Si jugo simplemente le aviso a mi variable local.
                     else {
                         _this.jugadorActual = data[key];
-                        _this.jugadorActual.juegoFacu = "si";
+                        _this.jugadorActual.juegoFacu = true;
                         _this.claveJugador = key;
                         _this.yaJugo = true;
                     }
@@ -4849,6 +4659,196 @@ var JuegoPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=juego.js.map
+
+/***/ }),
+
+/***/ 229:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JuegoDosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var JuegoDosPage = /** @class */ (function () {
+    function JuegoDosPage(navCtrl, navParams) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.puntajeMaximo = 0;
+        this.primeraVezJugando = 0;
+        this.meta = 3;
+        this.estadoBoton = false;
+        this.ocultarAlert = true;
+        this.firebase = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a;
+        this.puedeGanarBebida = true;
+        this.usuario = JSON.parse(localStorage.getItem("usuario"));
+        var usuariosRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios");
+        usuariosRef.once("value", function (snap) {
+            var data = snap.val();
+            for (var item in data) {
+                if (data[item].correo == _this.usuario.correo) {
+                    _this.usuarioKey = item;
+                    _this.usuarioMesa = data[item].mesa;
+                    if (data[item].juegoAxel) {
+                        _this.puedeGanarBebida = false;
+                    }
+                }
+            }
+        });
+        this.getNewQuestion();
+    }
+    JuegoDosPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad JuegoDosPage');
+    };
+    JuegoDosPage.prototype.Timer = function () {
+        var _this = this;
+        this.asd = setInterval(function () {
+            _this.segundos--;
+            if (_this.segundos == 0) {
+                _this.MostrarAlert("¡Perdió!", "Se le acabó el tiempo para responder.", "Aceptar", _this.limpiar);
+                __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios").child(_this.usuarioKey).update({ juegoAxel: true });
+                //alert("Se acabo el tiempo");
+                clearInterval(_this.asd);
+                _this.navCtrl.pop();
+            }
+        }, 1000);
+    };
+    JuegoDosPage.prototype.getNewQuestion = function () {
+        if (this.primeraVezJugando == 0) {
+            this.Timer();
+        }
+        this.segundos = 15;
+        this.operador = Math.floor(Math.random() * (4 - 1)) + 1;
+        this.n1 = Math.floor(Math.random() * (50 - 1)) + 1;
+        this.n2 = Math.floor(Math.random() * (50 - 1)) + 1;
+        switch (this.operador) {
+            case 1:
+                this.question = this.n1 + " + " + this.n2 + " = ";
+                this.answer = this.n1 + this.n2;
+                break;
+            case 2:
+                this.question = this.n1 + " - " + this.n2 + " = ";
+                this.answer = this.n1 - this.n2;
+                break;
+            case 3:
+                this.n1 = this.operador = Math.floor(Math.random() * (10 - 1)) + 1;
+                this.n2 = this.operador = Math.floor(Math.random() * (10 - 1)) + 1;
+                this.question = this.n1 + " X " + this.n2 + " = ";
+                this.answer = this.n1 * this.n2;
+                break;
+            default:
+        }
+    };
+    JuegoDosPage.prototype.onSubmitAnswer = function () {
+        var _this = this;
+        if (!this.userAnswer) {
+            //alert("No escribio ninguna respuesta");
+            this.MostrarAlert("¡Error!", "No escribió ninguna respuesta.", "Aceptar", this.limpiar);
+            return;
+        }
+        if (parseInt(this.userAnswer) == this.answer) {
+            //alert("respuesta correcta");
+            this.MostrarAlert("¡Respuesta correcta!", "Tiene que acertar 3 veces.", "Aceptar", this.limpiar);
+            this.userAnswer = "";
+            this.puntajeMaximo++;
+            this.primeraVezJugando++;
+            this.getNewQuestion();
+            if (this.puntajeMaximo == this.meta) {
+                //alert("Enhorabuena,usted gano el juego");
+                //this.MostrarAlert("Gano!!", "Se gano su bebida gratis", "Aceptar", this.limpiar);
+                this.question == "";
+                this.segundos == 0;
+                clearInterval(this.asd);
+                if (this.puedeGanarBebida) {
+                    this.estadoBoton = true;
+                    //this.ocultarSpinner = false;
+                    this.MostrarAlert("¡Ganaste!", "¡Tu bebida gratis aguarda!", "Volver", this.limpiar);
+                    __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true }).then(function () {
+                        __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("pedidos").child(_this.usuarioMesa).child("cocinero").push({
+                            cantidad: 1,
+                            nombre: "bebida gratuita",
+                            precio: 0
+                        }).then(function () {
+                            __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("pedidos").child(_this.usuarioMesa).child("cocinero").update({ estado: "tomado" }).then(function () {
+                                _this.estadoBoton = false;
+                                // this.ocultarSpinner = true;
+                                //this.navCtrl.pop();
+                            });
+                        });
+                    });
+                }
+                else {
+                    this.MostrarAlert("¡Ganaste!", "", "Volver", this.limpiar);
+                    this.navCtrl.pop();
+                }
+            }
+        }
+        else {
+            //alert("respuesta incorrecta");
+            this.MostrarAlert("¡Perdió!", "¡Escribió un número incorrecto.", "Aceptar", this.limpiar);
+            __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true });
+            clearInterval(this.asd);
+            this.navCtrl.pop();
+        }
+    };
+    JuegoDosPage.prototype.MostrarAlert = function (titulo, mensaje, mensajeBoton, handler) {
+        this.ocultarAlert = false;
+        this.alertTitulo = titulo;
+        this.alertMensaje = mensaje;
+        this.alertMensajeBoton = mensajeBoton;
+        this.alertHandler = handler;
+    };
+    JuegoDosPage.prototype.limpiar = function () {
+        this.ocultarAlert = true;
+    };
+    JuegoDosPage.prototype.volver = function () {
+        clearInterval(this.asd);
+        this.navCtrl.pop();
+    };
+    JuegoDosPage.prototype.Logout = function () {
+        var _this = this;
+        var usuariosRef = this.firebase.database().ref("usuarios");
+        usuariosRef.once("value", function (snap) {
+            var data = snap.val();
+            for (var item in data) {
+                if (data[item].correo == _this.usuario.correo) {
+                    usuariosRef.child(item).update({
+                        logueado: false
+                    }).then(function () {
+                        localStorage.clear();
+                        _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
+                    });
+                    break;
+                }
+            }
+        });
+    };
+    JuegoDosPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-juego-dos',template:/*ion-inline-start:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\juego-dos\juego-dos.html"*/'<!--\n\n  Generated template for the JuegoQuinterosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar color="dark" hideBackButton="true">\n\n      <ion-title class="titulo2">\n\n        {{usuario.tipo}}\n\n      </ion-title>\n\n\n\n      <ion-buttons start style="left: 3px;\n\n          position: absolute;">\n\n          <button ion-button (click)="volver()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n         </button>\n\n        </ion-buttons>\n\n\n\n\n\n\n\n  \n\n      <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n\n\n       \n\n        <button ion-button (click)="Logout()">\n\n          <ion-icon name="close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n  \n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n               \n\n                  \n\n                   \n\n\n\n           \n\n\n\n\n\n\n\n            <div class="container">\n\n\n\n                    \n\n                            \n\n                                    <!--<span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>-->\n\n\n\n                                    <h2 class="asd">Tiempo restante: {{segundos}}</h2>\n\n\n\n                                    <h4 class="asd" >Acierte 3 veces para ganar</h4>\n\n\n\n                                    <h4 class="asd" >Puntaje: {{puntajeMaximo}}</h4>\n\n\n\n                  \n\n\n\n                                    <!--<p class="question">{{question}}</p>-->\n\n                                    <p style="text-align:center;font-size:70px;background-color:white;border-radius: 70px;">{{question}}</p>\n\n            \n\n                                    <div class="laPregunta5">\n\n\n\n                                    <ion-item>\n\n                                        <ion-input type="text" class="respuestitaa" placeholder="¡Respondé acá!"  [(ngModel)]="userAnswer" ></ion-input>\n\n                                      </ion-item>\n\n\n\n                                    </div>\n\n                                \n\n                                   \n\n                               \n\n                              \n\n                                \n\n                                \n\n                                    <button  class="botonJuego" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>\n\n                               \n\n                         \n\n                                \n\n                          \n\n                \n\n                        \n\n                \n\n                      </div>\n\n\n\n\n\n</ion-content>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n    <div class="alert-message animation-target">\n\n      <h1>{{alertTitulo}}</h1>\n\n      <p>{{alertMensaje}}</p>\n\n      <div class="botones">\n\n  \n\n        <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n      </div>\n\n    </div>\n\n  \n\n  </div>\n\n\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\juego-dos\juego-dos.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+    ], JuegoDosPage);
+    return JuegoDosPage;
+}());
+
+//# sourceMappingURL=juego-dos.js.map
 
 /***/ }),
 
@@ -8874,7 +8874,7 @@ var MapaDeRutaPage = /** @class */ (function () {
     ], MapaDeRutaPage.prototype, "content", void 0);
     MapaDeRutaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-mapa-de-ruta',template:/*ion-inline-start:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/'<!--\n\n  Generated template for the MapaDeRutaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>mapaDeRuta</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n\n\n\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n\n\n      \n\n\n\n    \n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n    position: absolute;">\n\n    <button ion-button (click)="volver()">\n\n  <ion-icon name="arrow-dropleft"></ion-icon>\n\n   </button>\n\n  </ion-buttons>\n\n\n\n    \n\n\n\n    <ion-buttons end >\n\n\n\n       \n\n\n\n       \n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<!--<ion-content padding class="home">\n\n\n\n    <ion-row class="logo-row">\n\n       \n\n        <ion-col>\n\n            <img src="assets/imgs/gamma/mapaderuta.jpg"/>\n\n          \n\n        </ion-col>\n\n        \n\n      </ion-row>\n\n\n\n      \n\n      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>\n\n      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>\n\n      \n\n  \n\n\n\n   <ion-list>\n\n     <ion-item *ngFor="let chat of ListadoDeChats">\n\n\n\n   \n\n     <div class="chat-message" text-right >\n\n       <div class="right-bubble">\n\n         <span class="msg-name">Yo</span>\n\n         <span class="msg-date">asdasd</span>\n\n         <p text-wrap>fdsfs</p>\n\n       </div>\n\n     </div>\n\n\n\n     <div class="chat-message" text-left >\n\n       <div class="left-bubble">\n\n         <span class="msg-name">Cliente:Juan Perez</span>\n\n         <span class="msg-date">sdfs</span>\n\n         <p text-wrap>asdasd</p>\n\n       </div>\n\n     </div>\n\n\n\n   \n\n   </ion-item>\n\n </ion-list>\n\n   \n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n<ion-footer no-shadow >\n\n  <ion-toolbar position="bottom" color="light">\n\n    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">\n\n      <ion-row>\n\n            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>\n\n            <ion-buttons end>\n\n                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">\n\n                    <ion-icon name="arrow-round-forward"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n      </ion-row>\n\n    </form>\n\n  </ion-toolbar>\n\n</ion-footer>-->\n\n\n\n\n\n\n\n\n\n<ion-content #content>\n\n\n\n  <div *ngIf="clientes">\n\n\n\n      <div class="asdasd" *ngIf="sinPedidos">\n\n          SIN PEDIDOS\n\n        </div>\n\n        \n\n        <div class="mapouter" *ngIf="!sinPedidos">\n\n          <div class="gmap_canvas">\n\n            <iframe width="600" height="500" id="gmap_canvas" \n\n              src="https://maps.google.com/maps?q=mitre%20750&t=&z=19&ie=UTF8&iwloc=&output=embed" \n\n              frameborder="0" scrolling="no" marginheight="0" marginwidth="0">\n\n            </iframe>Google Maps by ASGARDIANOS</div>\n\n            <style>\n\n              .mapouter{\n\n                position:relative;\n\n                text-align:right;\n\n                height:500px;\n\n                width:600px;\n\n                }\n\n              .gmap_canvas {\n\n                overflow:hidden;\n\n                background:none!important;\n\n                height:500px;\n\n                width:600px;\n\n              }\n\n            </style>\n\n      </div>\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">\n\n          <div class="realizarEncuesta">Pedidos a entregar</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of clientesConPedidos">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="entregar(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n    </div>\n\n\n\n    <div *ngIf="chat">\n\n\n\n\n\n\n\n\n\n        <img src={{probando}} style="width: 100px;">\n\n    \n\n\n\n          <ion-label class="lb" >{{nombreCliente}}</ion-label>\n\n          <ion-label class="lb" >{{direccionCliente}}</ion-label>\n\n\n\n          \n\n\n\n        \n\n\n\n\n\n	<ion-list no-lines>\n\n\n\n		<ion-item *ngFor="let message of messagesList">\n\n		<!--	<h3>{{message.name}}</h3>\n\n      <p>{{message.message}}</p>-->\n\n\n\n      <div class="chat-message" text-right *ngIf="message.name === probanding">\n\n          <div class="right-bubble">\n\n            <span class="msg-name"></span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n           <!-- <span class="msg-date">{{message.tiempo}}</span>-->\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n\n\n        <div class="chat-message" text-left *ngIf="message.name !== probanding">\n\n          <div class="left-bubble">\n\n            <span class="msg-name">{{message.name}}</span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-item>\n\n    \n\n\n\n\n\n\n\n  </ion-list>\n\n  \n\n\n\n</div>\n\n\n\n\n\n\n\n</ion-content>\n\n\n\n\n\n<ion-footer *ngIf="mandar">\n\n	<ion-item>\n\n		<ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>\n\n		<button ion-button clear item-right (click)="send()">Enviar</button>\n\n	</ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/,
+            selector: 'page-mapa-de-ruta',template:/*ion-inline-start:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/'<!--\n\n  Generated template for the MapaDeRutaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>mapaDeRuta</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n\n\n\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n\n\n      \n\n\n\n    \n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n    position: absolute;">\n\n    <button ion-button (click)="volver()">\n\n  <ion-icon name="arrow-dropleft"></ion-icon>\n\n   </button>\n\n  </ion-buttons>\n\n\n\n    \n\n\n\n    <ion-buttons end >\n\n\n\n       \n\n\n\n       \n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<!--<ion-content padding class="home">\n\n\n\n    <ion-row class="logo-row">\n\n       \n\n        <ion-col>\n\n            <img src="assets/imgs/gamma/mapaderuta.jpg"/>\n\n          \n\n        </ion-col>\n\n        \n\n      </ion-row>\n\n\n\n      \n\n      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>\n\n      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>\n\n      \n\n  \n\n\n\n   <ion-list>\n\n     <ion-item *ngFor="let chat of ListadoDeChats">\n\n\n\n   \n\n     <div class="chat-message" text-right >\n\n       <div class="right-bubble">\n\n         <span class="msg-name">Yo</span>\n\n         <span class="msg-date">asdasd</span>\n\n         <p text-wrap>fdsfs</p>\n\n       </div>\n\n     </div>\n\n\n\n     <div class="chat-message" text-left >\n\n       <div class="left-bubble">\n\n         <span class="msg-name">Cliente:Juan Perez</span>\n\n         <span class="msg-date">sdfs</span>\n\n         <p text-wrap>asdasd</p>\n\n       </div>\n\n     </div>\n\n\n\n   \n\n   </ion-item>\n\n </ion-list>\n\n   \n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n<ion-footer no-shadow >\n\n  <ion-toolbar position="bottom" color="light">\n\n    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">\n\n      <ion-row>\n\n            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>\n\n            <ion-buttons end>\n\n                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">\n\n                    <ion-icon name="arrow-round-forward"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n      </ion-row>\n\n    </form>\n\n  </ion-toolbar>\n\n</ion-footer>-->\n\n\n\n\n\n\n\n\n\n<ion-content #content>\n\n\n\n  <div *ngIf="clientes">\n\n\n\n      <div class="asdasd" *ngIf="sinPedidos">\n\n          SIN PEDIDOS\n\n        </div>\n\n        \n\n        <div class="mapouter" *ngIf="!sinPedidos">\n\n          <div class="gmap_canvas">\n\n            <iframe width="600" height="500" id="gmap_canvas" \n\n              src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyB63D2az3Guib3VGk7Auoie1fyG3lY1SzQ&origin=Oslo+Norway&destination=Telemark+Norway" \n\n              frameborder="0" scrolling="no" marginheight="0" marginwidth="0">\n\n            </iframe>Google Maps by ASGARDIANOS</div>\n\n            <style>\n\n              .mapouter{\n\n                position:relative;\n\n                text-align:right;\n\n                height:500px;\n\n                width:600px;\n\n                }\n\n              .gmap_canvas {\n\n                overflow:hidden;\n\n                background:none!important;\n\n                height:500px;\n\n                width:600px;\n\n              }\n\n            </style>\n\n      </div>\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">\n\n          <div class="realizarEncuesta">Pedidos a entregar</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of clientesConPedidos">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="entregar(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n    </div>\n\n\n\n    <div *ngIf="chat">\n\n\n\n\n\n\n\n\n\n        <img src={{probando}} style="width: 100px;">\n\n    \n\n\n\n          <ion-label class="lb" >{{nombreCliente}}</ion-label>\n\n          <ion-label class="lb" >{{direccionCliente}}</ion-label>\n\n\n\n          \n\n\n\n        \n\n\n\n\n\n	<ion-list no-lines>\n\n\n\n		<ion-item *ngFor="let message of messagesList">\n\n		<!--	<h3>{{message.name}}</h3>\n\n      <p>{{message.message}}</p>-->\n\n\n\n      <div class="chat-message" text-right *ngIf="message.name === probanding">\n\n          <div class="right-bubble">\n\n            <span class="msg-name"></span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n           <!-- <span class="msg-date">{{message.tiempo}}</span>-->\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n\n\n        <div class="chat-message" text-left *ngIf="message.name !== probanding">\n\n          <div class="left-bubble">\n\n            <span class="msg-name">{{message.name}}</span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-item>\n\n    \n\n\n\n\n\n\n\n  </ion-list>\n\n  \n\n\n\n</div>\n\n\n\n\n\n\n\n</ion-content>\n\n\n\n\n\n<ion-footer *ngIf="mandar">\n\n	<ion-item>\n\n		<ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>\n\n		<button ion-button clear item-right (click)="send()">Enviar</button>\n\n	</ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\Fede\Desktop\2019_TP_PPS_Comanda\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__["AngularFireAuth"]])
     ], MapaDeRutaPage);
@@ -9143,7 +9143,7 @@ var map = {
 		20
 	],
 	"../pages/alta-duenio-supervisor/alta-duenio-supervisor.module": [
-		817,
+		809,
 		19
 	],
 	"../pages/alta-empleado/alta-empleado.module": [
@@ -9151,55 +9151,55 @@ var map = {
 		18
 	],
 	"../pages/cuenta/cuenta.module": [
-		827,
+		820,
 		17
 	],
 	"../pages/encuesta-de-empleado/encuesta-de-empleado.module": [
-		820,
+		821,
 		16
 	],
 	"../pages/encuesta-supervisor/encuesta-supervisor.module": [
-		809,
+		810,
 		15
 	],
 	"../pages/juego-dos/juego-dos.module": [
-		810,
+		813,
 		14
 	],
 	"../pages/juego-uno/juego-uno.module": [
-		821,
+		825,
 		13
 	],
 	"../pages/juego/juego.module": [
-		822,
+		823,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
-		811,
+		817,
 		11
 	],
 	"../pages/listado-supervisor/listado-supervisor.module": [
-		823,
+		824,
 		10
 	],
 	"../pages/login/login.module": [
-		824,
+		822,
 		9
 	],
 	"../pages/mapa-de-ruta/mapa-de-ruta.module": [
-		825,
+		826,
 		8
 	],
 	"../pages/mis-reservas/mis-reservas.module": [
-		812,
+		811,
 		7
 	],
 	"../pages/perfil/perfil.module": [
-		813,
+		812,
 		6
 	],
 	"../pages/principal/principal.module": [
-		826,
+		827,
 		5
 	],
 	"../pages/qr-de-la-mesa/qr-de-la-mesa.module": [
@@ -9239,19 +9239,19 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 461:
+/***/ 318:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VerificarTipoProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_alta_duenio_supervisor_alta_duenio_supervisor__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_alta_empleado_alta_empleado__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_listado_supervisor_listado_supervisor__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_reserva_reserva__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_cuenta_cuenta__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_listado_reservas_listado_reservas__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_sala_de_juegos_sala_de_juegos__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_alta_duenio_supervisor_alta_duenio_supervisor__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_alta_empleado_alta_empleado__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_listado_supervisor_listado_supervisor__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_reserva_reserva__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_cuenta_cuenta__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_listado_reservas_listado_reservas__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_sala_de_juegos_sala_de_juegos__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_registro_cliente_registro_cliente__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_alta_platos_alta_platos__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_qr_ingreso_local_qr_ingreso_local__ = __webpack_require__(190);
@@ -10182,7 +10182,7 @@ var AltaPlatosPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pedir_platos_pedir_platos__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_chart_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login__ = __webpack_require__(15);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10912,17 +10912,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_tabs_tabs__ = __webpack_require__(789);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_principal_principal__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_alta_duenio_supervisor_alta_duenio_supervisor__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_alta_duenio_supervisor_alta_duenio_supervisor__ = __webpack_require__(218);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_perfil_perfil__ = __webpack_require__(234);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_alta_empleado_alta_empleado__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_encuesta_supervisor_encuesta_supervisor__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_listado_supervisor_listado_supervisor__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_reserva_reserva__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_mis_reservas_mis_reservas__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_cuenta_cuenta__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_listado_reservas_listado_reservas__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_juego_uno_juego_uno__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_sala_de_juegos_sala_de_juegos__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_alta_empleado_alta_empleado__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_encuesta_supervisor_encuesta_supervisor__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_listado_supervisor_listado_supervisor__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_reserva_reserva__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_mis_reservas_mis_reservas__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_cuenta_cuenta__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_listado_reservas_listado_reservas__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_juego_uno_juego_uno__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_sala_de_juegos_sala_de_juegos__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_registro_cliente_registro_cliente__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_alta_platos_alta_platos__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_qr_ingreso_local_qr_ingreso_local__ = __webpack_require__(190);
@@ -10941,7 +10941,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_mapa_de_ruta_mapa_de_ruta__ = __webpack_require__(233);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__ionic_native_camera__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__ionic_native_barcode_scanner__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__providers_verificar_tipo_verificar_tipo__ = __webpack_require__(461);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__providers_verificar_tipo_verificar_tipo__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40_angularfire2__ = __webpack_require__(793);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41_angularfire2_auth__ = __webpack_require__(24);
@@ -10950,12 +10950,12 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_43_angularfire2_firestore__ = __webpack_require__(469);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_43_angularfire2_firestore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_43_angularfire2_firestore__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__ionic_native_firebase__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__pages_juego_juego__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__pages_juego_juego__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__providers_fcm_fcm__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__pipes_el_el__ = __webpack_require__(795);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_components_module__ = __webpack_require__(796);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49_ionic2_rating__ = __webpack_require__(798);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__pages_juego_dos_juego_dos__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__pages_juego_dos_juego_dos__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__pipes_tiempo_desde_ahora_tiempo_desde_ahora__ = __webpack_require__(800);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__providers_ruteo_ruteo__ = __webpack_require__(801);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11061,25 +11061,25 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
+                        { loadChildren: '../pages/alta-duenio-supervisor/alta-duenio-supervisor.module#AltaDuenioSupervisorPageModule', name: 'AltaDuenioSupervisorPage', segment: 'alta-duenio-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-supervisor/encuesta-supervisor.module#EncuestaSupervisorPageModule', name: 'EncuestaSupervisorPage', segment: 'encuesta-supervisor', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego-dos/juego-dos.module#JuegoQuinterosPageModule', name: 'JuegoDosPage', segment: 'juego-dos', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego-dos/juego-dos.module#JuegoQuinterosPageModule', name: 'JuegoDosPage', segment: 'juego-dos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/alta-duenio-supervisor/alta-duenio-supervisor.module#AltaDuenioSupervisorPageModule', name: 'AltaDuenioSupervisorPage', segment: 'alta-duenio-supervisor', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-de-la-mesa/qr-de-la-mesa.module#QrDeLaMesaPageModule', name: 'QrDeLaMesaPage', segment: 'qr-de-la-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tomar-pedido/tomar-pedido.module#TomarPedidoPageModule', name: 'TomarPedidoPage', segment: 'tomar-pedido', priority: 'low', defaultHistory: [] }
                     ]
@@ -11154,7 +11154,7 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrincipalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_verificar_tipo_verificar_tipo__ = __webpack_require__(461);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_verificar_tipo_verificar_tipo__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__perfil_perfil__ = __webpack_require__(234);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_audio__ = __webpack_require__(77);
@@ -11424,264 +11424,264 @@ var PrincipalPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 673:
+/***/ 766:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 318,
-	"./af.js": 318,
-	"./ar": 319,
-	"./ar-dz": 320,
-	"./ar-dz.js": 320,
-	"./ar-kw": 321,
-	"./ar-kw.js": 321,
-	"./ar-ly": 322,
-	"./ar-ly.js": 322,
-	"./ar-ma": 323,
-	"./ar-ma.js": 323,
-	"./ar-sa": 324,
-	"./ar-sa.js": 324,
-	"./ar-tn": 325,
-	"./ar-tn.js": 325,
-	"./ar.js": 319,
-	"./az": 326,
-	"./az.js": 326,
-	"./be": 327,
-	"./be.js": 327,
-	"./bg": 328,
-	"./bg.js": 328,
-	"./bm": 329,
-	"./bm.js": 329,
-	"./bn": 330,
-	"./bn.js": 330,
-	"./bo": 331,
-	"./bo.js": 331,
-	"./br": 332,
-	"./br.js": 332,
-	"./bs": 333,
-	"./bs.js": 333,
-	"./ca": 334,
-	"./ca.js": 334,
-	"./cs": 335,
-	"./cs.js": 335,
-	"./cv": 336,
-	"./cv.js": 336,
-	"./cy": 337,
-	"./cy.js": 337,
-	"./da": 338,
-	"./da.js": 338,
-	"./de": 339,
-	"./de-at": 340,
-	"./de-at.js": 340,
-	"./de-ch": 341,
-	"./de-ch.js": 341,
-	"./de.js": 339,
-	"./dv": 342,
-	"./dv.js": 342,
-	"./el": 343,
-	"./el.js": 343,
-	"./en-SG": 344,
-	"./en-SG.js": 344,
-	"./en-au": 345,
-	"./en-au.js": 345,
-	"./en-ca": 346,
-	"./en-ca.js": 346,
-	"./en-gb": 347,
-	"./en-gb.js": 347,
-	"./en-ie": 348,
-	"./en-ie.js": 348,
-	"./en-il": 349,
-	"./en-il.js": 349,
-	"./en-nz": 350,
-	"./en-nz.js": 350,
-	"./eo": 351,
-	"./eo.js": 351,
-	"./es": 352,
-	"./es-do": 353,
-	"./es-do.js": 353,
-	"./es-us": 354,
-	"./es-us.js": 354,
-	"./es.js": 352,
-	"./et": 355,
-	"./et.js": 355,
-	"./eu": 356,
-	"./eu.js": 356,
-	"./fa": 357,
-	"./fa.js": 357,
-	"./fi": 358,
-	"./fi.js": 358,
-	"./fo": 359,
-	"./fo.js": 359,
-	"./fr": 360,
-	"./fr-ca": 361,
-	"./fr-ca.js": 361,
-	"./fr-ch": 362,
-	"./fr-ch.js": 362,
-	"./fr.js": 360,
-	"./fy": 363,
-	"./fy.js": 363,
-	"./ga": 364,
-	"./ga.js": 364,
-	"./gd": 365,
-	"./gd.js": 365,
-	"./gl": 366,
-	"./gl.js": 366,
-	"./gom-latn": 367,
-	"./gom-latn.js": 367,
-	"./gu": 368,
-	"./gu.js": 368,
-	"./he": 369,
-	"./he.js": 369,
-	"./hi": 370,
-	"./hi.js": 370,
-	"./hr": 371,
-	"./hr.js": 371,
-	"./hu": 372,
-	"./hu.js": 372,
-	"./hy-am": 373,
-	"./hy-am.js": 373,
-	"./id": 374,
-	"./id.js": 374,
-	"./is": 375,
-	"./is.js": 375,
-	"./it": 376,
-	"./it-ch": 377,
-	"./it-ch.js": 377,
-	"./it.js": 376,
-	"./ja": 378,
-	"./ja.js": 378,
-	"./jv": 379,
-	"./jv.js": 379,
-	"./ka": 380,
-	"./ka.js": 380,
-	"./kk": 381,
-	"./kk.js": 381,
-	"./km": 382,
-	"./km.js": 382,
-	"./kn": 383,
-	"./kn.js": 383,
-	"./ko": 384,
-	"./ko.js": 384,
-	"./ku": 385,
-	"./ku.js": 385,
-	"./ky": 386,
-	"./ky.js": 386,
-	"./lb": 387,
-	"./lb.js": 387,
-	"./lo": 388,
-	"./lo.js": 388,
-	"./lt": 389,
-	"./lt.js": 389,
-	"./lv": 390,
-	"./lv.js": 390,
-	"./me": 391,
-	"./me.js": 391,
-	"./mi": 392,
-	"./mi.js": 392,
-	"./mk": 393,
-	"./mk.js": 393,
-	"./ml": 394,
-	"./ml.js": 394,
-	"./mn": 395,
-	"./mn.js": 395,
-	"./mr": 396,
-	"./mr.js": 396,
-	"./ms": 397,
-	"./ms-my": 398,
-	"./ms-my.js": 398,
-	"./ms.js": 397,
-	"./mt": 399,
-	"./mt.js": 399,
-	"./my": 400,
-	"./my.js": 400,
-	"./nb": 401,
-	"./nb.js": 401,
-	"./ne": 402,
-	"./ne.js": 402,
-	"./nl": 403,
-	"./nl-be": 404,
-	"./nl-be.js": 404,
-	"./nl.js": 403,
-	"./nn": 405,
-	"./nn.js": 405,
-	"./pa-in": 406,
-	"./pa-in.js": 406,
-	"./pl": 407,
-	"./pl.js": 407,
-	"./pt": 408,
-	"./pt-br": 409,
-	"./pt-br.js": 409,
-	"./pt.js": 408,
-	"./ro": 410,
-	"./ro.js": 410,
-	"./ru": 411,
-	"./ru.js": 411,
-	"./sd": 412,
-	"./sd.js": 412,
-	"./se": 413,
-	"./se.js": 413,
-	"./si": 414,
-	"./si.js": 414,
-	"./sk": 415,
-	"./sk.js": 415,
-	"./sl": 416,
-	"./sl.js": 416,
-	"./sq": 417,
-	"./sq.js": 417,
-	"./sr": 418,
-	"./sr-cyrl": 419,
-	"./sr-cyrl.js": 419,
-	"./sr.js": 418,
-	"./ss": 420,
-	"./ss.js": 420,
-	"./sv": 421,
-	"./sv.js": 421,
-	"./sw": 422,
-	"./sw.js": 422,
-	"./ta": 423,
-	"./ta.js": 423,
-	"./te": 424,
-	"./te.js": 424,
-	"./tet": 425,
-	"./tet.js": 425,
-	"./tg": 426,
-	"./tg.js": 426,
-	"./th": 427,
-	"./th.js": 427,
-	"./tl-ph": 428,
-	"./tl-ph.js": 428,
-	"./tlh": 429,
-	"./tlh.js": 429,
-	"./tr": 430,
-	"./tr.js": 430,
-	"./tzl": 431,
-	"./tzl.js": 431,
-	"./tzm": 432,
-	"./tzm-latn": 433,
-	"./tzm-latn.js": 433,
-	"./tzm.js": 432,
-	"./ug-cn": 434,
-	"./ug-cn.js": 434,
-	"./uk": 435,
-	"./uk.js": 435,
-	"./ur": 436,
-	"./ur.js": 436,
-	"./uz": 437,
-	"./uz-latn": 438,
-	"./uz-latn.js": 438,
-	"./uz.js": 437,
-	"./vi": 439,
-	"./vi.js": 439,
-	"./x-pseudo": 440,
-	"./x-pseudo.js": 440,
-	"./yo": 441,
-	"./yo.js": 441,
-	"./zh-cn": 442,
-	"./zh-cn.js": 442,
-	"./zh-hk": 443,
-	"./zh-hk.js": 443,
-	"./zh-tw": 444,
-	"./zh-tw.js": 444
+	"./af": 338,
+	"./af.js": 338,
+	"./ar": 339,
+	"./ar-dz": 340,
+	"./ar-dz.js": 340,
+	"./ar-kw": 341,
+	"./ar-kw.js": 341,
+	"./ar-ly": 342,
+	"./ar-ly.js": 342,
+	"./ar-ma": 343,
+	"./ar-ma.js": 343,
+	"./ar-sa": 344,
+	"./ar-sa.js": 344,
+	"./ar-tn": 345,
+	"./ar-tn.js": 345,
+	"./ar.js": 339,
+	"./az": 346,
+	"./az.js": 346,
+	"./be": 347,
+	"./be.js": 347,
+	"./bg": 348,
+	"./bg.js": 348,
+	"./bm": 349,
+	"./bm.js": 349,
+	"./bn": 350,
+	"./bn.js": 350,
+	"./bo": 351,
+	"./bo.js": 351,
+	"./br": 352,
+	"./br.js": 352,
+	"./bs": 353,
+	"./bs.js": 353,
+	"./ca": 354,
+	"./ca.js": 354,
+	"./cs": 355,
+	"./cs.js": 355,
+	"./cv": 356,
+	"./cv.js": 356,
+	"./cy": 357,
+	"./cy.js": 357,
+	"./da": 358,
+	"./da.js": 358,
+	"./de": 359,
+	"./de-at": 360,
+	"./de-at.js": 360,
+	"./de-ch": 361,
+	"./de-ch.js": 361,
+	"./de.js": 359,
+	"./dv": 362,
+	"./dv.js": 362,
+	"./el": 363,
+	"./el.js": 363,
+	"./en-SG": 364,
+	"./en-SG.js": 364,
+	"./en-au": 365,
+	"./en-au.js": 365,
+	"./en-ca": 366,
+	"./en-ca.js": 366,
+	"./en-gb": 367,
+	"./en-gb.js": 367,
+	"./en-ie": 368,
+	"./en-ie.js": 368,
+	"./en-il": 369,
+	"./en-il.js": 369,
+	"./en-nz": 370,
+	"./en-nz.js": 370,
+	"./eo": 371,
+	"./eo.js": 371,
+	"./es": 372,
+	"./es-do": 373,
+	"./es-do.js": 373,
+	"./es-us": 374,
+	"./es-us.js": 374,
+	"./es.js": 372,
+	"./et": 375,
+	"./et.js": 375,
+	"./eu": 376,
+	"./eu.js": 376,
+	"./fa": 377,
+	"./fa.js": 377,
+	"./fi": 378,
+	"./fi.js": 378,
+	"./fo": 379,
+	"./fo.js": 379,
+	"./fr": 380,
+	"./fr-ca": 381,
+	"./fr-ca.js": 381,
+	"./fr-ch": 382,
+	"./fr-ch.js": 382,
+	"./fr.js": 380,
+	"./fy": 383,
+	"./fy.js": 383,
+	"./ga": 384,
+	"./ga.js": 384,
+	"./gd": 385,
+	"./gd.js": 385,
+	"./gl": 386,
+	"./gl.js": 386,
+	"./gom-latn": 387,
+	"./gom-latn.js": 387,
+	"./gu": 388,
+	"./gu.js": 388,
+	"./he": 389,
+	"./he.js": 389,
+	"./hi": 390,
+	"./hi.js": 390,
+	"./hr": 391,
+	"./hr.js": 391,
+	"./hu": 392,
+	"./hu.js": 392,
+	"./hy-am": 393,
+	"./hy-am.js": 393,
+	"./id": 394,
+	"./id.js": 394,
+	"./is": 395,
+	"./is.js": 395,
+	"./it": 396,
+	"./it-ch": 397,
+	"./it-ch.js": 397,
+	"./it.js": 396,
+	"./ja": 398,
+	"./ja.js": 398,
+	"./jv": 399,
+	"./jv.js": 399,
+	"./ka": 400,
+	"./ka.js": 400,
+	"./kk": 401,
+	"./kk.js": 401,
+	"./km": 402,
+	"./km.js": 402,
+	"./kn": 403,
+	"./kn.js": 403,
+	"./ko": 404,
+	"./ko.js": 404,
+	"./ku": 405,
+	"./ku.js": 405,
+	"./ky": 406,
+	"./ky.js": 406,
+	"./lb": 407,
+	"./lb.js": 407,
+	"./lo": 408,
+	"./lo.js": 408,
+	"./lt": 409,
+	"./lt.js": 409,
+	"./lv": 410,
+	"./lv.js": 410,
+	"./me": 411,
+	"./me.js": 411,
+	"./mi": 412,
+	"./mi.js": 412,
+	"./mk": 413,
+	"./mk.js": 413,
+	"./ml": 414,
+	"./ml.js": 414,
+	"./mn": 415,
+	"./mn.js": 415,
+	"./mr": 416,
+	"./mr.js": 416,
+	"./ms": 417,
+	"./ms-my": 418,
+	"./ms-my.js": 418,
+	"./ms.js": 417,
+	"./mt": 419,
+	"./mt.js": 419,
+	"./my": 420,
+	"./my.js": 420,
+	"./nb": 421,
+	"./nb.js": 421,
+	"./ne": 422,
+	"./ne.js": 422,
+	"./nl": 423,
+	"./nl-be": 424,
+	"./nl-be.js": 424,
+	"./nl.js": 423,
+	"./nn": 425,
+	"./nn.js": 425,
+	"./pa-in": 426,
+	"./pa-in.js": 426,
+	"./pl": 427,
+	"./pl.js": 427,
+	"./pt": 428,
+	"./pt-br": 429,
+	"./pt-br.js": 429,
+	"./pt.js": 428,
+	"./ro": 430,
+	"./ro.js": 430,
+	"./ru": 431,
+	"./ru.js": 431,
+	"./sd": 432,
+	"./sd.js": 432,
+	"./se": 433,
+	"./se.js": 433,
+	"./si": 434,
+	"./si.js": 434,
+	"./sk": 435,
+	"./sk.js": 435,
+	"./sl": 436,
+	"./sl.js": 436,
+	"./sq": 437,
+	"./sq.js": 437,
+	"./sr": 438,
+	"./sr-cyrl": 439,
+	"./sr-cyrl.js": 439,
+	"./sr.js": 438,
+	"./ss": 440,
+	"./ss.js": 440,
+	"./sv": 441,
+	"./sv.js": 441,
+	"./sw": 442,
+	"./sw.js": 442,
+	"./ta": 443,
+	"./ta.js": 443,
+	"./te": 444,
+	"./te.js": 444,
+	"./tet": 445,
+	"./tet.js": 445,
+	"./tg": 446,
+	"./tg.js": 446,
+	"./th": 447,
+	"./th.js": 447,
+	"./tl-ph": 448,
+	"./tl-ph.js": 448,
+	"./tlh": 449,
+	"./tlh.js": 449,
+	"./tr": 450,
+	"./tr.js": 450,
+	"./tzl": 451,
+	"./tzl.js": 451,
+	"./tzm": 452,
+	"./tzm-latn": 453,
+	"./tzm-latn.js": 453,
+	"./tzm.js": 452,
+	"./ug-cn": 454,
+	"./ug-cn.js": 454,
+	"./uk": 455,
+	"./uk.js": 455,
+	"./ur": 456,
+	"./ur.js": 456,
+	"./uz": 457,
+	"./uz-latn": 458,
+	"./uz-latn.js": 458,
+	"./uz.js": 457,
+	"./vi": 459,
+	"./vi.js": 459,
+	"./x-pseudo": 460,
+	"./x-pseudo.js": 460,
+	"./yo": 461,
+	"./yo.js": 461,
+	"./zh-cn": 462,
+	"./zh-cn.js": 462,
+	"./zh-hk": 463,
+	"./zh-hk.js": 463,
+	"./zh-tw": 464,
+	"./zh-tw.js": 464
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -11697,7 +11697,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 673;
+webpackContext.id = 766;
 
 /***/ }),
 
@@ -11714,7 +11714,7 @@ webpackContext.id = 673;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_firestore__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_chart_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__principal_principal__ = __webpack_require__(66);
