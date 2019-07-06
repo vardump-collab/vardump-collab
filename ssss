@@ -1,0 +1,272 @@
+[33mcommit ddab2ce7070bbe72672444c2a9e809de881c49f6[m[33m ([m[1;36mHEAD -> [m[1;32malpha[m[33m, [m[1;31morigin/alpha[m[33m)[m
+Author: Federico Henseler <fhenseler3@gmail.com>
+Date:   Sat Jun 29 00:29:14 2019 -0300
+
+    Mapa RE PEOLA
+
+[33mcommit 64836a6c02520ada91aee045b3d76cf7769fab0d[m
+Merge: a584b1f ae7d4dd
+Author: vardump-collab <fhenseler3@gmail.com>
+Date:   Fri Jun 28 23:52:30 2019 -0300
+
+    Merge branch 'alpha' of https://github.com/vardump-collab/vardump-collab into alpha
+
+[33mcommit a584b1fa52d74befd0da0bbf5578dd4e3bb5eb10[m
+Author: vardump-collab <fhenseler3@gmail.com>
+Date:   Fri Jun 28 23:51:28 2019 -0300
+
+    Cambios readme
+
+[33mcommit ae7d4dd7ea11fafab840189dcadff47e086292ac[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:48:10 2019 -0300
+
+    Update README.md
+
+[33mcommit 22185c40c9cb73291f51ffc31998fdf44b864daf[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:46:03 2019 -0300
+
+    Update README.md
+
+[33mcommit eddcbf53eab9015da15b4fb4f6ebee8e5b8eb41f[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:43:10 2019 -0300
+
+    Update README.md
+
+[33mcommit 698d6b257f8bd9c43a197e1c7d67aa330a324ecb[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:42:21 2019 -0300
+
+    Update README.md
+
+[33mcommit 38f3a7758b8706641dacab2551c8bb865f1c0f25[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:41:28 2019 -0300
+
+    Update README.md
+
+[33mcommit ca5f252806adf761cd8e1a52ac616edf17767967[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:36:08 2019 -0300
+
+    Update README.md
+
+[33mcommit 4a5c4e4c6e1e5a9cafa7d4031aa98c92db1e2bcf[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:26:50 2019 -0300
+
+    Update README.md
+
+[33mcommit 562e0b83c39cf987eac7aba1603338acf8b86ed5[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 23:21:00 2019 -0300
+
+    Update README.md
+
+[33mcommit e37fe1bd00e421d8bdaf24455611267d4ae29246[m
+Author: Federico Henseler <fhenseler3@gmail.com>
+Date:   Fri Jun 28 20:33:01 2019 -0300
+
+    Cambios varios
+
+[33mcommit 4981d0c7fed9f456ccf54aec2a9bc9391eab1286[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 20:24:36 2019 -0300
+
+    Update README.md
+
+[33mcommit 6f74786e31365aabe1e9205b12ec054d30aec197[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 20:22:56 2019 -0300
+
+    Update README.md
+
+[33mcommit 0d582e1a52c32d32ef4ecffed14f1461aa188e7a[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 20:11:57 2019 -0300
+
+    Update README.md
+
+[33mcommit 702ee8366fe25f70440335db16bd2ef97a62d82c[m
+Merge: 772a9f7 632086f
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Fri Jun 28 20:08:49 2019 -0300
+
+    Merge branch 'alpha' of https://github.com/vardump-collab/vardump-collab into alpha
+
+[33mcommit 772a9f73adcf07dfe0ff32da4290fcda5a55ba4c[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Fri Jun 28 20:08:24 2019 -0300
+
+    Arreglo descuentos en la cuenta
+
+[33mcommit 632086f2fb4426ec1e8396a9e36a706d7b5773d2[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:59:07 2019 -0300
+
+    Update README.md
+
+[33mcommit dfdcdfa0f10939c51455bfc9f95621b7b9883471[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Fri Jun 28 19:51:15 2019 -0300
+
+    Arreglos de diseño
+
+[33mcommit b81f854428e1ef4ace466b66ca29ef9a0d81c9b5[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:48:19 2019 -0300
+
+    Update README.md
+
+[33mcommit 40e1746e5520895f9cb2927853a1e224f0f5473a[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:40:51 2019 -0300
+
+    Update README.md
+
+[33mcommit eb6902a4468e9e18305f7e974f3be80468042322[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:26:16 2019 -0300
+
+    Update README.md
+
+[33mcommit f85b3effc8f67c203613fd31e25de952ef68bb7c[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:14:51 2019 -0300
+
+    Update README.md
+
+[33mcommit 535288e5f456ef1a422136ab9e103ab6dd92a18b[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:14:00 2019 -0300
+
+    Update README.md
+
+[33mcommit 43905069740cefe5d6f1cb4355d7df29cf7bd053[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 19:04:20 2019 -0300
+
+    Update README.md
+
+[33mcommit e065e61512c90dec70641321f49f073706e488dc[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 18:47:23 2019 -0300
+
+    Update README.md
+
+[33mcommit 5f7096483a84a5434c61e9357f174d8cd9191c99[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 18:46:55 2019 -0300
+
+    Update README.md
+
+[33mcommit d92598155cfb53a61b1a5b94f3e2023bcae9f9d9[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 18:46:42 2019 -0300
+
+    Update README.md
+
+[33mcommit 03f64389a9d97714568a8b2a85814a61091a2a89[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 18:46:16 2019 -0300
+
+    Update README.md
+
+[33mcommit ce64786fee684518c2cbed5d612af25adbe7625d[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 18:45:14 2019 -0300
+
+    Update README.md
+
+[33mcommit 109ec0d35c06534983f6d9d4a4cb23f260d2f289[m
+Author: vardump-collab <52055919+vardump-collab@users.noreply.github.com>
+Date:   Fri Jun 28 18:43:48 2019 -0300
+
+    Update README.md
+
+[33mcommit 8266a4dc6ab1cda770082654def520705c187b1f[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Fri Jun 28 18:40:01 2019 -0300
+
+    imagenes readme
+
+[33mcommit 3fd587ebcf9247710570435ee370b907112d0da5[m
+Merge: fa012ce 340b949
+Author: vardump-collab <fhenseler3@gmail.com>
+Date:   Fri Jun 28 17:44:14 2019 -0300
+
+    Actualizo sonido
+
+[33mcommit fa012ce324552a4acf685db8c4e3da5796ddc94d[m
+Author: Federico Henseler <fhenseler@outlook.com>
+Date:   Fri Jun 28 17:34:03 2019 -0300
+
+    Agrego sonido
+
+[33mcommit 340b94946366ad9f656ad38d0cb59acc0156f159[m
+Author: Federico Henseler <fhenseler3@gmail.com>
+Date:   Fri Jun 28 17:19:55 2019 -0300
+
+    Fix Validación DNI
+
+[33mcommit 3c7d1949b410ab5f0edc9e9e5387c466923c619d[m
+Author: Federico Henseler <fhenseler3@gmail.com>
+Date:   Fri Jun 28 17:00:07 2019 -0300
+
+    Validación DNI
+
+[33mcommit 26ee3f07b31122b1b319e4d8db346f9abbc83e67[m
+Author: Federico Henseler <fhenseler@outlook.com>
+Date:   Fri Jun 28 16:35:29 2019 -0300
+
+    Arreglo Encuesta
+
+[33mcommit d1c9a7657db52c4c7887c74639257e82f9ca871e[m[33m ([m[1;31morigin/gamma[m[33m)[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Fri Jun 28 16:13:49 2019 -0300
+
+    arreglos varios
+
+[33mcommit f15775552ee64921ccad68fe52d955360d850896[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Fri Jun 28 16:04:12 2019 -0300
+
+    arreglos varios
+
+[33mcommit 9b5e2cd5993bb7cad5156a5655bba17098452af6[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Sat Jun 22 21:08:13 2019 -0300
+
+    Detalles de diseño
+
+[33mcommit b7c2198232a13498f22cd20e8723a8b2884b0a79[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Sat Jun 22 20:10:58 2019 -0300
+
+    Detalles de diseño
+
+[33mcommit f3ad9501c328f871c00780236ee4aa209531de72[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Sat Jun 22 19:12:00 2019 -0300
+
+    Detalles de diseño
+
+[33mcommit c29742e454bdb873186b80c526f2fa481d80f8bb[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Sat Jun 22 12:31:40 2019 -0300
+
+    Cambios de diseño
+
+[33mcommit d2f75fa78b8170d67fcced181a12dbab4e67f77f[m
+Author: vardump-collab <cjaviermollar@gmail.com>
+Date:   Sat Jun 22 00:21:41 2019 -0300
+
+    Agrego nueva rama alpha
+
+[33mcommit aa1e3dcd455e9abc1748a623624abff12fc47b93[m
+Author: vardump-collab <fhenseler3@gmail.com>
+Date:   Thu Jun 20 22:57:40 2019 -0300
+
+    Punto de partida
