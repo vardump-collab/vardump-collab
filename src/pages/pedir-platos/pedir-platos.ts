@@ -680,9 +680,10 @@ console.log("Le saco la selecccion a ");
 
       
     }
+      firebase.database().ref().child("pedidos/"+this.mesa).update({estado: "tomado"});
     if(tieneCocinero)
-    {
-      mensaje.update({estado:"tomado", cuenta: this.monto}).then(()=>{
+    { 
+      mensaje.update({estado:"tomado"}).then(()=>{
 
         for(let i=0;i<this.pedido.length;i++)
         {
@@ -695,7 +696,7 @@ console.log("Le saco la selecccion a ");
     }
     if(tieneBartender)
     {
-      mensaje2.update({estado:"tomado", cuenta: this.monto}).then(()=>{
+      mensaje2.update({estado:"tomado"}).then(()=>{
 
         for(let i=0;i<this.pedido.length;i++)
         {
@@ -778,7 +779,7 @@ console.log("Le saco la selecccion a ");
     {
 
       let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
-      usuariosRef.update({estado:"delivery", direccion:this.direccion, localidad: this.localidad }).then(()=>{
+      usuariosRef.update({estado:"delivery",cuenta:this.monto, direccion:this.direccion, localidad: this.localidad }).then(()=>{
 
         console.log(" delivery");
 

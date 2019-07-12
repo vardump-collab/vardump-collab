@@ -40,6 +40,7 @@ export class MapaDeRutaPage {
 
   public usuarios: Array<any>;
   public clientesConPedidos: Array<any>;
+  public PagosPendientes: Array<any>;
   public probando;
 
   public nombreCliente;
@@ -53,6 +54,7 @@ export class MapaDeRutaPage {
   ListadoDeChats=["asd","probando","gg"];
 
   public sinPedidos;
+  public sinPagos;
 
   public direccion;
   public localidad;
@@ -66,6 +68,7 @@ export class MapaDeRutaPage {
 	//this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
 	this.sinPedidos=true;
+	this.sinPagos=true;
 
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
@@ -105,42 +108,9 @@ export class MapaDeRutaPage {
 	}
 	
 
-	//this.clientes=true;
-	//this.chat=false;
-
-	//this.probanding="yo";
-
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
 	this.probanding=this.usuario.apellido;
-
-
- /*	let genteRef = firebase.database().ref("usuarios");
-
-    genteRef.on("value", (snap) => {
-
-      this.usuarios=[];
-
-      let data = snap.val();
-
-      for (let item in data) {
-
-        this.usuarios.push(data[item]);
-      }
-
-      this.clientesConPedidos = this.usuarios.filter(item => {
-
-        
-        return item.estado=="delivery";
-      });
-
-     
-
-      console.log(this.usuarios);
-
-
-	});*/
-
 	
 	
 	let genteRef = firebase.database().ref("usuarios");
@@ -148,6 +118,7 @@ export class MapaDeRutaPage {
 	genteRef.on("value", (snap) => {
 
 		this.clientesConPedidos=[];
+		this.PagosPendientes = [];
 		//this.sinPedidos=true;
 
 		let data = snap.val();
@@ -288,77 +259,10 @@ export class MapaDeRutaPage {
 
 
 										}
-										
 
-
-
-
-
-										//console.log(dataDos[a][dios].estado);
 									}
-									//console.log(dataDos[a][dios].estado);
-							/*	if(dataDos[a][dios].estado=="terminado")
-								{
-
-										if(bartender==true && cocinero==true)
-										{
-										
-											this.clientesConPedidos.push(data[item]);
-											console.log("los dos")
-											break;
-										
-										}
-
-								}*/
 
 							}
-
-							/*for(let dios in dataDos[a])
-							{ 
-								if (data[a][dios].estado=="terminado")
-								{
-								vale++;
-
-								if(bartender==true && cocinero==true)
-								{
-									if(vale==2)
-									{
-										this.clientesConPedidos.push(data[item]);
-										console.log("los 2")
-										break;
-									}
-
-								}
-
-								if(bartender==true && cocinero==false)
-								{
-									if(vale==1)
-									{
-										this.clientesConPedidos.push(data[item]);
-									console.log("barteneder")
-									break;
-									}
-
-								}
-								if(cocinero==true && bartender == false)
-								{
-									if(vale==1)
-									{
-										this.clientesConPedidos.push(data[item]);
-									console.log("cocinero")
-									break;
-									}
-
-								}
-								
-
-								}
-
-							//console.log("llegue papu");
-						}*/
-
-
-
 
 
 					}
@@ -370,6 +274,9 @@ export class MapaDeRutaPage {
 
 
 
+			}else if(data[item].estado == "pagandoDelivery"){
+				this.sinPagos = false;
+				this.PagosPendientes.push(data[item]);
 			}
 
 
@@ -382,26 +289,6 @@ export class MapaDeRutaPage {
 
 	
 
-	/*this.ref=firebase.database().ref('mensajes/' + this.nombreCliente);
-	
-	this.ref.on('value',data => {
-		let tmp = [];
-		data.forEach( data => {
-			tmp.push({
-				key: data.key,
-				name: data.val().name,
-				message: data.val().message
-			})
-		});
-		this.messagesList = tmp;
-
-		
-	});*/
-
-	//setTimeout(() => {
-	//	this.content.scrollToBottom(300);
-	 //}, 1000);
-   
 	
 
 
@@ -409,68 +296,57 @@ export class MapaDeRutaPage {
 
   
 
-  ionViewDidLoad() 
-  {
-	//alert(this.usuario.tipo);
-	//this.content.scrollToBottom(300);
-    //console.log('ionViewDidLoad MapaDeRutaPage');
+	ionViewDidLoad() 
+	{
 
-    	// Presenting popup
-/*  	this.alert.create({
-  		title:'Username',
-  		inputs:[{
-  			name:'username',
-  			placeholder: 'username'
-  		}],
-  		buttons:[{
-  			text: 'Continue',
-  			handler: username =>{
-          this.name = username
-         
-  			}
-  		}]
-    }).present();
-    
-     this.ref = firebase.database().ref('mensajes/' + this.nombre);
+	}
 
-  	
-  	this.ref.on('value',data => {
-  		let tmp = [];
-  		data.forEach( data => {
-  			tmp.push({
-  				key: data.key,
-  				name: data.val().name,
-  				message: data.val().message
-  			})
-  		});
-  		this.messagesList = tmp;
-  	});
+	confirmarPago(item){
+
+		let pruebita=item.correo;
+		let patron ='@';
+		let nuevo= '';
+		let cadena=pruebita.replace(patron, nuevo);
+		patron ='.';
+		nuevo= '';
+		cadena=cadena.replace(patron, nuevo);
+		pruebita=cadena;
+
+		console.log(item);
+
+		let probandoRef=firebase.database().ref("usuarios");
+		
+		probandoRef.once("value", (snap)=>{
+
+			let data = snap.val();
+
+			for (let a in data)
+			{
+				if(data[a].correo==item.correo)
+				{
+					//console.log("llegb ro");
+					data[a].estado="deliveryPago";
+					probandoRef.child(a).update(data[a]);
+					let pedidoRef = firebase.database().ref("pedidos").child(pruebita);
+					pedidoRef.remove();
+					let mensajesRef=firebase.database().ref("mensajes").child(item.apellido);
+					mensajesRef.remove();
+				}
+				
+			} 
 
 
 
-		*/
-  }
+		});
 
+
+	}
 
   send(){
 
-	this.ref;
-
-  	
-  	/*this.ref.on('value',data => {
-  		let tmp = [];
-  		data.forEach( data => {
-  			tmp.push({
-  				key: data.key,
-  				name: data.val().name,
-  				message: data.val().message
-  			})
-  		});
-  		this.messagesList = tmp;
-	  });*/
-
+		this.ref;
 	  if(this.usuario.tipo=="cliente")
-    	{	
+		{	
 		this.ref=firebase.database().ref('mensajes/' + this.usuario.apellido);
 		
 		}
@@ -549,42 +425,43 @@ export class MapaDeRutaPage {
   entregar(item)
   {
 
-						let pruebita=item.correo;
+	let pruebita=item.correo;
 
-						let patron ='@';
-						let nuevo= '';
-						let cadena=pruebita.replace(patron, nuevo);
-						patron ='.';
-						nuevo= '';
-						cadena=cadena.replace(patron, nuevo);
-						pruebita=cadena;
+	let patron ='@';
+	let nuevo= '';
+	let cadena=pruebita.replace(patron, nuevo);
+	patron ='.';
+	nuevo= '';
+	cadena=cadena.replace(patron, nuevo);
+	pruebita=cadena;
 
-						console.log(item);
+	console.log(item);
 
-						let probandoRef=firebase.database().ref("usuarios");
-						
-						probandoRef.once("value", (snap)=>{
+	let probandoRef=firebase.database().ref("usuarios");
+	
+	probandoRef.once("value", (snap)=>{
 
-							let data = snap.val();
+		let data = snap.val();
 
-							for (let a in data)
-							{
-								if(data[a].correo==item.correo)
-								{
-									//console.log("llegb ro");
-									data[a].estado="deliveryTerminado";
-									probandoRef.child(a).update(data[a]);
-									let pedidoRef = firebase.database().ref("pedidos").child(pruebita);
-									pedidoRef.remove();
-									let mensajesRef=firebase.database().ref("mensajes").child(item.apellido);
-									mensajesRef.remove();
-								}
-								
-							} 
+		for (let a in data)
+		{
+			if(data[a].correo==item.correo)
+			{
+				//console.log("llegb ro");
+				data[a].estado="deliveryEntregado";
+				probandoRef.child(a).update(data[a]);
+				let pedidoRef = firebase.database().ref("pedidos").child(pruebita);
+				pedidoRef.update({estado:"entregado"});
+				/*pedidoRef.remove();
+				let mensajesRef=firebase.database().ref("mensajes").child(item.apellido);
+				mensajesRef.remove();*/
+			}
+			
+		} 
 
 
 
-						});
+	});
 
 						//let clienteRef = firebase.database().ref("usuarios").child(item.key);
 						//clienteRef.child(item).update({ pago: "si" });

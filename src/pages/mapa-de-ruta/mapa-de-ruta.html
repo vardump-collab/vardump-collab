@@ -52,74 +52,6 @@
 </ion-header>
 
 
-
-
-
-<!--<ion-content padding class="home">
-
-    <ion-row class="logo-row">
-       
-        <ion-col>
-            <img src="assets/imgs/gamma/mapaderuta.jpg"/>
-          
-        </ion-col>
-        
-      </ion-row>
-
-      
-      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
-      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
-      
-  
-
-   <ion-list>
-     <ion-item *ngFor="let chat of ListadoDeChats">
-
-   
-     <div class="chat-message" text-right >
-       <div class="right-bubble">
-         <span class="msg-name">Yo</span>
-         <span class="msg-date">asdasd</span>
-         <p text-wrap>fdsfs</p>
-       </div>
-     </div>
-
-     <div class="chat-message" text-left >
-       <div class="left-bubble">
-         <span class="msg-name">Cliente:Juan Perez</span>
-         <span class="msg-date">sdfs</span>
-         <p text-wrap>asdasd</p>
-       </div>
-     </div>
-
-   
-   </ion-item>
- </ion-list>
-   
-</ion-content>
-
-
-
-
-
-<ion-footer no-shadow >
-  <ion-toolbar position="bottom" color="light">
-    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">
-      <ion-row>
-            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>
-            <ion-buttons end>
-                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">
-                    <ion-icon name="arrow-round-forward"></ion-icon>
-                </button>
-            </ion-buttons>
-      </ion-row>
-    </form>
-  </ion-toolbar>
-</ion-footer>-->
-
-
-
-
 <ion-content #content>
 
   <div *ngIf="clientes">
@@ -176,6 +108,47 @@
           </button>
 
           <button ion-button clear item-end (click)="entregar(item)">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
+    
+    
+    
+    
+      </ion-item>
+    
+    
+    </ion-list>
+
+
+    <ion-list>
+
+        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->
+
+        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPagos">
+          <div class="realizarEncuesta">Pagos</div>
+        </ion-list-header>
+    
+       
+    
+      <ion-item *ngFor="let item of PagosPendientes">
+        <ion-thumbnail item-start>
+          <!--<img src={{item.img}}>-->
+          <ion-icon name="contact"></ion-icon>
+        </ion-thumbnail>
+    
+      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+        <p>Cliente • {{item.tipo}}</p>-->
+        <h1 class="que">{{item.nombre}}</h1>
+        <p class="queDos">{{item.correo}}</p>
+        <p class="queDos">{{item.direccion}}</p>
+        <p class="queDos">{{item.localidad}}</p>
+        <p class="queDos">$ {{item.cuenta}}</p>
+
+        <button ion-button clear item-end (click)="chatear(item)">
+            <ion-icon name="chatboxes"></ion-icon>
+          </button>
+
+          <button ion-button clear item-end (click)="confirmarPago(item)">
             <ion-icon name="checkmark-circle"></ion-icon>
           </button>
     

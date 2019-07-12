@@ -39,7 +39,7 @@ export class CuentaPage {
   public alertMensajeBoton;
   public alertHandler;
   public alertMostrarBotonCancelar = true;
-
+  public esDelivery: boolean;
   public descuento;
 
   constructor(
@@ -58,6 +58,7 @@ export class CuentaPage {
     this.subTotal = 0;
     this.total = 0;
     this.pedidos = [];
+    this.esDelivery = false;
 
     let usuariosRef = this.firebase.database().ref("usuarios");
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -77,8 +78,15 @@ export class CuentaPage {
         }
       }
     }).then(() => {
+      let keyPedido = "";
+      if(this.mesa == null || this.mesa == ""){
+        keyPedido = this.usuario.correo.replace("@","").replace(".","");
+        this.esDelivery = true;
+      }else{
+        keyPedido = this.mesa;
+      }
 
-      let pedidoRef = this.firebase.database().ref("pedidos").child(this.mesa);
+      let pedidoRef = this.firebase.database().ref("pedidos").child(keyPedido);
 
       pedidoRef.once("value", (snap) => {
 
@@ -167,7 +175,7 @@ export class CuentaPage {
     this.total = this.subTotal + ((this.subTotal * this.propina) / 100);
         console.log("TOTAL 3: ", this.total);
 
-    if (this.rate > 1)
+    if (this.rate > 1 && !this.esDelivery)
       this.textoDelBoton = "Verificar mesa";
     else
       this.textoDelBoton = "Pagar"
@@ -192,15 +200,22 @@ export class CuentaPage {
 
     } else {
 
+      let keyPedido = "";
+      let estadoPedido = "pagando";
+      if(this.mesa == null || this.mesa == ""){
+        keyPedido = this.usuario.correo.replace("@","").replace(".","");
+        estadoPedido = "pagandoDelivery";
+      }else{
+        keyPedido = this.mesa;
+      }
       let clienteRef = this.firebase.database().ref("usuarios").child(this.keyCliente);
-      let pedidoRef = this.firebase.database().ref("pedidos").child(this.mesa);
-      let mesaRef = this.firebase.database().ref("mesas");
+      let pedidoRef = this.firebase.database().ref("pedidos").child(keyPedido);
 
       this.estadoBoton = true;
       this.ocultarSpinner = false;
 
-      pedidoRef.update({estado: "pagando"}).then(()=>{
-        clienteRef.update({estado: "pagando", cuenta: this.total}).then(()=>{
+      pedidoRef.update({estado: estadoPedido}).then(()=>{
+        clienteRef.update({estado: estadoPedido, cuenta: this.total}).then(()=>{
               this.MostrarAlert("Éxito!", "Aguarde la confirmación del mozo, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
               this.ocultarSpinner = true;
         }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));

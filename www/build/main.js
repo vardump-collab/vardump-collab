@@ -1634,8 +1634,9 @@ var PedirPlatosPage = /** @class */ (function () {
                 this.yaPidio = true;
             }
         }
+        __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref().child("pedidos/" + this.mesa).update({ estado: "tomado" });
         if (tieneCocinero) {
-            mensaje.update({ estado: "tomado", cuenta: this.monto }).then(function () {
+            mensaje.update({ estado: "tomado" }).then(function () {
                 for (var i = 0; i < _this.pedido.length; i++) {
                     window.document.querySelector('#' + _this.pedido[i].id).classList.remove("mostrarElegido");
                 }
@@ -1643,7 +1644,7 @@ var PedirPlatosPage = /** @class */ (function () {
             });
         }
         if (tieneBartender) {
-            mensaje2.update({ estado: "tomado", cuenta: this.monto }).then(function () {
+            mensaje2.update({ estado: "tomado" }).then(function () {
                 for (var i = 0; i < _this.pedido.length; i++) {
                     window.document.querySelector('#' + _this.pedido[i].id).classList.remove("mostrarElegido");
                 }
@@ -1689,7 +1690,7 @@ var PedirPlatosPage = /** @class */ (function () {
         }
         else {
             var usuariosRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref().child("usuarios/" + this.claveUsuarioActual);
-            usuariosRef.update({ estado: "delivery", direccion: this.direccion, localidad: this.localidad }).then(function () {
+            usuariosRef.update({ estado: "delivery", cuenta: this.monto, direccion: this.direccion, localidad: this.localidad }).then(function () {
                 console.log(" delivery");
                 console.log(_this.claveUsuarioActual);
                 _this.mostrarSpinner = false;
@@ -3592,6 +3593,7 @@ var CuentaPage = /** @class */ (function () {
         this.subTotal = 0;
         this.total = 0;
         this.pedidos = [];
+        this.esDelivery = false;
         var usuariosRef = this.firebase.database().ref("usuarios");
         this.usuario = JSON.parse(localStorage.getItem("usuario"));
         this.mesa = "";
@@ -3605,7 +3607,15 @@ var CuentaPage = /** @class */ (function () {
                 }
             }
         }).then(function () {
-            var pedidoRef = _this.firebase.database().ref("pedidos").child(_this.mesa);
+            var keyPedido = "";
+            if (_this.mesa == null || _this.mesa == "") {
+                keyPedido = _this.usuario.correo.replace("@", "").replace(".", "");
+                _this.esDelivery = true;
+            }
+            else {
+                keyPedido = _this.mesa;
+            }
+            var pedidoRef = _this.firebase.database().ref("pedidos").child(keyPedido);
             pedidoRef.once("value", function (snap) {
                 var data = snap.val();
                 for (var item in data) {
@@ -3675,7 +3685,7 @@ var CuentaPage = /** @class */ (function () {
         //this.propinaTotal = (this.subTotal * this.propina) / 100;
         this.total = this.subTotal + ((this.subTotal * this.propina) / 100);
         console.log("TOTAL 3: ", this.total);
-        if (this.rate > 1)
+        if (this.rate > 1 && !this.esDelivery)
             this.textoDelBoton = "Verificar mesa";
         else
             this.textoDelBoton = "Pagar";
@@ -3692,13 +3702,21 @@ var CuentaPage = /** @class */ (function () {
             }).catch(function (err) { });
         }
         else {
+            var keyPedido = "";
+            var estadoPedido_1 = "pagando";
+            if (this.mesa == null || this.mesa == "") {
+                keyPedido = this.usuario.correo.replace("@", "").replace(".", "");
+                estadoPedido_1 = "pagandoDelivery";
+            }
+            else {
+                keyPedido = this.mesa;
+            }
             var clienteRef_1 = this.firebase.database().ref("usuarios").child(this.keyCliente);
-            var pedidoRef = this.firebase.database().ref("pedidos").child(this.mesa);
-            var mesaRef = this.firebase.database().ref("mesas");
+            var pedidoRef = this.firebase.database().ref("pedidos").child(keyPedido);
             this.estadoBoton = true;
             this.ocultarSpinner = false;
-            pedidoRef.update({ estado: "pagando" }).then(function () {
-                clienteRef_1.update({ estado: "pagando", cuenta: _this.total }).then(function () {
+            pedidoRef.update({ estado: estadoPedido_1 }).then(function () {
+                clienteRef_1.update({ estado: estadoPedido_1, cuenta: _this.total }).then(function () {
                     _this.MostrarAlert("Éxito!", "Aguarde la confirmación del mozo, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", _this.Redireccionar);
                     _this.ocultarSpinner = true;
                 }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
@@ -4099,7 +4117,7 @@ var ListadoReservasPage = /** @class */ (function () {
     };
     ListadoReservasPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-listado-reservas',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->\n\n\n\n    <ion-buttons end>\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div class="imagen" [ngClass]="{\'ocultar\':ocultarImagen,\'opacidad\':true}">\n\n\n\n  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>\n\n  <img [src]="image" alt="">\n\n\n\n</div>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n      <button ion-button outline (click)="OcultarAlert()">No</button>\n\n      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && pedidosPendientes.length > 0">\n\n    <h2 class="titulo">Pedidos a confirmar</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of pedidosPendientes">\n\n\n\n      <ion-thumbnail item-start>\n\n        <ion-icon name="person"></ion-icon>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Direccion • {{item.direccion}}</p>\n\n      <p>Localidad • {{item.localidad}}</p>\n\n      <p>Monto $ {{item.cuenta}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarPedido(item)">\n\n        <ion-icon style="color: green;" name="checkmark-circle"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">\n\n    <img src="../../assets/imgs/alfa/empty.png" />\n\n    <h1>No hay reservas disponibles.</h1>\n\n  </div>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasPendientes.length > 0">\n\n    <h2 class="titulo">Reservas pendientes de confirmación</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasPendientes">\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}}>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n\n\n      <div item-end style="display: flex; align-items: center;align-content: center;flex-direction: column;">\n\n\n\n        <button ion-button clear (click)="DesplegarMesas(item)" style="margin-bottom: 20px;">\n\n          <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>\n\n        </button>\n\n\n\n        <button ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n          <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n        </button>\n\n\n\n      </div>\n\n\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">\n\n    <h2 class="titulo">Reservas confirmadas</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasConfirmadas">\n\n\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}} />\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n      <p>Mesa • {{item.mesa}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n        <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n\n\n  <div [ngClass]="{\'interfaz-mesas\':true,\'ocultar\':ocultarInterfazMesas}">\n\n\n\n    <h1>Selecciona una mesa para la reserva</h1>\n\n    <div class="mesas">\n\n      <button ion-button color="dark" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>\n\n    </div>\n\n\n\n    <div class="botones-interfaz-mesa">\n\n      <button ion-button color="dark" (click)="OcultarInterfaz()">Cancelar</button>\n\n      <button ion-button color="dark" (click)="Confirmar()">Confirmar</button>\n\n    </div>\n\n\n\n  </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':ocultarSpinner}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/,
+            selector: 'page-listado-reservas',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->\n\n\n\n    <ion-buttons end>\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div class="imagen" [ngClass]="{\'ocultar\':ocultarImagen,\'opacidad\':true}">\n\n\n\n  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>\n\n  <img [src]="image" alt="">\n\n\n\n</div>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n      <button ion-button outline (click)="OcultarAlert()">No</button>\n\n      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && pedidosPendientes.length > 0">\n\n    <h2 class="titulo">Pedidos a confirmar</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of pedidosPendientes">\n\n\n\n      <ion-thumbnail item-start>\n\n        <ion-icon name="person"></ion-icon>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Direccion • {{item.direccion}}</p>\n\n      <p>Localidad • {{item.localidad}}</p>\n\n      <p>Monto $ {{item.cuenta}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarPedido(item)">\n\n        <ion-icon style="color: green;" name="checkmark-circle"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n\n\n\n\n\n\n  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">\n\n    <img src="../../assets/imgs/alfa/empty.png" />\n\n    <h1>No hay reservas disponibles.</h1>\n\n  </div>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasPendientes.length > 0">\n\n    <h2 class="titulo">Reservas pendientes de confirmación</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasPendientes">\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}}>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n\n\n      <div item-end style="display: flex; align-items: center;align-content: center;flex-direction: column;">\n\n\n\n        <button ion-button clear (click)="DesplegarMesas(item)" style="margin-bottom: 20px;">\n\n          <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>\n\n        </button>\n\n\n\n        <button ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n          <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n        </button>\n\n\n\n      </div>\n\n\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">\n\n    <h2 class="titulo">Reservas confirmadas</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasConfirmadas">\n\n\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}} />\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n      <p>Mesa • {{item.mesa}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n        <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n\n\n  <div [ngClass]="{\'interfaz-mesas\':true,\'ocultar\':ocultarInterfazMesas}">\n\n\n\n    <h1>Selecciona una mesa para la reserva</h1>\n\n    <div class="mesas">\n\n      <button ion-button color="dark" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>\n\n    </div>\n\n\n\n    <div class="botones-interfaz-mesa">\n\n      <button ion-button color="dark" (click)="OcultarInterfaz()">Cancelar</button>\n\n      <button ion-button color="dark" (click)="Confirmar()">Confirmar</button>\n\n    </div>\n\n\n\n  </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':ocultarSpinner}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
@@ -8447,6 +8465,7 @@ var MapaDeRutaPage = /** @class */ (function () {
         this.firebase = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a;
         this.ListadoDeChats = ["asd", "probando", "gg"];
         this.sinPedidos = true;
+        this.sinPagos = true;
         this.usuario = JSON.parse(localStorage.getItem("usuario"));
         if (this.usuario.tipo == "repartidor") {
             this.clientes = true;
@@ -8469,39 +8488,12 @@ var MapaDeRutaPage = /** @class */ (function () {
                 _this.messagesList = tmp;
             });
         }
-        //this.clientes=true;
-        //this.chat=false;
-        //this.probanding="yo";
         this.usuario = JSON.parse(localStorage.getItem("usuario"));
         this.probanding = this.usuario.apellido;
-        /*	let genteRef = firebase.database().ref("usuarios");
-       
-           genteRef.on("value", (snap) => {
-       
-             this.usuarios=[];
-       
-             let data = snap.val();
-       
-             for (let item in data) {
-       
-               this.usuarios.push(data[item]);
-             }
-       
-             this.clientesConPedidos = this.usuarios.filter(item => {
-       
-               
-               return item.estado=="delivery";
-             });
-       
-            
-       
-             console.log(this.usuarios);
-       
-       
-           });*/
         var genteRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios");
         genteRef.on("value", function (snap) {
             _this.clientesConPedidos = [];
+            _this.PagosPendientes = [];
             //this.sinPedidos=true;
             var data = snap.val();
             var _loop_1 = function (item) {
@@ -8601,66 +8593,8 @@ var MapaDeRutaPage = /** @class */ (function () {
                                                 }
                                             }
                                         }
-                                        //console.log(dataDos[a][dios].estado);
                                     }
-                                    //console.log(dataDos[a][dios].estado);
-                                    /*	if(dataDos[a][dios].estado=="terminado")
-                                        {
-        
-                                                if(bartender==true && cocinero==true)
-                                                {
-                                                
-                                                    this.clientesConPedidos.push(data[item]);
-                                                    console.log("los dos")
-                                                    break;
-                                                
-                                                }
-        
-                                        }*/
                                 }
-                                /*for(let dios in dataDos[a])
-                                {
-                                    if (data[a][dios].estado=="terminado")
-                                    {
-                                    vale++;
-    
-                                    if(bartender==true && cocinero==true)
-                                    {
-                                        if(vale==2)
-                                        {
-                                            this.clientesConPedidos.push(data[item]);
-                                            console.log("los 2")
-                                            break;
-                                        }
-    
-                                    }
-    
-                                    if(bartender==true && cocinero==false)
-                                    {
-                                        if(vale==1)
-                                        {
-                                            this.clientesConPedidos.push(data[item]);
-                                        console.log("barteneder")
-                                        break;
-                                        }
-    
-                                    }
-                                    if(cocinero==true && bartender == false)
-                                    {
-                                        if(vale==1)
-                                        {
-                                            this.clientesConPedidos.push(data[item]);
-                                        console.log("cocinero")
-                                        break;
-                                        }
-    
-                                    }
-                                    
-    
-                                    }
-    
-                                //console.log("llegue papu");
-                            }*/
                             }
                         };
                         var refU;
@@ -8669,83 +8603,47 @@ var MapaDeRutaPage = /** @class */ (function () {
                         }
                     });
                 }
+                else if (data[item].estado == "pagandoDelivery") {
+                    _this.sinPagos = false;
+                    _this.PagosPendientes.push(data[item]);
+                }
                 //this.usuarios.push(data[item]);
             };
             for (var item in data) {
                 _loop_1(item);
             }
         });
-        /*this.ref=firebase.database().ref('mensajes/' + this.nombreCliente);
-        
-        this.ref.on('value',data => {
-            let tmp = [];
-            data.forEach( data => {
-                tmp.push({
-                    key: data.key,
-                    name: data.val().name,
-                    message: data.val().message
-                })
-            });
-            this.messagesList = tmp;
-    
-            
-        });*/
-        //setTimeout(() => {
-        //	this.content.scrollToBottom(300);
-        //}, 1000);
     }
     MapaDeRutaPage.prototype.ionViewDidLoad = function () {
-        //alert(this.usuario.tipo);
-        //this.content.scrollToBottom(300);
-        //console.log('ionViewDidLoad MapaDeRutaPage');
-        // Presenting popup
-        /*  	this.alert.create({
-                title:'Username',
-                inputs:[{
-                    name:'username',
-                    placeholder: 'username'
-                }],
-                buttons:[{
-                    text: 'Continue',
-                    handler: username =>{
-                  this.name = username
-                 
-                    }
-                }]
-            }).present();
-            
-             this.ref = firebase.database().ref('mensajes/' + this.nombre);
-        
-            
-            this.ref.on('value',data => {
-                let tmp = [];
-                data.forEach( data => {
-                    tmp.push({
-                        key: data.key,
-                        name: data.val().name,
-                        message: data.val().message
-                    })
-                });
-                this.messagesList = tmp;
-            });
-        
-        
-        
-                */
+    };
+    MapaDeRutaPage.prototype.confirmarPago = function (item) {
+        var pruebita = item.correo;
+        var patron = '@';
+        var nuevo = '';
+        var cadena = pruebita.replace(patron, nuevo);
+        patron = '.';
+        nuevo = '';
+        cadena = cadena.replace(patron, nuevo);
+        pruebita = cadena;
+        console.log(item);
+        var probandoRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("usuarios");
+        probandoRef.once("value", function (snap) {
+            var data = snap.val();
+            for (var a in data) {
+                if (data[a].correo == item.correo) {
+                    //console.log("llegb ro");
+                    data[a].estado = "deliveryPago";
+                    probandoRef.child(a).update(data[a]);
+                    var pedidoRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("pedidos").child(pruebita);
+                    pedidoRef.remove();
+                    var mensajesRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("mensajes").child(item.apellido);
+                    mensajesRef.remove();
+                }
+            }
+        });
     };
     MapaDeRutaPage.prototype.send = function () {
         this.ref;
-        /*this.ref.on('value',data => {
-            let tmp = [];
-            data.forEach( data => {
-                tmp.push({
-                    key: data.key,
-                    name: data.val().name,
-                    message: data.val().message
-                })
-            });
-            this.messagesList = tmp;
-          });*/
         if (this.usuario.tipo == "cliente") {
             this.ref = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref('mensajes/' + this.usuario.apellido);
         }
@@ -8813,12 +8711,13 @@ var MapaDeRutaPage = /** @class */ (function () {
             for (var a in data) {
                 if (data[a].correo == item.correo) {
                     //console.log("llegb ro");
-                    data[a].estado = "deliveryTerminado";
+                    data[a].estado = "deliveryEntregado";
                     probandoRef.child(a).update(data[a]);
                     var pedidoRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("pedidos").child(pruebita);
-                    pedidoRef.remove();
-                    var mensajesRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("mensajes").child(item.apellido);
-                    mensajesRef.remove();
+                    pedidoRef.update({ estado: "entregado" });
+                    /*pedidoRef.remove();
+                    let mensajesRef=firebase.database().ref("mensajes").child(item.apellido);
+                    mensajesRef.remove();*/
                 }
             }
         });
@@ -8862,7 +8761,7 @@ var MapaDeRutaPage = /** @class */ (function () {
     ], MapaDeRutaPage.prototype, "content", void 0);
     MapaDeRutaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-mapa-de-ruta',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/'<!--\n\n  Generated template for the MapaDeRutaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>mapaDeRuta</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n\n\n\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n\n\n      \n\n\n\n    \n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n    position: absolute;">\n\n    <button ion-button (click)="volver()">\n\n  <ion-icon name="arrow-dropleft"></ion-icon>\n\n   </button>\n\n  </ion-buttons>\n\n\n\n    \n\n\n\n    <ion-buttons end >\n\n\n\n       \n\n\n\n       \n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<!--<ion-content padding class="home">\n\n\n\n    <ion-row class="logo-row">\n\n       \n\n        <ion-col>\n\n            <img src="assets/imgs/gamma/mapaderuta.jpg"/>\n\n          \n\n        </ion-col>\n\n        \n\n      </ion-row>\n\n\n\n      \n\n      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>\n\n      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>\n\n      \n\n  \n\n\n\n   <ion-list>\n\n     <ion-item *ngFor="let chat of ListadoDeChats">\n\n\n\n   \n\n     <div class="chat-message" text-right >\n\n       <div class="right-bubble">\n\n         <span class="msg-name">Yo</span>\n\n         <span class="msg-date">asdasd</span>\n\n         <p text-wrap>fdsfs</p>\n\n       </div>\n\n     </div>\n\n\n\n     <div class="chat-message" text-left >\n\n       <div class="left-bubble">\n\n         <span class="msg-name">Cliente:Juan Perez</span>\n\n         <span class="msg-date">sdfs</span>\n\n         <p text-wrap>asdasd</p>\n\n       </div>\n\n     </div>\n\n\n\n   \n\n   </ion-item>\n\n </ion-list>\n\n   \n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n<ion-footer no-shadow >\n\n  <ion-toolbar position="bottom" color="light">\n\n    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">\n\n      <ion-row>\n\n            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>\n\n            <ion-buttons end>\n\n                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">\n\n                    <ion-icon name="arrow-round-forward"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n      </ion-row>\n\n    </form>\n\n  </ion-toolbar>\n\n</ion-footer>-->\n\n\n\n\n\n\n\n\n\n<ion-content #content>\n\n\n\n  <div *ngIf="clientes">\n\n\n\n      <div class="asdasd" *ngIf="sinPedidos">\n\n          SIN PEDIDOS\n\n        </div>\n\n        \n\n        <div class="mapouter" *ngIf="!sinPedidos">\n\n          <div class="gmap_canvas">\n\n            <iframe width="600" height="500" id="gmap_canvas" src="{{urlSanit}}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">\n\n            </iframe>Google Maps by ASGARDIANOS</div>\n\n            <style>\n\n              .mapouter{\n\n                position:relative;\n\n                text-align:right;\n\n                height:500px;\n\n                width:600px;\n\n                }\n\n              .gmap_canvas {\n\n                overflow:hidden;\n\n                background:none!important;\n\n                height:500px;\n\n                width:600px;\n\n              }\n\n            </style>\n\n      </div>\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">\n\n          <div class="realizarEncuesta">Pedidos a entregar</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of clientesConPedidos">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n        <p class="queDos">{{item.direccion}}</p>\n\n        <p class="queDos">{{item.localidad}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="entregar(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n    </div>\n\n\n\n    <div *ngIf="chat">\n\n\n\n\n\n\n\n\n\n        <img src={{probando}} style="width: 100px;">\n\n    \n\n\n\n          <ion-label class="lb" >{{nombreCliente}}</ion-label>\n\n          <ion-label class="lb" >{{direccionCliente}}</ion-label>\n\n\n\n          \n\n\n\n        \n\n\n\n\n\n  <ion-list no-lines>\n\n\n\n    <ion-item *ngFor="let message of messagesList">\n\n    <!--  <h3>{{message.name}}</h3>\n\n      <p>{{message.message}}</p>-->\n\n\n\n      <div class="chat-message" text-right *ngIf="message.name === probanding">\n\n          <div class="right-bubble">\n\n            <span class="msg-name"></span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n           <!-- <span class="msg-date">{{message.tiempo}}</span>-->\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n\n\n        <div class="chat-message" text-left *ngIf="message.name !== probanding">\n\n          <div class="left-bubble">\n\n            <span class="msg-name">{{message.name}}</span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-item>\n\n    \n\n\n\n\n\n\n\n  </ion-list>\n\n  \n\n\n\n</div>\n\n\n\n\n\n\n\n</ion-content>\n\n\n\n\n\n<ion-footer *ngIf="mandar">\n\n  <ion-item>\n\n    <ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>\n\n    <button ion-button clear item-right (click)="send()">Enviar</button>\n\n  </ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/,
+            selector: 'page-mapa-de-ruta',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/'<!--\n\n  Generated template for the MapaDeRutaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>mapaDeRuta</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n\n\n\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n\n\n      \n\n\n\n    \n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n    position: absolute;">\n\n    <button ion-button (click)="volver()">\n\n  <ion-icon name="arrow-dropleft"></ion-icon>\n\n   </button>\n\n  </ion-buttons>\n\n\n\n    \n\n\n\n    <ion-buttons end >\n\n\n\n       \n\n\n\n       \n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content #content>\n\n\n\n  <div *ngIf="clientes">\n\n\n\n      <div class="asdasd" *ngIf="sinPedidos">\n\n          SIN PEDIDOS\n\n        </div>\n\n        \n\n        <div class="mapouter" *ngIf="!sinPedidos">\n\n          <div class="gmap_canvas">\n\n            <iframe width="600" height="500" id="gmap_canvas" src="{{urlSanit}}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">\n\n            </iframe>Google Maps by ASGARDIANOS</div>\n\n            <style>\n\n              .mapouter{\n\n                position:relative;\n\n                text-align:right;\n\n                height:500px;\n\n                width:600px;\n\n                }\n\n              .gmap_canvas {\n\n                overflow:hidden;\n\n                background:none!important;\n\n                height:500px;\n\n                width:600px;\n\n              }\n\n            </style>\n\n      </div>\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">\n\n          <div class="realizarEncuesta">Pedidos a entregar</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of clientesConPedidos">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n        <p class="queDos">{{item.direccion}}</p>\n\n        <p class="queDos">{{item.localidad}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="entregar(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n\n\n    <ion-list>\n\n\n\n        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->\n\n\n\n        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPagos">\n\n          <div class="realizarEncuesta">Pagos</div>\n\n        </ion-list-header>\n\n    \n\n       \n\n    \n\n      <ion-item *ngFor="let item of PagosPendientes">\n\n        <ion-thumbnail item-start>\n\n          <!--<img src={{item.img}}>-->\n\n          <ion-icon name="contact"></ion-icon>\n\n        </ion-thumbnail>\n\n    \n\n      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>\n\n        <p>Cliente • {{item.tipo}}</p>-->\n\n        <h1 class="que">{{item.nombre}}</h1>\n\n        <p class="queDos">{{item.correo}}</p>\n\n        <p class="queDos">{{item.direccion}}</p>\n\n        <p class="queDos">{{item.localidad}}</p>\n\n        <p class="queDos">$ {{item.cuenta}}</p>\n\n\n\n        <button ion-button clear item-end (click)="chatear(item)">\n\n            <ion-icon name="chatboxes"></ion-icon>\n\n          </button>\n\n\n\n          <button ion-button clear item-end (click)="confirmarPago(item)">\n\n            <ion-icon name="checkmark-circle"></ion-icon>\n\n          </button>\n\n    \n\n    \n\n    \n\n    \n\n      </ion-item>\n\n    \n\n    \n\n    </ion-list>\n\n\n\n    </div>\n\n\n\n    <div *ngIf="chat">\n\n\n\n\n\n\n\n\n\n        <img src={{probando}} style="width: 100px;">\n\n    \n\n\n\n          <ion-label class="lb" >{{nombreCliente}}</ion-label>\n\n          <ion-label class="lb" >{{direccionCliente}}</ion-label>\n\n\n\n          \n\n\n\n        \n\n\n\n\n\n  <ion-list no-lines>\n\n\n\n    <ion-item *ngFor="let message of messagesList">\n\n    <!--  <h3>{{message.name}}</h3>\n\n      <p>{{message.message}}</p>-->\n\n\n\n      <div class="chat-message" text-right *ngIf="message.name === probanding">\n\n          <div class="right-bubble">\n\n            <span class="msg-name"></span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n           <!-- <span class="msg-date">{{message.tiempo}}</span>-->\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n\n\n        <div class="chat-message" text-left *ngIf="message.name !== probanding">\n\n          <div class="left-bubble">\n\n            <span class="msg-name">{{message.name}}</span>\n\n            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>\n\n            <p text-wrap>{{message.message}}</p>\n\n          </div>\n\n        </div>\n\n      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-item>\n\n    \n\n\n\n\n\n\n\n  </ion-list>\n\n  \n\n\n\n</div>\n\n\n\n\n\n\n\n</ion-content>\n\n\n\n\n\n<ion-footer *ngIf="mandar">\n\n  <ion-item>\n\n    <ion-input type="text" placeholder="Escriba aquí..." [(ngModel)]="newmessage"></ion-input>\n\n    <button ion-button clear item-right (click)="send()">Enviar</button>\n\n  </ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\mapa-de-ruta\mapa-de-ruta.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__["AngularFireAuth"],
@@ -9141,11 +9040,11 @@ var map = {
 		18
 	],
 	"../pages/cuenta/cuenta.module": [
-		819,
+		822,
 		17
 	],
 	"../pages/encuesta-de-empleado/encuesta-de-empleado.module": [
-		820,
+		827,
 		16
 	],
 	"../pages/encuesta-supervisor/encuesta-supervisor.module": [
@@ -9157,11 +9056,11 @@ var map = {
 		14
 	],
 	"../pages/juego-uno/juego-uno.module": [
-		824,
+		819,
 		13
 	],
 	"../pages/juego/juego.module": [
-		823,
+		820,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
@@ -9169,15 +9068,15 @@ var map = {
 		11
 	],
 	"../pages/listado-supervisor/listado-supervisor.module": [
-		822,
+		825,
 		10
 	],
 	"../pages/login/login.module": [
-		827,
+		824,
 		9
 	],
 	"../pages/mapa-de-ruta/mapa-de-ruta.module": [
-		825,
+		823,
 		8
 	],
 	"../pages/mis-reservas/mis-reservas.module": [
@@ -9201,11 +9100,11 @@ var map = {
 		3
 	],
 	"../pages/sala-de-juegos/sala-de-juegos.module": [
-		815,
+		816,
 		2
 	],
 	"../pages/splash/splash.module": [
-		816,
+		815,
 		1
 	],
 	"../pages/tomar-pedido/tomar-pedido.module": [
@@ -11057,19 +10956,19 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-de-la-mesa/qr-de-la-mesa.module#QrDeLaMesaPageModule', name: 'QrDeLaMesaPage', segment: 'qr-de-la-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tomar-pedido/tomar-pedido.module#TomarPedidoPageModule', name: 'TomarPedidoPage', segment: 'tomar-pedido', priority: 'low', defaultHistory: [] }
                     ]
@@ -11233,6 +11132,10 @@ var PrincipalPage = /** @class */ (function () {
                     switch (estadoCliente) {
                         case 'delivery':
                             _this.acciones[0] = _this.accionesRespaldoCliente[7];
+                            break;
+                        case 'deliveryEntregado':
+                            _this.acciones[0] = _this.accionesRespaldoCliente[7];
+                            _this.acciones[1] = _this.accionesRespaldoCliente[0];
                             break;
                         /*
                          *

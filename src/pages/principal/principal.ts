@@ -111,6 +111,14 @@ export class PrincipalPage {
             case 'delivery':
               this.acciones[0] = this.accionesRespaldoCliente[7];
               break;
+            case 'deliveryEntregado':
+              this.acciones[0] = this.accionesRespaldoCliente[7];
+              this.acciones[1] = this.accionesRespaldoCliente[0];
+              break;
+              
+            case 'pagandoDelivery':
+              this.acciones[0] = this.accionesRespaldoCliente[7];
+              break;
             /*
              * 
              * Puede hacer un pedido
