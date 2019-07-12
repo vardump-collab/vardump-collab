@@ -135,6 +135,8 @@ export class PrincipalPage {
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
 
+              console.log("flag", flag);
+              console.log("estadoCliente", estadoCliente);
               if (flag) {
 
                 flag = false;
@@ -153,9 +155,9 @@ export class PrincipalPage {
                       estaComiendo = true;
 
                       for (let item in data) {
-
+                        console.log("afuera", data[item].estado);
                         if (data[item].estado && data[item].estado != "terminado") {
-
+                          console.log("entro", data[item].estado);
                           estaComiendo = false;
                           break;
                         }

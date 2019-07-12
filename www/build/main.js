@@ -5280,37 +5280,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var QrDeLaMesaPage = /** @class */ (function () {
     function QrDeLaMesaPage(navCtrl, navParams, toastCtrl, authInstance, barcode) {
-        /* this.qrScanner.prepare()
-     .then((status: QRScannerStatus) => {
-
-       if (status.authorized) {
-
-         this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
-
-         
-           alert(text);
-          
-         });
-
-         this.qrScanner.show().then(() => {
-
-           (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
-           (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
-           (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
-         
-         });
-
-       } else if (status.denied) {
-         
-
-       } else {
-        
-       }
-     })
-     .catch((e: any) => this.presentToast(e));
-
-*/
-        //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -5330,10 +5299,6 @@ var QrDeLaMesaPage = /** @class */ (function () {
         this.estadoBoton = false;
         this.ocultarAlert = true;
         this.moment = __WEBPACK_IMPORTED_MODULE_7_moment__;
-        //this.vistaCliente=true;
-        //this.usuario.tipo="cliente";
-        //this.vistaMozo=true;
-        // this.usuario = JSON.parse(localStorage.getItem("usuario"));
         this.sinPersonasEnEspera = false;
         this.sinPersonasAtendidas = false;
         this.sinPedidosParaEntregar = false;
@@ -5391,36 +5356,6 @@ var QrDeLaMesaPage = /** @class */ (function () {
         this.pedidosPruebaNueve = [];
         this.pedidosPruebaDiez = [];
         this.mensajeValidar = [];
-        //let genteRef = this.firebase.database().ref("usuarios/clientes");
-        /* let genteRef = this.firebase.database().ref("usuarios");
-     
-         genteRef.once("value", (snap) => {
-     
-           let data = snap.val();
-     
-           for (let item in data) {
-     
-             this.usuarios.push(data[item]);
-           }
-     
-           console.log(this.usuarios);
-         }).then(() => {
-           this.espera = this.usuarios.filter(item => {
-     
-             
-             return item.estado=="espera";
-           });
-     
-           this.atendidos = this.usuarios.filter(item => {
-     
-            
-            return item.estado=="atendido";
-           });
-     
-     
-           
-     
-         });*/
         var genteRef = this.firebase.database().ref("usuarios");
         genteRef.on("value", function (snap) {
             _this.usuarios = [];
@@ -5506,6 +5441,10 @@ var QrDeLaMesaPage = /** @class */ (function () {
                 }
             }
             for (var k in result) {
+                console.log("Resultado: ", result[k].estado);
+                console.log("Vale: ", vale);
+                console.log("k: ", k);
+                console.log("cocinero: ", cocinero);
                 if (result[k].estado == "preparacion") {
                     vale++;
                     if (terminadisimo == true) {
@@ -5530,6 +5469,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
                             break;
                         }
                     }
+                    console.log("llego: ", cocinero, bartender, vale);
                     if (cocinero == true && bartender == false) {
                         if (vale == 1) {
                             _this.pedidosPruebaUno.push(result[k]);
@@ -6376,15 +6316,36 @@ var QrDeLaMesaPage = /** @class */ (function () {
         var ref = this.firebase.database().ref("usuarios");
         ref.once('value', function (snap) {
             var data = snap.val();
+            var cocinero = false;
+            var bartender = false;
             for (var key in data) {
                 if (mesa == data[key].mesa) {
                     data[key].estado = "atendido";
                     ref.child(key).update(data[key]);
-                    _this.firebase.database().ref("pedidos/" + mesa).child("cocinero").update({ estado: "aceptado" }).then(function () {
+                    var pedidos = _this.firebase.database().ref("pedidos/" + mesa);
+                    pedidos.once('value', function (result) {
+                        var res = result.val();
+                        for (var k in res) {
+                            console.log("k", k);
+                            console.log("pedidos", res);
+                            console.log("pedidos[k]", res[k]);
+                            if (k == "cocinero") {
+                                cocinero = true;
+                            }
+                            if (k == "bartender") {
+                                bartender = true;
+                            }
+                        }
+                        if (cocinero) {
+                            _this.firebase.database().ref("pedidos/" + mesa).child("cocinero").update({ estado: "aceptado" }).then(function () {
+                            });
+                        }
+                        if (bartender) {
+                            _this.firebase.database().ref("pedidos/" + mesa).child("bartender").update({ estado: "aceptado" }).then(function () {
+                            });
+                        }
                     });
-                    _this.firebase.database().ref("pedidos/" + mesa).child("bartender").update({ estado: "aceptado" }).then(function () {
-                        _this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", _this.limpiar);
-                    });
+                    _this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", _this.limpiar);
                     return;
                 }
                 ;
@@ -9243,11 +9204,11 @@ var map = {
 		14
 	],
 	"../pages/juego-uno/juego-uno.module": [
-		822,
+		823,
 		13
 	],
 	"../pages/juego/juego.module": [
-		823,
+		822,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
@@ -11150,8 +11111,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
@@ -11341,6 +11302,8 @@ var PrincipalPage = /** @class */ (function () {
                             _this.acciones[0] = (_this.usuario.tipo == "cliente") ? _this.accionesRespaldoCliente[2] : _this.accionesRespaldoCliente[1];
                             _this.acciones[1] = (_this.usuario.tipo == "cliente") ? _this.accionesRespaldoCliente[3] : _this.accionesRespaldoCliente[2];
                             _this.acciones[2] = (_this.usuario.tipo == "cliente") ? _this.accionesRespaldoCliente[6] : _this.accionesRespaldoCliente[4];
+                            console.log("flag", flag);
+                            console.log("estadoCliente", estadoCliente);
                             if (flag) {
                                 flag = false;
                                 var estaComiendo_1;
@@ -11353,7 +11316,9 @@ var PrincipalPage = /** @class */ (function () {
                                             var data_1 = snap.val();
                                             estaComiendo_1 = true;
                                             for (var item in data_1) {
+                                                console.log("afuera", data_1[item].estado);
                                                 if (data_1[item].estado && data_1[item].estado != "terminado") {
+                                                    console.log("entro", data_1[item].estado);
                                                     estaComiendo_1 = false;
                                                     break;
                                                 }

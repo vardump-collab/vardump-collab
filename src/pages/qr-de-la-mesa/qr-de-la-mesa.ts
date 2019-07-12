@@ -87,43 +87,6 @@ public sinPedidosParaEntregar;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private authInstance: AngularFireAuth,private barcode: BarcodeScanner)
    {
-                 /* this.qrScanner.prepare()
-              .then((status: QRScannerStatus) => {
-
-                if (status.authorized) {
-
-                  this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
-
-                  
-                    alert(text);
-                   
-                  });
-
-                  this.qrScanner.show().then(() => {
-
-                    (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
-                    (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
-                    (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
-                  
-                  });
-
-                } else if (status.denied) {
-                  
-
-                } else {
-                 
-                }
-              })
-              .catch((e: any) => this.presentToast(e));
-
-*/
-    //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
-
-    //this.vistaCliente=true;
-    //this.usuario.tipo="cliente";
-    //this.vistaMozo=true;
-   // this.usuario = JSON.parse(localStorage.getItem("usuario"));
-
    this.sinPersonasEnEspera=false;
    this.sinPersonasAtendidas=false;
    this.sinPedidosParaEntregar=false;
@@ -191,37 +154,6 @@ public sinPedidosParaEntregar;
     this.pedidosPruebaNueve=[];
     this.pedidosPruebaDiez=[];
     this.mensajeValidar = [];
-
-    //let genteRef = this.firebase.database().ref("usuarios/clientes");
-   /* let genteRef = this.firebase.database().ref("usuarios");
-
-    genteRef.once("value", (snap) => {
-
-      let data = snap.val();
-
-      for (let item in data) {
-
-        this.usuarios.push(data[item]);
-      }
-
-      console.log(this.usuarios);
-    }).then(() => {
-      this.espera = this.usuarios.filter(item => {
-
-        
-        return item.estado=="espera";
-      });
-
-      this.atendidos = this.usuarios.filter(item => {
-
-       
-       return item.estado=="atendido";
-      });
-
-
-      
-
-    });*/
 
     let genteRef = this.firebase.database().ref("usuarios");
 
@@ -351,7 +283,10 @@ public sinPedidosParaEntregar;
               for(let k in result)
               { 
 
-              
+              console.log("Resultado: ", result[k].estado);
+              console.log("Vale: ", vale);
+              console.log("k: ", k);
+              console.log("cocinero: ", cocinero);
                 if (result[k].estado=="preparacion")
                 {
                   vale++;
@@ -392,6 +327,7 @@ public sinPedidosParaEntregar;
                     }
 
                   }
+                  console.log("llego: ", cocinero, bartender, vale);
                   if(cocinero==true && bartender == false)
                   {
                     if(vale==1)
@@ -1539,146 +1475,7 @@ public sinPedidosParaEntregar;
 
                               
                                  });
-
-
-
-
-
-
-
-
-                            
-                              
-
-          /*var refDos = this.firebase.database().ref("mesas");
-                        
-                        refDos.once('value', (snap) => {
-                            var data = snap.val();
-                            //this.estaLibre=true;
-                          // ocup=true;
-                            for(var key in data)
-                            {
-
-                              if(mesa=="1"||mesa=="2"||mesa=="3"||mesa=="4"||mesa=="5"||mesa=="6"||mesa=="7"||mesa=="8"||mesa=="9"||mesa=="10")
-                              //if(mesa=="1")
-                                  {
-                                    
-                                      if(text!=mesa)
-                                      {
-                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
-                                        break;
-                                      }
-
-                                  }
-
-
-
-                                if (text == data[key].numeroMesa) 
-                                {
-
-                               
-
-                                  //if(data[key].cliente!=null)
-                                  //CAMBIE ESTA LINEA
-                                  if(data[key].estado!="libre")
-                                  {
-
-                                    this.estaLibre=false;
-                                    //ocup=false;
-                                   // alert("La mesa ya esta ocupada");
-                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
-                                    break;
-                                    //return;
-                                    
-                                  }
-
-                                  if(data[key].cantidadComensales<cantidad)
-                                  {
-                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
-                                    break;
-
-                                  }
-
-
-
-
-
-                                    data[key].cliente = correo;
-                                    data[key].estado = "ocupada";
-                                    refDos.child(key).update(data[key]);
-                                    //alert("bienvenido,se relaciono la mesa tres")
-
-
-
-                                    //var ref = this.firebase.database().ref("usuarios/clientes");
-                                    var ref = this.firebase.database().ref("usuarios");
-             
-                                    ref.once('value', (snap) => {
-                                        var data = snap.val();
-                                        for(var key in data){
-                                            if (correo == data[key].correo) {
-                                                data[key].mesa = text;
-                                                data[key].estado = "atendido";
-                                               
-                                                ref.child(key).update(data[key]);
-                                                //alert("Listo,se relaciono al cliente con la mesa " + text);
-                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
-                                                this.navCtrl.setRoot(this.navCtrl.getActive().component);
-                                                
-                                                
-                                                
-                     
-                                            };                  
-                                        }
-                                    });
-
-
-
-
-
-                                   
-                                };                  
-                            }
-                        }); */
-
-
-                      
-
-
-
-                          //if(this.estaLibre)
-
-
-                          //if(ocup==true)
-                       /*   if(this.estaLibre)
-                          {
-
-                            var ref = this.firebase.database().ref("usuarios/clientes");
-             
-                            ref.once('value', (snap) => {
-                                var data = snap.val();
-                                for(var key in data){
-                                    if (correo == data[key].correo) {
-                                        data[key].mesa = 3;
-                                       
-                                        ref.child(key).update(data[key]);
-                                        alert("bienvenido,se relaciono al cliente con la mesa " + 3);
-                                        this.navCtrl.setRoot(this.navCtrl.getActive().component);
-                                        
-                                        
-                                        
-             
-                                    };                  
-                                }
-                            });
-
-
-                          }*/
-
-                          
-                          //this.cargarPersonas();
-           
-                          
+                 
   }
 
   MostrarPedidos(mesa)
@@ -1688,21 +1485,44 @@ public sinPedidosParaEntregar;
              
       ref.once('value', (snap) => {
         var data = snap.val();
+        var cocinero:boolean = false;
+        var bartender:boolean = false;
+
         for(var key in data){
             if (mesa == data[key].mesa) {
               data[key].estado = "atendido";
              
               ref.child(key).update(data[key]);
+              let pedidos = this.firebase.database().ref("pedidos/"+mesa);
+
+              pedidos.once('value',(result)=>{
+                var res = result.val();
+              for(var k in res){
+                console.log("k",k);
+                console.log("pedidos",res);
+                console.log("pedidos[k]",res[k]);
+                if(k=="cocinero"){
+                  cocinero = true;
+                }
+                if(k=="bartender"){
+                  bartender = true;
+                }
+              }
               
-              this.firebase.database().ref("pedidos/"+mesa).child("cocinero").update({estado: "aceptado"}).then(()=>{
+              if(cocinero){
+                this.firebase.database().ref("pedidos/"+mesa).child("cocinero").update({estado: "aceptado"}).then(()=>{
 
+                });
+              }
+
+              if(bartender){
+                this.firebase.database().ref("pedidos/"+mesa).child("bartender").update({estado: "aceptado"}).then(()=>{
+                    
+
+                });
+              }
               });
-
-              
-              this.firebase.database().ref("pedidos/"+mesa).child("bartender").update({estado: "aceptado"}).then(()=>{
-                  this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", this.limpiar);
-
-              });
+              this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", this.limpiar);
               return;   
             };                  
         }
