@@ -8,6 +8,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
+
 /**
  * Generated class for the PedirPlatosPage page.
  *
@@ -182,7 +183,7 @@ mensaje.once("value",(snap)=>{
 
      if(!ocupada)
      {
-      this.presentToast("La mesa ingresada no es la corrcta ya que esta vacia");
+      this.presentToast("La mesa ingresada no es la correcta ya que esta vacia");
  
      return;
 
@@ -681,7 +682,7 @@ console.log("Le saco la selecccion a ");
     }
     if(tieneCocinero)
     {
-      mensaje.update({estado:"tomado"}).then(()=>{
+      mensaje.update({estado:"tomado", cuenta: this.monto}).then(()=>{
 
         for(let i=0;i<this.pedido.length;i++)
         {
@@ -694,7 +695,7 @@ console.log("Le saco la selecccion a ");
     }
     if(tieneBartender)
     {
-      mensaje2.update({estado:"tomado"}).then(()=>{
+      mensaje2.update({estado:"tomado", cuenta: this.monto}).then(()=>{
 
         for(let i=0;i<this.pedido.length;i++)
         {

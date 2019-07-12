@@ -173,8 +173,42 @@
           <p  style="color:black;">Tipo: • {{item.tipo}}</p>
           <p  style="color:black;">Mensaje: • {{mensajeValidar[i]}}</p>
     
-          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">
+          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa,i)">
              <ion-icon name="restaurant"></ion-icon>
+          </button>
+            <!--<button ion-button clear item-end (click)="probandoBarcode()">
+            <ion-icon name="restaurant"></ion-icon>
+          </button>-->
+        </ion-item>
+    
+      </ion-list>
+
+
+
+        <div *ngIf="sinPedidosPagar">
+
+      <h2 class="titulo">Lista de pedidos a pagar</h2>
+
+      </div>
+
+      <ion-list>
+
+        <ion-item *ngFor="let item of ParaPagar">
+          <ion-thumbnail item-start>
+            <!--<img src={{item.img}}>-->
+            <ion-icon name="people"></ion-icon>
+          </ion-thumbnail>
+    
+        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>
+          <p>Empleado • {{item.tipo}}</p>
+          <p>CUIL • {{item.cuil}}</p>-->
+
+          <h1 style="color:black;"> {{item.nombre}}</h1>
+          <p  style="color:black;">Mesa: • {{item.mesa}}</p>
+          <p  style="color:black;">Importe: $ {{item.cuenta}}</p>
+    
+          <button ion-button clear item-end (click)="CobrarPedido(item.correo, item.mesa)">
+             <ion-icon name="logo-usd"></ion-icon>
           </button>
             <!--<button ion-button clear item-end (click)="probandoBarcode()">
             <ion-icon name="restaurant"></ion-icon>
@@ -432,6 +466,8 @@
         <div class="botones">
     
           <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    
+          <button ion-button outline (click)="limpiar()">Cancelar</button>
         </div>
       </div>
     

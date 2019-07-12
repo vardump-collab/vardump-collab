@@ -34,6 +34,31 @@
 
 <ion-content>
 
+  <ng-container *ngIf="ocultarSpinner && pedidosPendientes.length > 0">
+    <h2 class="titulo">Pedidos a confirmar</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of pedidosPendientes">
+
+      <ion-thumbnail item-start>
+        <ion-icon name="person"></ion-icon>
+      </ion-thumbnail>
+
+      <h1>{{item.apellido}}, {{item.nombre}}</h1>
+      <p>Direccion • {{item.direccion}}</p>
+      <p>Localidad • {{item.localidad}}</p>
+      <p>Monto $ {{item.cuenta}}</p>
+
+      <button item-end ion-button clear (click)="ConfirmarPedido(item)">
+        <ion-icon style="color: green;" name="checkmark-circle"></ion-icon>
+      </button>
+
+    </ion-item>
+
+  </ion-list>
+
   <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">
     <img src="../../assets/imgs/alfa/empty.png" />
     <h1>No hay reservas disponibles.</h1>
@@ -95,6 +120,7 @@
     </ion-item>
 
   </ion-list>
+
 
   <div [ngClass]="{'interfaz-mesas':true,'ocultar':ocultarInterfazMesas}">
 

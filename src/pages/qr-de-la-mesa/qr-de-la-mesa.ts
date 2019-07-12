@@ -40,6 +40,7 @@ export class QrDeLaMesaPage {
   public espera: Array<any>;
   public atendidos: Array<any>;
   public ParaValidar: Array<any>;
+  public ParaPagar: Array<any>;
   
   public tiempopedidos;
 
@@ -77,10 +78,9 @@ public mensajeValidar: Array<any>;
 public sinPersonasEnEspera;
 public sinPersonasAtendidas;
 public sinPedidosValidar;
-
+public sinPedidosPagar;
 public sinPedidosParaEntregar;
-
-
+public mesa;
 
 
   
@@ -90,6 +90,7 @@ public sinPedidosParaEntregar;
    this.sinPersonasEnEspera=false;
    this.sinPersonasAtendidas=false;
    this.sinPedidosParaEntregar=false;
+   this.sinPedidosPagar = false;
    this.sinPedidosValidar = false;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -112,37 +113,12 @@ public sinPedidosParaEntregar;
       }
     }, 500);
 
-
-
-  /*  let pedidosRef = this.firebase.database().ref("usuarios");
-
-    pedidosRef.once("value", (snap) => {
-
-      //let data = snap.val();
-     // let esValido = true;
-     let result = snap.val();
-    for(let k in result){ //"k" provides key Id of each object
-      this.user_data.push({
-       id : k,
-       apellido : result[k].apellido,
-       clave : result[k].clave,
-       correo : result[k].correo,
-       cuil : result[k].cuil,
-       dni : result[k].dni,
-       nombre : result[k].nombre,
-       tipo : result[k].tipo
-     });
-    }
-
-
-
-      
-    });*/  
     this.estaLibre=false;
     this.usuarios = [];
     this.espera = [];
     this.atendidos = [];
     this.ParaValidar=[];
+    this.ParaPagar=[];
     this.pedidosPruebaUno=[];
     this.pedidosPruebaDos=[];
     this.pedidosPruebaTres=[];
@@ -208,7 +184,7 @@ public sinPedidosParaEntregar;
                 console.log("a", a.val());
                 console.log("a val", a.val());
                 if(a.val().cantidad != undefined && a.val().nombre != undefined){
-                  mensaje += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "<br>";
+                  mensaje += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "; ";
                 } 
 
                   
@@ -243,114 +219,125 @@ public sinPedidosParaEntregar;
       console.log("Para validar", this.ParaValidar);  
 
 
+
+
+      this.ParaPagar = this.usuarios.filter(item => {
+
+        if(item.estado=="pagando")
+        {
+          this.sinPedidosPagar = true;
+        }
+       return item.estado=="pagando";
+      });
+
+      console.log(this.usuarios);
+      console.log("Para pagar", this.ParaPagar);  
+
+
     });
 
       
-            let pedidosProbandoUno = this.firebase.database().ref("pedidos/1");
+    let pedidosProbandoUno = this.firebase.database().ref("pedidos/1");
+      pedidosProbandoUno.on("value", (snap) => {
+
+        this.pedidosPruebaUno=[];
+        let vale=0;
+        this.sinPedidosParaEntregar=false;
+        let terminadisimo=false;
+
+        let cocinero=false;
+        let bartender=false;
 
 
-            pedidosProbandoUno.on("value", (snap) => {
+        let result = snap.val();
 
-              this.pedidosPruebaUno=[];
-              let vale=0;
-              this.sinPedidosParaEntregar=false;
-              let terminadisimo=false;
+        for(let k in result)
+        {
+          if(k=="cocinero")
+          {
+            cocinero=true;
+          }
+          if(k=="bartender")
+          {
+            bartender=true;
+          }
 
-              let cocinero=false;
-              let bartender=false;
+          if(result[k].estado=="terminado")
+          {
+            terminadisimo=true;
+          }
+
+        }
+
+        for(let k in result)
+        { 
+
+        console.log("Resultado: ", result[k].estado);
+        console.log("Vale: ", vale);
+        console.log("k: ", k);
+        console.log("cocinero: ", cocinero);
+          if (result[k].estado=="preparacion")
+          {
+            vale++;
+
+                  if(terminadisimo==true)
+                  {
+                    this.pedidosPruebaUno.push(result[k]);
+                    console.log("los 2,uno terminado y el otro añadido")
+                    this.sinPedidosParaEntregar=true;
+                    break;
+
+                  }
+
+            if(bartender==true && cocinero==true)
+            {
+              if(vale==2)
+                {
+                  
+                  this.pedidosPruebaUno.push(result[k]);
+                  console.log("los 2")
+                  this.sinPedidosParaEntregar=true;
+                  break;
 
 
-              let result = snap.val();
 
-              for(let k in result)
+                }
+
+            }
+
+            if(bartender==true && cocinero==false)
+            {
+              if(vale==1)
               {
-                if(k=="cocinero")
-                {
-                  cocinero=true;
-                }
-                if(k=="bartender")
-                {
-                  bartender=true;
-                }
-
-                if(result[k].estado=="terminado")
-                {
-                  terminadisimo=true;
-                }
-
+                this.pedidosPruebaUno.push(result[k]);
+                console.log("barteneder")
+                this.sinPedidosParaEntregar=true;
+                break;
               }
 
-              for(let k in result)
-              { 
-
-              console.log("Resultado: ", result[k].estado);
-              console.log("Vale: ", vale);
-              console.log("k: ", k);
-              console.log("cocinero: ", cocinero);
-                if (result[k].estado=="preparacion")
-                {
-                  vale++;
-
-                        if(terminadisimo==true)
-                        {
-                          this.pedidosPruebaUno.push(result[k]);
-                          console.log("los 2,uno terminado y el otro añadido")
-                          this.sinPedidosParaEntregar=true;
-                          break;
-
-                        }
-
-                  if(bartender==true && cocinero==true)
-                  {
-                    if(vale==2)
-                      {
-                        
-                        this.pedidosPruebaUno.push(result[k]);
-                        console.log("los 2")
-                        this.sinPedidosParaEntregar=true;
-                        break;
-
-
-
-                      }
-
-                  }
-
-                  if(bartender==true && cocinero==false)
-                  {
-                    if(vale==1)
-                    {
-                      this.pedidosPruebaUno.push(result[k]);
-                      console.log("barteneder")
-                      this.sinPedidosParaEntregar=true;
-                      break;
-                    }
-
-                  }
-                  console.log("llego: ", cocinero, bartender, vale);
-                  if(cocinero==true && bartender == false)
-                  {
-                    if(vale==1)
-                    {
-                      this.pedidosPruebaUno.push(result[k]);
-                      console.log("cocinero")
-                      this.sinPedidosParaEntregar=true;
-                      break;
-                    }
-
-                  }
-                 
-
-                }
-
+            }
+            console.log("llego: ", cocinero, bartender, vale);
+            if(cocinero==true && bartender == false)
+            {
+              if(vale==1)
+              {
+                this.pedidosPruebaUno.push(result[k]);
+                console.log("cocinero")
+                this.sinPedidosParaEntregar=true;
+                break;
               }
-              
-            });
 
-            let pedidosProbandoDos = this.firebase.database().ref("pedidos/2");
+            }
+           
 
+          }
 
-            pedidosProbandoDos.on("value", (snap) => {
+        }
+        
+    });
+
+    let pedidosProbandoDos = this.firebase.database().ref("pedidos/2");
+      pedidosProbandoDos.on("value", (snap) => {
 
               this.pedidosPruebaDos=[];
               let vale=0;
@@ -434,12 +421,10 @@ public sinPedidosParaEntregar;
 
               }
               
-            });
+    });
 
-            let pedidosProbandoTres = this.firebase.database().ref("pedidos/3");
-
-
-            pedidosProbandoTres.on("value", (snap) => {
+    let pedidosProbandoTres = this.firebase.database().ref("pedidos/3");
+      pedidosProbandoTres.on("value", (snap) => {
 
               this.pedidosPruebaTres=[];
               //this.pedidosPruebaTres=new Array(0);
@@ -531,12 +516,10 @@ public sinPedidosParaEntregar;
 
               }
               
-            });
+    });
 
-            let pedidosProbandoCuatro = this.firebase.database().ref("pedidos/4");
-
-
-            pedidosProbandoCuatro.on("value", (snap) => {
+    let pedidosProbandoCuatro = this.firebase.database().ref("pedidos/4");
+      pedidosProbandoCuatro.on("value", (snap) => {
 
               this.pedidosPruebaCuatro=[];
               let vale=0;
@@ -621,11 +604,9 @@ public sinPedidosParaEntregar;
 
               }
               
-            });
+      });
 
             let pedidosProbandoCinco = this.firebase.database().ref("pedidos/5");
-
-
             pedidosProbandoCinco.on("value", (snap) => {
 
               this.pedidosPruebaCinco=[];
@@ -715,8 +696,6 @@ public sinPedidosParaEntregar;
             });
 
             let pedidosProbandoSeis = this.firebase.database().ref("pedidos/6");
-
-
             pedidosProbandoSeis.on("value", (snap) => {
 
               this.pedidosPruebaSeis=[];
@@ -805,8 +784,6 @@ public sinPedidosParaEntregar;
             });
 
             let pedidosProbandoSiete = this.firebase.database().ref("pedidos/7");
-
-
             pedidosProbandoSiete.on("value", (snap) => {
 
               this.pedidosPruebaSiete=[];
@@ -895,8 +872,6 @@ public sinPedidosParaEntregar;
             });
 
             let pedidosProbandoOcho = this.firebase.database().ref("pedidos/8");
-
-
             pedidosProbandoOcho.on("value", (snap) => {
 
               this.pedidosPruebaOcho=[];
@@ -984,8 +959,6 @@ public sinPedidosParaEntregar;
             });
 
             let pedidosProbandoNueve = this.firebase.database().ref("pedidos/9");
-
-
             pedidosProbandoNueve.on("value", (snap) => {
 
               this.pedidosPruebaNueve=[];
@@ -1075,8 +1048,6 @@ public sinPedidosParaEntregar;
 
             
             let pedidosProbandoDiez = this.firebase.database().ref("pedidos/10");
-
-
             pedidosProbandoDiez.on("value", (snap) => {
 
               this.pedidosPruebaDiez=[];
@@ -1167,12 +1138,11 @@ public sinPedidosParaEntregar;
 
 
 
-    
+    }
 
 
 
-  }
-
+  
   presentToast(mensaje: string) {
 
     let toast = this.toastCtrl.create({
@@ -1230,6 +1200,81 @@ public sinPedidosParaEntregar;
           })
           .catch((e: any) => this.presentToast(e));
 */
+
+  }
+
+  CobrarPedido(correo,mesa){
+      console.log("correo", correo);
+      console.log("mesa", mesa);
+      let keyCliente = "";
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == correo) {
+
+          keyCliente = item;
+          break;
+        }
+      }
+    })
+
+
+      let clienteRef = this.firebase.database().ref("usuarios").child(keyCliente);
+      let pedidoRef = this.firebase.database().ref("pedidos").child(mesa);
+      let mesaRef = this.firebase.database().ref("mesas");
+
+      pedidoRef.remove().then(() => {
+
+        clienteRef.child("estado").update({estado: "pago"}).then(() => {
+
+          clienteRef.child("comensales").remove().then(() => {
+
+            clienteRef.child("juegoFer").remove().then(() => {
+
+              clienteRef.child("juegoFacu").remove().then(() => {
+
+                clienteRef.child("juegoAxel").remove().then(() => {
+
+                  clienteRef.child("mesa").remove().then(() => {
+
+                    mesaRef.once("value", (snap) => {
+
+                      let data = snap.val();
+
+                      for (let item in data) {
+
+                        if (data[item].numeroMesa == mesa) {
+
+                          mesaRef.child(item).update({ estado: "libre" }).then(() => {
+
+                            mesaRef.child(item).child("cliente").remove().then(() => {
+
+                              mesaRef.child(item).child("tiempoMinimo").remove().then(() => {
+
+                                this.MostrarAlert("Éxito!", "El cobro fue realizado.", "Ok", this.limpiar);
+                               
+                              }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                            }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                          }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));;
+
+                          break;
+                        }
+                      }
+                    }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                  }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+              }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+            }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+          }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+        }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+      }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+
 
   }
 
@@ -1478,8 +1523,17 @@ public sinPedidosParaEntregar;
                  
   }
 
-  MostrarPedidos(mesa)
+  MostrarPedidos(mesa,i)
   {
+    this.mesa = mesa;
+
+     this.MostrarAlert("Validación", "Desea validar el pedido de la mesa " +
+      mesa + "? Pedido: "+ this.mensajeValidar[i], "Aceptar", this.ValidarPedido);
+           
+  }
+
+ValidarPedido(){
+
 
       var ref = this.firebase.database().ref("usuarios");
              
@@ -1489,11 +1543,11 @@ public sinPedidosParaEntregar;
         var bartender:boolean = false;
 
         for(var key in data){
-            if (mesa == data[key].mesa) {
+            if (this.mesa == data[key].mesa) {
               data[key].estado = "atendido";
              
               ref.child(key).update(data[key]);
-              let pedidos = this.firebase.database().ref("pedidos/"+mesa);
+              let pedidos = this.firebase.database().ref("pedidos/"+this.mesa);
 
               pedidos.once('value',(result)=>{
                 var res = result.val();
@@ -1510,63 +1564,28 @@ public sinPedidosParaEntregar;
               }
               
               if(cocinero){
-                this.firebase.database().ref("pedidos/"+mesa).child("cocinero").update({estado: "aceptado"}).then(()=>{
+                this.firebase.database().ref("pedidos/"+this.mesa).child("cocinero").update({estado: "aceptado"}).then(()=>{
 
                 });
               }
 
               if(bartender){
-                this.firebase.database().ref("pedidos/"+mesa).child("bartender").update({estado: "aceptado"}).then(()=>{
+                this.firebase.database().ref("pedidos/"+this.mesa).child("bartender").update({estado: "aceptado"}).then(()=>{
                     
 
                 });
               }
               });
-              this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", this.limpiar);
-              return;   
+                 return;   
             };                  
         }
       });
-
-
-
-  }
+      this.limpiar();
+}
 
   cargarPersonas()
   {
-  /*  this.usuarios = [];
-    this.espera = [];
-    this.atendidos = [];
-
-
-    let genteRef = this.firebase.database().ref("usuarios/clientes");
-
-    genteRef.once("value", (snap) => {
-
-      let data = snap.val();
-
-      for (let item in data) {
-
-        this.usuarios.push(data[item]);
-      }
-
-      console.log(this.usuarios);
-    }).then(() => {
-      this.espera = this.usuarios.filter(item => {
-
-        return item.mesa == null;
-      });
-
-      this.atendidos = this.usuarios.filter(item => {
-
-        return item.mesa != null;
-      });
-
-
-      
-
-    });*/
-    //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  /*  this.usuarios = 
 
   }
 
@@ -1574,68 +1593,7 @@ public sinPedidosParaEntregar;
   MostrarTiempoEsperaCliente()
   {
 
-/*
-        this.cerrarqr=true;
-          this.probandingg=false;
 
-          this.qrScanner.prepare()
-          //.then((status: QRScannerStatus) => {
-            .then((status) => {
-
-            if (status.authorized) {
-
-              this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
-
-                
-            
-                
-
-                  var refDos = this.firebase.database().ref("mesas");
-                        
-                        refDos.once('value', (snap) => {
-                            var data = snap.val();
-                           
-                            for(var key in data)
-                            {
-                                if (text == data[key].numeroMesa) 
-                                {
-                                    alert(data[key].tiempoMinimo);
-                                    break;
-                                                                                        
-                                }
-                              }
-                            });
-
-
-
-                 
-
-
-
-                  this.ocultarQR = true;
-
-               
-              });
-
-              this.qrScanner.show().then(() => {
-
-                (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
-                (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
-                (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
-               
-              });
-
-            } else if (status.denied) {
-           
-
-            } else {
-              
-            }
-          })
-          .catch((e: any) => this.presentToast(e));
-
-
-          */
 
   }
 
@@ -1806,6 +1764,7 @@ public sinPedidosParaEntregar;
 
    
   }
+
 
   limpiar()
   {

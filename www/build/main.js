@@ -1294,7 +1294,7 @@ var PedirPlatosPage = /** @class */ (function () {
             else {
                 //Aca valido que la mesa no esta ocupada
                 if (!ocupada) {
-                    _this.presentToast("La mesa ingresada no es la corrcta ya que esta vacia");
+                    _this.presentToast("La mesa ingresada no es la correcta ya que esta vacia");
                     return;
                 }
                 else {
@@ -1635,7 +1635,7 @@ var PedirPlatosPage = /** @class */ (function () {
             }
         }
         if (tieneCocinero) {
-            mensaje.update({ estado: "tomado" }).then(function () {
+            mensaje.update({ estado: "tomado", cuenta: this.monto }).then(function () {
                 for (var i = 0; i < _this.pedido.length; i++) {
                     window.document.querySelector('#' + _this.pedido[i].id).classList.remove("mostrarElegido");
                 }
@@ -1643,7 +1643,7 @@ var PedirPlatosPage = /** @class */ (function () {
             });
         }
         if (tieneBartender) {
-            mensaje2.update({ estado: "tomado" }).then(function () {
+            mensaje2.update({ estado: "tomado", cuenta: this.monto }).then(function () {
                 for (var i = 0; i < _this.pedido.length; i++) {
                     window.document.querySelector('#' + _this.pedido[i].id).classList.remove("mostrarElegido");
                 }
@@ -3694,45 +3694,60 @@ var CuentaPage = /** @class */ (function () {
         else {
             var clienteRef_1 = this.firebase.database().ref("usuarios").child(this.keyCliente);
             var pedidoRef = this.firebase.database().ref("pedidos").child(this.mesa);
-            var mesaRef_1 = this.firebase.database().ref("mesas");
+            var mesaRef = this.firebase.database().ref("mesas");
             this.estadoBoton = true;
             this.ocultarSpinner = false;
-            pedidoRef.remove().then(function () {
-                clienteRef_1.child("estado").update({ estado: "pago" }).then(function () {
-                    clienteRef_1.child("comensales").remove().then(function () {
-                        clienteRef_1.child("juegoFer").remove().then(function () {
-                            clienteRef_1.child("juegoFacu").remove().then(function () {
-                                clienteRef_1.child("juegoAxel").remove().then(function () {
-                                    clienteRef_1.child("mesa").remove().then(function () {
-                                        mesaRef_1.once("value", function (snap) {
-                                            var data = snap.val();
-                                            var _loop_1 = function (item) {
-                                                if (data[item].numeroMesa == _this.mesa) {
-                                                    mesaRef_1.child(item).update({ estado: "libre" }).then(function () {
-                                                        mesaRef_1.child(item).child("cliente").remove().then(function () {
-                                                            mesaRef_1.child(item).child("tiempoMinimo").remove().then(function () {
-                                                                _this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", _this.Redireccionar);
-                                                                _this.ocultarSpinner = true;
-                                                            }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                                                        }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                                                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                                                    ;
-                                                    return "break";
-                                                }
-                                            };
-                                            for (var item in data) {
-                                                var state_1 = _loop_1(item);
-                                                if (state_1 === "break")
-                                                    break;
-                                            }
-                                        }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                                }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                            }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                        }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
-                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+            pedidoRef.update({ estado: "pagando" }).then(function () {
+                clienteRef_1.update({ estado: "pagando", cuenta: _this.total }).then(function () {
+                    _this.MostrarAlert("Éxito!", "Aguarde la confirmación del mozo, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", _this.Redireccionar);
+                    _this.ocultarSpinner = true;
                 }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
             }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+            /*pedidoRef.remove().then(() => {
+      
+              clienteRef.child("estado").update({estado: "pago"}).then(() => {
+      
+                clienteRef.child("comensales").remove().then(() => {
+      
+                  clienteRef.child("juegoFer").remove().then(() => {
+      
+                    clienteRef.child("juegoFacu").remove().then(() => {
+      
+                      clienteRef.child("juegoAxel").remove().then(() => {
+      
+                        clienteRef.child("mesa").remove().then(() => {
+      
+                          mesaRef.once("value", (snap) => {
+      
+                            let data = snap.val();
+      
+                            for (let item in data) {
+      
+                              if (data[item].numeroMesa == this.mesa) {
+      
+                                mesaRef.child(item).update({ estado: "libre" }).then(() => {
+      
+                                  mesaRef.child(item).child("cliente").remove().then(() => {
+      
+                                    mesaRef.child(item).child("tiempoMinimo").remove().then(() => {
+      
+                                      this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                                      this.ocultarSpinner = true;
+                                    }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                                  }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                                }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));;
+      
+                                break;
+                              }
+                            }
+                          }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                        }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                      }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                    }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                  }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+              }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+            }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));*/
         }
     };
     CuentaPage.prototype.presentToast = function (mensaje) {
@@ -3843,6 +3858,7 @@ var ListadoReservasPage = /** @class */ (function () {
         this.reservas = [];
         this.reservasPendientes = [];
         this.reservasConfirmadas = [];
+        this.pedidosPendientes = [];
         this.mesas = [];
         this.ocultarInterfazMesas = true;
         this.ejecutarSetInterval = true;
@@ -3876,7 +3892,58 @@ var ListadoReservasPage = /** @class */ (function () {
             }
             _this.ocultarSpinner = true;
         });
+        var clientesRef = this.firebase.database().ref("usuarios");
+        clientesRef.on("value", function (snap) {
+            var data = snap.val();
+            var keyPedido;
+            var tomado = false;
+            var _loop_1 = function (item) {
+                console.log("data", data[item]);
+                if (data[item].estado == "delivery") {
+                    keyPedido = data[item].correo.replace("@", "").replace(".", "");
+                    _this.firebase.database().ref("pedidos").child(keyPedido).on("value", function (snap) {
+                        console.log("Pedido: ", snap.val());
+                        if (snap.val() != null) {
+                            if (snap.val().estado == "tomado") {
+                                _this.pedidosPendientes.push(data[item]);
+                            }
+                        }
+                    });
+                }
+            };
+            for (var item in data) {
+                _loop_1(item);
+            }
+            _this.ocultarSpinner = true;
+        });
     }
+    ListadoReservasPage.prototype.ConfirmarPedido = function (item) {
+        var _this = this;
+        console.log("item", item);
+        var keyPedido = item.correo.replace("@", "").replace(".", "");
+        console.log("key", keyPedido);
+        this.firebase.database().ref("pedidos").child(keyPedido).update({ estado: "autorizado" })
+            .then(function () {
+            _this.firebase.database().ref("pedidos").child(keyPedido).on("value", function (span) {
+                var data = span.val();
+                for (var item_1 in data) {
+                    console.log("item", item_1);
+                    console.log("data item", data[item_1]);
+                    if (item_1 == "cocinero") {
+                        data[item_1].estado = "autorizado";
+                    }
+                    if (item_1 == "bartender") {
+                        data[item_1].estado = "autorizado";
+                    }
+                }
+                _this.firebase.database().ref("pedidos").child(keyPedido).update(data);
+            });
+            _this.MostrarAlert("Mensaje", "El pedido fue aceptado", "Aceptar", _this.OcultarAlert);
+        }).catch(function (error) {
+            console.log(error);
+            _this.presentToast("Tenemos problemas tecnicos, intente mas tarde...");
+        });
+    };
     ListadoReservasPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ListadoReservasPage');
     };
@@ -4032,9 +4099,10 @@ var ListadoReservasPage = /** @class */ (function () {
     };
     ListadoReservasPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-listado-reservas',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->\n\n\n\n    <ion-buttons end>\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div class="imagen" [ngClass]="{\'ocultar\':ocultarImagen,\'opacidad\':true}">\n\n\n\n  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>\n\n  <img [src]="image" alt="">\n\n\n\n</div>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n      <button ion-button outline (click)="OcultarAlert()">No</button>\n\n      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">\n\n    <img src="../../assets/imgs/alfa/empty.png" />\n\n    <h1>No hay reservas disponibles.</h1>\n\n  </div>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasPendientes.length > 0">\n\n    <h2 class="titulo">Reservas pendientes de confirmación</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasPendientes">\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}}>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n\n\n      <div item-end style="display: flex; align-items: center;align-content: center;flex-direction: column;">\n\n\n\n        <button ion-button clear (click)="DesplegarMesas(item)" style="margin-bottom: 20px;">\n\n          <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>\n\n        </button>\n\n\n\n        <button ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n          <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n        </button>\n\n\n\n      </div>\n\n\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">\n\n    <h2 class="titulo">Reservas confirmadas</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasConfirmadas">\n\n\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}} />\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n      <p>Mesa • {{item.mesa}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n        <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <div [ngClass]="{\'interfaz-mesas\':true,\'ocultar\':ocultarInterfazMesas}">\n\n\n\n    <h1>Selecciona una mesa para la reserva</h1>\n\n    <div class="mesas">\n\n      <button ion-button color="dark" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>\n\n    </div>\n\n\n\n    <div class="botones-interfaz-mesa">\n\n      <button ion-button color="dark" (click)="OcultarInterfaz()">Cancelar</button>\n\n      <button ion-button color="dark" (click)="Confirmar()">Confirmar</button>\n\n    </div>\n\n\n\n  </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':ocultarSpinner}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/,
+            selector: 'page-listado-reservas',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/'<ion-header>\n\n  <ion-navbar color="dark">\n\n\n\n    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->\n\n\n\n    <ion-buttons end>\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<div class="imagen" [ngClass]="{\'ocultar\':ocultarImagen,\'opacidad\':true}">\n\n\n\n  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>\n\n  <img [src]="image" alt="">\n\n\n\n</div>\n\n\n\n<div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n  <div class="alert-message animation-target">\n\n    <h1>{{alertTitulo}}</h1>\n\n    <p>{{alertMensaje}}</p>\n\n    <div class="botones">\n\n      <button ion-button outline (click)="OcultarAlert()">No</button>\n\n      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    </div>\n\n  </div>\n\n\n\n</div>\n\n\n\n<ion-content>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && pedidosPendientes.length > 0">\n\n    <h2 class="titulo">Pedidos a confirmar</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of pedidosPendientes">\n\n\n\n      <ion-thumbnail item-start>\n\n        <ion-icon name="person"></ion-icon>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Direccion • {{item.direccion}}</p>\n\n      <p>Localidad • {{item.localidad}}</p>\n\n      <p>Monto $ {{item.cuenta}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarPedido(item)">\n\n        <ion-icon style="color: green;" name="checkmark-circle"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">\n\n    <img src="../../assets/imgs/alfa/empty.png" />\n\n    <h1>No hay reservas disponibles.</h1>\n\n  </div>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasPendientes.length > 0">\n\n    <h2 class="titulo">Reservas pendientes de confirmación</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasPendientes">\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}}>\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n\n\n      <div item-end style="display: flex; align-items: center;align-content: center;flex-direction: column;">\n\n\n\n        <button ion-button clear (click)="DesplegarMesas(item)" style="margin-bottom: 20px;">\n\n          <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>\n\n        </button>\n\n\n\n        <button ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n          <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n        </button>\n\n\n\n      </div>\n\n\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">\n\n    <h2 class="titulo">Reservas confirmadas</h2>\n\n  </ng-container>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor="let item of reservasConfirmadas">\n\n\n\n      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">\n\n        <img src={{item.img}} />\n\n      </ion-thumbnail>\n\n\n\n      <h1>{{item.apellido}}, {{item.nombre}}</h1>\n\n      <p>Horario • {{item.horario}} Hs.</p>\n\n      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>\n\n      <p>Mesa • {{item.mesa}}</p>\n\n\n\n      <button item-end ion-button clear (click)="ConfirmarCancelarReserva(item)">\n\n        <ion-icon style="color: #FF0000;" name="close"></ion-icon>\n\n      </button>\n\n\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n\n\n  <div [ngClass]="{\'interfaz-mesas\':true,\'ocultar\':ocultarInterfazMesas}">\n\n\n\n    <h1>Selecciona una mesa para la reserva</h1>\n\n    <div class="mesas">\n\n      <button ion-button color="dark" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>\n\n    </div>\n\n\n\n    <div class="botones-interfaz-mesa">\n\n      <button ion-button color="dark" (click)="OcultarInterfaz()">Cancelar</button>\n\n      <button ion-button color="dark" (click)="Confirmar()">Confirmar</button>\n\n    </div>\n\n\n\n  </div>\n\n\n\n  <app-spinner [ngClass]="{\'ocultar\':ocultarSpinner}"></app-spinner>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\listado-reservas\listado-reservas.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
     ], ListadoReservasPage);
     return ListadoReservasPage;
 }());
@@ -5302,6 +5370,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
         this.sinPersonasEnEspera = false;
         this.sinPersonasAtendidas = false;
         this.sinPedidosParaEntregar = false;
+        this.sinPedidosPagar = false;
         this.sinPedidosValidar = false;
         this.usuario = JSON.parse(localStorage.getItem("usuario"));
         if (this.usuario.tipo == "mozo") {
@@ -5316,35 +5385,12 @@ var QrDeLaMesaPage = /** @class */ (function () {
                 _this.ocultarQR = false;
             }
         }, 500);
-        /*  let pedidosRef = this.firebase.database().ref("usuarios");
-      
-          pedidosRef.once("value", (snap) => {
-      
-            //let data = snap.val();
-           // let esValido = true;
-           let result = snap.val();
-          for(let k in result){ //"k" provides key Id of each object
-            this.user_data.push({
-             id : k,
-             apellido : result[k].apellido,
-             clave : result[k].clave,
-             correo : result[k].correo,
-             cuil : result[k].cuil,
-             dni : result[k].dni,
-             nombre : result[k].nombre,
-             tipo : result[k].tipo
-           });
-          }
-      
-      
-      
-            
-          });*/
         this.estaLibre = false;
         this.usuarios = [];
         this.espera = [];
         this.atendidos = [];
         this.ParaValidar = [];
+        this.ParaPagar = [];
         this.pedidosPruebaUno = [];
         this.pedidosPruebaDos = [];
         this.pedidosPruebaTres = [];
@@ -5392,7 +5438,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
                                 console.log("a", a.val());
                                 console.log("a val", a.val());
                                 if (a.val().cantidad != undefined && a.val().nombre != undefined) {
-                                    mensaje_1 += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "<br>";
+                                    mensaje_1 += a.val().cantidad + "-" + a.val().nombre + "- $" + a.val().precio + "; ";
                                 }
                             });
                         });
@@ -5419,6 +5465,14 @@ var QrDeLaMesaPage = /** @class */ (function () {
             });
             console.log(_this.usuarios);
             console.log("Para validar", _this.ParaValidar);
+            _this.ParaPagar = _this.usuarios.filter(function (item) {
+                if (item.estado == "pagando") {
+                    _this.sinPedidosPagar = true;
+                }
+                return item.estado == "pagando";
+            });
+            console.log(_this.usuarios);
+            console.log("Para pagar", _this.ParaPagar);
         });
         var pedidosProbandoUno = this.firebase.database().ref("pedidos/1");
         pedidosProbandoUno.on("value", function (snap) {
@@ -6043,6 +6097,60 @@ var QrDeLaMesaPage = /** @class */ (function () {
          .catch((e: any) => this.presentToast(e));
 */
     };
+    QrDeLaMesaPage.prototype.CobrarPedido = function (correo, mesa) {
+        var _this = this;
+        console.log("correo", correo);
+        console.log("mesa", mesa);
+        var keyCliente = "";
+        var usuariosRef = this.firebase.database().ref("usuarios");
+        usuariosRef.once("value", function (snap) {
+            var data = snap.val();
+            for (var item in data) {
+                if (data[item].correo == correo) {
+                    keyCliente = item;
+                    break;
+                }
+            }
+        });
+        var clienteRef = this.firebase.database().ref("usuarios").child(keyCliente);
+        var pedidoRef = this.firebase.database().ref("pedidos").child(mesa);
+        var mesaRef = this.firebase.database().ref("mesas");
+        pedidoRef.remove().then(function () {
+            clienteRef.child("estado").update({ estado: "pago" }).then(function () {
+                clienteRef.child("comensales").remove().then(function () {
+                    clienteRef.child("juegoFer").remove().then(function () {
+                        clienteRef.child("juegoFacu").remove().then(function () {
+                            clienteRef.child("juegoAxel").remove().then(function () {
+                                clienteRef.child("mesa").remove().then(function () {
+                                    mesaRef.once("value", function (snap) {
+                                        var data = snap.val();
+                                        var _loop_1 = function (item) {
+                                            if (data[item].numeroMesa == mesa) {
+                                                mesaRef.child(item).update({ estado: "libre" }).then(function () {
+                                                    mesaRef.child(item).child("cliente").remove().then(function () {
+                                                        mesaRef.child(item).child("tiempoMinimo").remove().then(function () {
+                                                            _this.MostrarAlert("Éxito!", "El cobro fue realizado.", "Ok", _this.limpiar);
+                                                        }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                                                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                                                }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                                                ;
+                                                return "break";
+                                            }
+                                        };
+                                        for (var item in data) {
+                                            var state_1 = _loop_1(item);
+                                            if (state_1 === "break")
+                                                break;
+                                        }
+                                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                                }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                            }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                        }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                    }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+                }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+            }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+        }).catch(function () { return _this.presentToast("Ups... Tenemos problemas técnicos."); });
+    };
     QrDeLaMesaPage.prototype.OcultarLectorQR = function () {
         /*
             this.qrScanner.hide().then(() => {
@@ -6076,7 +6184,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
                                         __WEBPACK_IMPORTED_MODULE_3_firebase___default.a.database().ref("usuarios").child(itemUsuario).update({ estado: "atendido" }).then(function () {
                                             __WEBPACK_IMPORTED_MODULE_3_firebase___default.a.database().ref("mesas").once("value", function (snapMesa) {
                                                 var dataMesa = snapMesa.val();
-                                                var _loop_1 = function (itemMesa) {
+                                                var _loop_2 = function (itemMesa) {
                                                     if (dataMesa[itemMesa].numeroMesa == mesa) {
                                                         __WEBPACK_IMPORTED_MODULE_3_firebase___default.a.database().ref("mesas").child(itemMesa).update({ estado: "ocupada" }).then(function () {
                                                             __WEBPACK_IMPORTED_MODULE_3_firebase___default.a.database().ref("mesas").child(itemMesa).update({ cliente: correo }).then(function () {
@@ -6086,7 +6194,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
                                                     }
                                                 };
                                                 for (var itemMesa in dataMesa) {
-                                                    _loop_1(itemMesa);
+                                                    _loop_2(itemMesa);
                                                 }
                                             });
                                         });
@@ -6107,7 +6215,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
             var refDos = _this.firebase.database().ref("mesas");
             refDos.once('value', function (snap) {
                 var data = snap.val();
-                var _loop_2 = function () {
+                var _loop_3 = function () {
                     if (mesa == "1" || mesa == "2" || mesa == "3" || mesa == "4" || mesa == "5" || mesa == "6" || mesa == "7" || mesa == "8" || mesa == "9" || mesa == "10") 
                     //if(mesa=="1")
                     {
@@ -6187,131 +6295,19 @@ var QrDeLaMesaPage = /** @class */ (function () {
                 //this.estaLibre=true;
                 // ocup=true;
                 for (var key in data) {
-                    var state_1 = _loop_2();
-                    if (state_1 === "break")
+                    var state_2 = _loop_3();
+                    if (state_2 === "break")
                         break;
                 }
             });
         });
-        /*var refDos = this.firebase.database().ref("mesas");
-                      
-                      refDos.once('value', (snap) => {
-                          var data = snap.val();
-                          //this.estaLibre=true;
-                        // ocup=true;
-                          for(var key in data)
-                          {
-
-                            if(mesa=="1"||mesa=="2"||mesa=="3"||mesa=="4"||mesa=="5"||mesa=="6"||mesa=="7"||mesa=="8"||mesa=="9"||mesa=="10")
-                            //if(mesa=="1")
-                                {
-                                  
-                                    if(text!=mesa)
-                                    {
-                                      this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
-                                      break;
-                                    }
-
-                                }
-
-
-
-                              if (text == data[key].numeroMesa)
-                              {
-
-                             
-
-                                //if(data[key].cliente!=null)
-                                //CAMBIE ESTA LINEA
-                                if(data[key].estado!="libre")
-                                {
-
-                                  this.estaLibre=false;
-                                  //ocup=false;
-                                 // alert("La mesa ya esta ocupada");
-                                 this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
-                                  break;
-                                  //return;
-                                  
-                                }
-
-                                if(data[key].cantidadComensales<cantidad)
-                                {
-                                  this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
-                                  break;
-
-                                }
-
-
-
-
-
-                                  data[key].cliente = correo;
-                                  data[key].estado = "ocupada";
-                                  refDos.child(key).update(data[key]);
-                                  //alert("bienvenido,se relaciono la mesa tres")
-
-
-
-                                  //var ref = this.firebase.database().ref("usuarios/clientes");
-                                  var ref = this.firebase.database().ref("usuarios");
-           
-                                  ref.once('value', (snap) => {
-                                      var data = snap.val();
-                                      for(var key in data){
-                                          if (correo == data[key].correo) {
-                                              data[key].mesa = text;
-                                              data[key].estado = "atendido";
-                                             
-                                              ref.child(key).update(data[key]);
-                                              //alert("Listo,se relaciono al cliente con la mesa " + text);
-                                              this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
-                                              this.navCtrl.setRoot(this.navCtrl.getActive().component);
-                                              
-                                              
-                                              
-                   
-                                          };
-                                      }
-                                  });
-
-
-
-
-
-                                 
-                              };
-                          }
-                      }); */
-        //if(this.estaLibre)
-        //if(ocup==true)
-        /*   if(this.estaLibre)
-           {
-
-             var ref = this.firebase.database().ref("usuarios/clientes");
-
-             ref.once('value', (snap) => {
-                 var data = snap.val();
-                 for(var key in data){
-                     if (correo == data[key].correo) {
-                         data[key].mesa = 3;
-                        
-                         ref.child(key).update(data[key]);
-                         alert("bienvenido,se relaciono al cliente con la mesa " + 3);
-                         this.navCtrl.setRoot(this.navCtrl.getActive().component);
-                         
-                         
-                         
-
-                     };
-                 }
-             });
-
-
-           }*/
-        //this.cargarPersonas();
     };
-    QrDeLaMesaPage.prototype.MostrarPedidos = function (mesa) {
+    QrDeLaMesaPage.prototype.MostrarPedidos = function (mesa, i) {
+        this.mesa = mesa;
+        this.MostrarAlert("Validación", "Desea validar el pedido de la mesa " +
+            mesa + "? Pedido: " + this.mensajeValidar[i], "Aceptar", this.ValidarPedido);
+    };
+    QrDeLaMesaPage.prototype.ValidarPedido = function () {
         var _this = this;
         var ref = this.firebase.database().ref("usuarios");
         ref.once('value', function (snap) {
@@ -6319,10 +6315,10 @@ var QrDeLaMesaPage = /** @class */ (function () {
             var cocinero = false;
             var bartender = false;
             for (var key in data) {
-                if (mesa == data[key].mesa) {
+                if (_this.mesa == data[key].mesa) {
                     data[key].estado = "atendido";
                     ref.child(key).update(data[key]);
-                    var pedidos = _this.firebase.database().ref("pedidos/" + mesa);
+                    var pedidos = _this.firebase.database().ref("pedidos/" + _this.mesa);
                     pedidos.once('value', function (result) {
                         var res = result.val();
                         for (var k in res) {
@@ -6337,121 +6333,37 @@ var QrDeLaMesaPage = /** @class */ (function () {
                             }
                         }
                         if (cocinero) {
-                            _this.firebase.database().ref("pedidos/" + mesa).child("cocinero").update({ estado: "aceptado" }).then(function () {
+                            _this.firebase.database().ref("pedidos/" + _this.mesa).child("cocinero").update({ estado: "aceptado" }).then(function () {
                             });
                         }
                         if (bartender) {
-                            _this.firebase.database().ref("pedidos/" + mesa).child("bartender").update({ estado: "aceptado" }).then(function () {
+                            _this.firebase.database().ref("pedidos/" + _this.mesa).child("bartender").update({ estado: "aceptado" }).then(function () {
                             });
                         }
                     });
-                    _this.MostrarAlert("Éxito!", "Se valido el pedido de la mesa" + mesa, "Aceptar", _this.limpiar);
                     return;
                 }
                 ;
             }
         });
+        this.limpiar();
     };
     QrDeLaMesaPage.prototype.cargarPersonas = function () {
-        /*  this.usuarios = [];
-          this.espera = [];
-          this.atendidos = [];
+        /*  this.usuarios =
+      
+        }
       
       
-          let genteRef = this.firebase.database().ref("usuarios/clientes");
-      
-          genteRef.once("value", (snap) => {
-      
-            let data = snap.val();
-      
-            for (let item in data) {
-      
-              this.usuarios.push(data[item]);
-            }
-      
-            console.log(this.usuarios);
-          }).then(() => {
-            this.espera = this.usuarios.filter(item => {
-      
-              return item.mesa == null;
-            });
-      
-            this.atendidos = this.usuarios.filter(item => {
-      
-              return item.mesa != null;
-            });
+        MostrarTiempoEsperaCliente()
+        {
       
       
-            
       
-          });*/
-        //this.navCtrl.setRoot(this.navCtrl.getActive().component);
-    };
-    QrDeLaMesaPage.prototype.MostrarTiempoEsperaCliente = function () {
-        /*
-                this.cerrarqr=true;
-                  this.probandingg=false;
-        
-                  this.qrScanner.prepare()
-                  //.then((status: QRScannerStatus) => {
-                    .then((status) => {
-        
-                    if (status.authorized) {
-        
-                      this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
-        
-                        
-                    
-                        
-        
-                          var refDos = this.firebase.database().ref("mesas");
-                                
-                                refDos.once('value', (snap) => {
-                                    var data = snap.val();
-                                   
-                                    for(var key in data)
-                                    {
-                                        if (text == data[key].numeroMesa)
-                                        {
-                                            alert(data[key].tiempoMinimo);
-                                            break;
-                                                                                                
-                                        }
-                                      }
-                                    });
-        
-        
-        
-                         
-        
-        
-        
-                          this.ocultarQR = true;
-        
-                       
-                      });
-        
-                      this.qrScanner.show().then(() => {
-        
-                        (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
-                        (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
-                        (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
-                       
-                      });
-        
-                    } else if (status.denied) {
-                   
-        
-                    } else {
-                      
-                    }
-                  })
-                  .catch((e: any) => this.presentToast(e));
-        
-        
-                  */
-    };
-    QrDeLaMesaPage.prototype.probandoBarcode = function (correo) {
+        }
+      
+        probandoBarcode(correo)
+        {
+      
         /*  this.options = { prompt : "Escaneá tu DNI", formats: "PDF_417" }
       
           this.barcode.scan(this.options).then((barcodeData) => {
@@ -6770,7 +6682,7 @@ var QrDeLaMesaPage = /** @class */ (function () {
     };
     QrDeLaMesaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-qr-de-la-mesa',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\qr-de-la-mesa\qr-de-la-mesa.html"*/'<!--\n\n  Generated template for the QrDeLaMesaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>qrDeLaMesa</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n          position: absolute;">\n\n          <button ion-button (click)="volver()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n         </button>\n\n        </ion-buttons>\n\n\n\n    <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n\n\n\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n\n\n     \n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n    <ion-content padding class="home">\n\n     <!--   <div class="center">\n\n          <ion-row>\n\n            <h1>Mesa:</h1>\n\n          </ion-row>\n\n          \n\n        </div>\n\n        <div class="center button">\n\n          <button ion-button class="submit-btn" >Relacionar cliente con mesa</button>\n\n        </div>\n\n\n\n        <div class="center button">\n\n          <button ion-button class="submit-btn" >Ver estado de pedido</button>\n\n        </div>\n\n\n\n        <div class="center button">\n\n          <button ion-button class="submit-btn" >Acceder a encuesta de satisfaccion</button>\n\n        </div>-->\n\n        \n\n      </ion-content>\n\n\n\n      <ion-content  *ngIf="probandingg">\n\n\n\n         \n\n\n\n             <!-- <div class="asdasd3" *ngIf="!sinPedidosParaEntregar">\n\n                  SIN PEDIDOS TERMINADOS\n\n                </div>-->\n\n\n\n         <div *ngIf="vistaMozo">\n\n\n\n            <div class="asdasd" *ngIf="!sinPersonasEnEspera">\n\n                SIN PERSONAS EN ESPERA\n\n              </div>\n\n  \n\n              <div class="asdasd2" *ngIf="!sinPersonasAtendidas">\n\n                  SIN PERSONAS ATENDIDAS\n\n                </div>\n\n\n\n  \n\n              <div class="asdasd3" *ngIf="!sinPedidosValidar">\n\n                  SIN PEDIDOS P/ VALIDAR\n\n                </div>\n\n         \n\n\n\n\n\n        <div *ngIf="sinPersonasEnEspera">\n\n\n\n      <h2 class="titulo">Lista de personas en espera</h2>\n\n\n\n    </div>\n\n\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of espera">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="person"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n         <!-- <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;">{{item.nombre}}</h1>\n\n          <p style="color:black;">Tipo: • {{item.tipo}}</p>\n\n          <p style="color:black;">Cantidad de personas: • {{item.comensales}} </p>\n\n          <p style="color:black;">Mesa: • {{item.mesa}} </p>\n\n         \n\n    \n\n          <!--<button ion-button clear item-end (click)="MostrarQr(item.correo)">-->\n\n              <button ion-button clear item-end (click)="ocuparMesaBarcode(item.correo,item.comensales,item.mesa)">\n\n            <ion-icon name="expand"></ion-icon>\n\n          </button>\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n      <div *ngIf="sinPersonasAtendidas">\n\n\n\n      <h2 class="titulo">Lista de personas atendidas</h2>\n\n\n\n      </div>\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of atendidos">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;"> {{item.nombre}}</h1>\n\n          <p  style="color:black;">Tipo: • {{item.tipo}}</p>\n\n    \n\n         <!-- <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">-->\n\n            <!--<button ion-button clear item-end (click)="probandoBarcode()">\n\n            <ion-icon name="restaurant"></ion-icon>\n\n          </button>-->\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n        <div *ngIf="sinPedidosValidar">\n\n\n\n      <h2 class="titulo">Lista de pedidos p/ validar</h2>\n\n\n\n      </div>\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of ParaValidar; index as i">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;"> {{item.nombre}}</h1>\n\n          <p  style="color:black;">Tipo: • {{item.tipo}}</p>\n\n          <p  style="color:black;">Mensaje: • {{mensajeValidar[i]}}</p>\n\n    \n\n          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">\n\n             <ion-icon name="restaurant"></ion-icon>\n\n          </button>\n\n            <!--<button ion-button clear item-end (click)="probandoBarcode()">\n\n            <ion-icon name="restaurant"></ion-icon>\n\n          </button>-->\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n   <!--   <div *ngIf="sinPedidosParaEntregar">-->\n\n\n\n      <h2 class="titulo">Lista de pedidos para entregar</h2>\n\n\n\n    <!--</div>-->\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of pedidosPruebaUno">\n\n          <ion-thumbnail item-start>\n\n           \n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n\n\n          <button ion-button clear item-end (click)="terminarPedidoUno()">\n\n        \n\n              <ion-icon name="checkmark-circle"></ion-icon>\n\n            </button>\n\n    \n\n\n\n          <h1 style="color:black;">Mesa uno</h1>\n\n   \n\n        </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list>\n\n\n\n        <ion-item *ngFor="let item of pedidosPruebaDos">\n\n            <ion-thumbnail item-start>\n\n             \n\n              <ion-icon name="people"></ion-icon>\n\n            </ion-thumbnail>\n\n\n\n            \n\n            <button ion-button clear item-end (click)="terminarPedidoDos()">\n\n        \n\n                <ion-icon name="checkmark-circle"></ion-icon>\n\n              </button>\n\n  \n\n            <h1 style="color:black;">Mesa dos</h1>\n\n     \n\n          </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list>\n\n\n\n          <ion-item *ngFor="let item of pedidosPruebaTres">\n\n              <ion-thumbnail item-start>\n\n\n\n                \n\n               \n\n                <ion-icon name="people"></ion-icon>\n\n              </ion-thumbnail>\n\n        \n\n              <button ion-button clear item-end (click)="terminarPedidoTres()">\n\n        \n\n                  <ion-icon name="checkmark-circle"></ion-icon>\n\n                </button>\n\n    \n\n              <h1 style="color:black;">Mesa tres</h1>\n\n       \n\n            </ion-item>\n\n\n\n          </ion-list>\n\n\n\n          <ion-list>\n\n\n\n            <ion-item *ngFor="let item of pedidosPruebaCuatro">\n\n                <ion-thumbnail item-start>\n\n                 \n\n                  <ion-icon name="people"></ion-icon>\n\n                </ion-thumbnail>\n\n          \n\n                <button ion-button clear item-end (click)="terminarPedidoCuatro()">\n\n        \n\n                    <ion-icon name="checkmark-circle"></ion-icon>\n\n                  </button>\n\n      \n\n                <h1 style="color:black;">Mesa cuatro</h1>\n\n         \n\n              </ion-item>\n\n\n\n            </ion-list>\n\n\n\n            <ion-list>\n\n\n\n              <ion-item *ngFor="let item of pedidosPruebaCinco">\n\n                  <ion-thumbnail item-start>\n\n                   \n\n                    <ion-icon name="people"></ion-icon>\n\n                  </ion-thumbnail>\n\n            \n\n                  <button ion-button clear item-end (click)="terminarPedidoCinco()">\n\n        \n\n                      <ion-icon name="checkmark-circle"></ion-icon>\n\n                    </button>\n\n        \n\n                  <h1 style="color:black;">Mesa cinco</h1>\n\n           \n\n                </ion-item>\n\n\n\n              </ion-list>\n\n\n\n              <ion-list>\n\n\n\n                <ion-item *ngFor="let item of pedidosPruebaSeis">\n\n                    <ion-thumbnail item-start>\n\n                     \n\n                      <ion-icon name="people"></ion-icon>\n\n                    </ion-thumbnail>\n\n              \n\n                    <button ion-button clear item-end (click)="terminarPedidoSeis()">\n\n        \n\n                        <ion-icon name="checkmark-circle"></ion-icon>\n\n                      </button>\n\n          \n\n                    <h1 style="color:black;">Mesa seis</h1>\n\n             \n\n                  </ion-item>\n\n\n\n                </ion-list>\n\n\n\n                <ion-list>\n\n\n\n                  <ion-item *ngFor="let item of pedidosPruebaSiete">\n\n                      <ion-thumbnail item-start>\n\n                       \n\n                        <ion-icon name="people"></ion-icon>\n\n                      </ion-thumbnail>\n\n                \n\n                      <button ion-button clear item-end (click)="terminarPedidoSiete()">\n\n        \n\n                          <ion-icon name="checkmark-circle"></ion-icon>\n\n                        </button>\n\n            \n\n                      <h1 style="color:black;">Mesa siete</h1>\n\n               \n\n                    </ion-item>\n\n\n\n                  </ion-list>\n\n\n\n                  <ion-list>\n\n\n\n                  <ion-item *ngFor="let item of pedidosPruebaOcho">\n\n                      <ion-thumbnail item-start>\n\n                       \n\n                        <ion-icon name="people"></ion-icon>\n\n                      </ion-thumbnail>\n\n                \n\n                      <button ion-button clear item-end (click)="terminarPedidoOcho()">\n\n        \n\n                          <ion-icon name="checkmark-circle"></ion-icon>\n\n                        </button>\n\n            \n\n                      <h1 style="color:black;">Mesa ocho</h1>\n\n               \n\n                    </ion-item>\n\n\n\n                  </ion-list>\n\n\n\n                  <ion-list>\n\n\n\n                    <ion-item *ngFor="let item of pedidosPruebaNueve">\n\n                        <ion-thumbnail item-start>\n\n                         \n\n                          <ion-icon name="people"></ion-icon>\n\n                        </ion-thumbnail>\n\n\n\n                        <button ion-button clear item-end (click)="terminarPedidoNueve()">\n\n        \n\n                            <ion-icon name="checkmark-circle"></ion-icon>\n\n                          </button>\n\n                  \n\n              \n\n                        <h1 style="color:black;">Mesa nueve</h1>\n\n                 \n\n                      </ion-item>\n\n\n\n                    </ion-list>\n\n\n\n                    <ion-list>\n\n\n\n                      <ion-item *ngFor="let item of pedidosPruebaDiez">\n\n                          <ion-thumbnail item-start>\n\n                           \n\n                            <ion-icon name="people"></ion-icon>\n\n                          </ion-thumbnail>\n\n\n\n                          <button ion-button clear item-end (click)="terminarPedidoDiez()">\n\n        \n\n                              <ion-icon name="checkmark-circle"></ion-icon>\n\n                            </button>\n\n                    \n\n                \n\n                          <h1 style="color:black;">Mesa diez</h1>\n\n                   \n\n                        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n     <!-- <ion-list>\n\n\n\n          <ion-item *ngFor="let item of pedidosPruebaUno">\n\n            <ion-thumbnail item-start>\n\n             \n\n              <ion-icon name="people"></ion-icon>\n\n            </ion-thumbnail>\n\n  \n\n            <button ion-button clear item-end (click)="terminarPedidoUno()">\n\n          \n\n                <ion-icon name="checkmark-circle"></ion-icon>\n\n              </button>\n\n      \n\n  \n\n            <h1 style="color:black;">Mesa Uno </h1>\n\n     \n\n          </ion-item>\n\n\n\n          </ion-list>-->\n\n\n\n      \n\n        \n\n\n\n    </div>\n\n\n\n    <div *ngIf="vistaCliente" style="padding-top: 40px;background-color: lightblue;background-size: auto;">\n\n\n\n       <!-- <button ion-button clear item-end (click)="mostrarTiempoBarcode()">\n\n            <ion-icon name="expand"></ion-icon>\n\n          </button>-->\n\n\n\n          <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="mostrarTiempoBarcode()" >Escanear mesa</button>\n\n\n\n\n\n    </div>\n\n\n\n    </ion-content>\n\n\n\n\n\n    <div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n      <div class="alert-message animation-target">\n\n        <h1>{{alertTitulo}}</h1>\n\n        <p>{{alertMensaje}}</p>\n\n        <div class="botones">\n\n    \n\n          <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n        </div>\n\n      </div>\n\n    \n\n    </div>\n\n\n\n\n\n      <!--<ion-footer *ngIf="cerrarqr">\n\n        <ion-toolbar>\n\n          <ion-title>Footer</ion-title>\n\n          <button ion-button color="red" class="close" (click)="OcultarLectorQR()">\n\n            <ion-icon name="close"></ion-icon>\n\n          </button>\n\n        </ion-toolbar>\n\n      </ion-footer>-->\n\n'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\qr-de-la-mesa\qr-de-la-mesa.html"*/,
+            selector: 'page-qr-de-la-mesa',template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\qr-de-la-mesa\qr-de-la-mesa.html"*/'<!--\n\n  Generated template for the QrDeLaMesaPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>qrDeLaMesa</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>-->\n\n\n\n<ion-header>\n\n  <ion-navbar color="dark" hideBackButton="true">\n\n    <!-- <ion-title class="titulo2">\n\n      {{usuario.tipo}}\n\n    </ion-title> -->\n\n\n\n    <ion-buttons start style="left: 3px;\n\n          position: absolute;">\n\n          <button ion-button (click)="volver()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n         </button>\n\n        </ion-buttons>\n\n\n\n    <ion-buttons end *ngIf="usuario.tipo != \'anonimo\'">\n\n\n\n\n\n      <button ion-button (click)="Logout()">\n\n        <ion-icon name="close"></ion-icon>\n\n      </button>\n\n\n\n     \n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n    <ion-content padding class="home">\n\n     <!--   <div class="center">\n\n          <ion-row>\n\n            <h1>Mesa:</h1>\n\n          </ion-row>\n\n          \n\n        </div>\n\n        <div class="center button">\n\n          <button ion-button class="submit-btn" >Relacionar cliente con mesa</button>\n\n        </div>\n\n\n\n        <div class="center button">\n\n          <button ion-button class="submit-btn" >Ver estado de pedido</button>\n\n        </div>\n\n\n\n        <div class="center button">\n\n          <button ion-button class="submit-btn" >Acceder a encuesta de satisfaccion</button>\n\n        </div>-->\n\n        \n\n      </ion-content>\n\n\n\n      <ion-content  *ngIf="probandingg">\n\n\n\n         \n\n\n\n             <!-- <div class="asdasd3" *ngIf="!sinPedidosParaEntregar">\n\n                  SIN PEDIDOS TERMINADOS\n\n                </div>-->\n\n\n\n         <div *ngIf="vistaMozo">\n\n\n\n            <div class="asdasd" *ngIf="!sinPersonasEnEspera">\n\n                SIN PERSONAS EN ESPERA\n\n              </div>\n\n  \n\n              <div class="asdasd2" *ngIf="!sinPersonasAtendidas">\n\n                  SIN PERSONAS ATENDIDAS\n\n                </div>\n\n\n\n  \n\n              <div class="asdasd3" *ngIf="!sinPedidosValidar">\n\n                  SIN PEDIDOS P/ VALIDAR\n\n                </div>\n\n         \n\n\n\n\n\n        <div *ngIf="sinPersonasEnEspera">\n\n\n\n      <h2 class="titulo">Lista de personas en espera</h2>\n\n\n\n    </div>\n\n\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of espera">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="person"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n         <!-- <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;">{{item.nombre}}</h1>\n\n          <p style="color:black;">Tipo: • {{item.tipo}}</p>\n\n          <p style="color:black;">Cantidad de personas: • {{item.comensales}} </p>\n\n          <p style="color:black;">Mesa: • {{item.mesa}} </p>\n\n         \n\n    \n\n          <!--<button ion-button clear item-end (click)="MostrarQr(item.correo)">-->\n\n              <button ion-button clear item-end (click)="ocuparMesaBarcode(item.correo,item.comensales,item.mesa)">\n\n            <ion-icon name="expand"></ion-icon>\n\n          </button>\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n      <div *ngIf="sinPersonasAtendidas">\n\n\n\n      <h2 class="titulo">Lista de personas atendidas</h2>\n\n\n\n      </div>\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of atendidos">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;"> {{item.nombre}}</h1>\n\n          <p  style="color:black;">Tipo: • {{item.tipo}}</p>\n\n    \n\n         <!-- <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">-->\n\n            <!--<button ion-button clear item-end (click)="probandoBarcode()">\n\n            <ion-icon name="restaurant"></ion-icon>\n\n          </button>-->\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n        <div *ngIf="sinPedidosValidar">\n\n\n\n      <h2 class="titulo">Lista de pedidos p/ validar</h2>\n\n\n\n      </div>\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of ParaValidar; index as i">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;"> {{item.nombre}}</h1>\n\n          <p  style="color:black;">Tipo: • {{item.tipo}}</p>\n\n          <p  style="color:black;">Mensaje: • {{mensajeValidar[i]}}</p>\n\n    \n\n          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa,i)">\n\n             <ion-icon name="restaurant"></ion-icon>\n\n          </button>\n\n            <!--<button ion-button clear item-end (click)="probandoBarcode()">\n\n            <ion-icon name="restaurant"></ion-icon>\n\n          </button>-->\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n\n\n\n\n        <div *ngIf="sinPedidosPagar">\n\n\n\n      <h2 class="titulo">Lista de pedidos a pagar</h2>\n\n\n\n      </div>\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of ParaPagar">\n\n          <ion-thumbnail item-start>\n\n            <!--<img src={{item.img}}>-->\n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n    \n\n        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>\n\n          <p>Empleado • {{item.tipo}}</p>\n\n          <p>CUIL • {{item.cuil}}</p>-->\n\n\n\n          <h1 style="color:black;"> {{item.nombre}}</h1>\n\n          <p  style="color:black;">Mesa: • {{item.mesa}}</p>\n\n          <p  style="color:black;">Importe: $ {{item.cuenta}}</p>\n\n    \n\n          <button ion-button clear item-end (click)="CobrarPedido(item.correo, item.mesa)">\n\n             <ion-icon name="logo-usd"></ion-icon>\n\n          </button>\n\n            <!--<button ion-button clear item-end (click)="probandoBarcode()">\n\n            <ion-icon name="restaurant"></ion-icon>\n\n          </button>-->\n\n        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n   <!--   <div *ngIf="sinPedidosParaEntregar">-->\n\n\n\n      <h2 class="titulo">Lista de pedidos para entregar</h2>\n\n\n\n    <!--</div>-->\n\n\n\n      <ion-list>\n\n\n\n        <ion-item *ngFor="let item of pedidosPruebaUno">\n\n          <ion-thumbnail item-start>\n\n           \n\n            <ion-icon name="people"></ion-icon>\n\n          </ion-thumbnail>\n\n\n\n          <button ion-button clear item-end (click)="terminarPedidoUno()">\n\n        \n\n              <ion-icon name="checkmark-circle"></ion-icon>\n\n            </button>\n\n    \n\n\n\n          <h1 style="color:black;">Mesa uno</h1>\n\n   \n\n        </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list>\n\n\n\n        <ion-item *ngFor="let item of pedidosPruebaDos">\n\n            <ion-thumbnail item-start>\n\n             \n\n              <ion-icon name="people"></ion-icon>\n\n            </ion-thumbnail>\n\n\n\n            \n\n            <button ion-button clear item-end (click)="terminarPedidoDos()">\n\n        \n\n                <ion-icon name="checkmark-circle"></ion-icon>\n\n              </button>\n\n  \n\n            <h1 style="color:black;">Mesa dos</h1>\n\n     \n\n          </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list>\n\n\n\n          <ion-item *ngFor="let item of pedidosPruebaTres">\n\n              <ion-thumbnail item-start>\n\n\n\n                \n\n               \n\n                <ion-icon name="people"></ion-icon>\n\n              </ion-thumbnail>\n\n        \n\n              <button ion-button clear item-end (click)="terminarPedidoTres()">\n\n        \n\n                  <ion-icon name="checkmark-circle"></ion-icon>\n\n                </button>\n\n    \n\n              <h1 style="color:black;">Mesa tres</h1>\n\n       \n\n            </ion-item>\n\n\n\n          </ion-list>\n\n\n\n          <ion-list>\n\n\n\n            <ion-item *ngFor="let item of pedidosPruebaCuatro">\n\n                <ion-thumbnail item-start>\n\n                 \n\n                  <ion-icon name="people"></ion-icon>\n\n                </ion-thumbnail>\n\n          \n\n                <button ion-button clear item-end (click)="terminarPedidoCuatro()">\n\n        \n\n                    <ion-icon name="checkmark-circle"></ion-icon>\n\n                  </button>\n\n      \n\n                <h1 style="color:black;">Mesa cuatro</h1>\n\n         \n\n              </ion-item>\n\n\n\n            </ion-list>\n\n\n\n            <ion-list>\n\n\n\n              <ion-item *ngFor="let item of pedidosPruebaCinco">\n\n                  <ion-thumbnail item-start>\n\n                   \n\n                    <ion-icon name="people"></ion-icon>\n\n                  </ion-thumbnail>\n\n            \n\n                  <button ion-button clear item-end (click)="terminarPedidoCinco()">\n\n        \n\n                      <ion-icon name="checkmark-circle"></ion-icon>\n\n                    </button>\n\n        \n\n                  <h1 style="color:black;">Mesa cinco</h1>\n\n           \n\n                </ion-item>\n\n\n\n              </ion-list>\n\n\n\n              <ion-list>\n\n\n\n                <ion-item *ngFor="let item of pedidosPruebaSeis">\n\n                    <ion-thumbnail item-start>\n\n                     \n\n                      <ion-icon name="people"></ion-icon>\n\n                    </ion-thumbnail>\n\n              \n\n                    <button ion-button clear item-end (click)="terminarPedidoSeis()">\n\n        \n\n                        <ion-icon name="checkmark-circle"></ion-icon>\n\n                      </button>\n\n          \n\n                    <h1 style="color:black;">Mesa seis</h1>\n\n             \n\n                  </ion-item>\n\n\n\n                </ion-list>\n\n\n\n                <ion-list>\n\n\n\n                  <ion-item *ngFor="let item of pedidosPruebaSiete">\n\n                      <ion-thumbnail item-start>\n\n                       \n\n                        <ion-icon name="people"></ion-icon>\n\n                      </ion-thumbnail>\n\n                \n\n                      <button ion-button clear item-end (click)="terminarPedidoSiete()">\n\n        \n\n                          <ion-icon name="checkmark-circle"></ion-icon>\n\n                        </button>\n\n            \n\n                      <h1 style="color:black;">Mesa siete</h1>\n\n               \n\n                    </ion-item>\n\n\n\n                  </ion-list>\n\n\n\n                  <ion-list>\n\n\n\n                  <ion-item *ngFor="let item of pedidosPruebaOcho">\n\n                      <ion-thumbnail item-start>\n\n                       \n\n                        <ion-icon name="people"></ion-icon>\n\n                      </ion-thumbnail>\n\n                \n\n                      <button ion-button clear item-end (click)="terminarPedidoOcho()">\n\n        \n\n                          <ion-icon name="checkmark-circle"></ion-icon>\n\n                        </button>\n\n            \n\n                      <h1 style="color:black;">Mesa ocho</h1>\n\n               \n\n                    </ion-item>\n\n\n\n                  </ion-list>\n\n\n\n                  <ion-list>\n\n\n\n                    <ion-item *ngFor="let item of pedidosPruebaNueve">\n\n                        <ion-thumbnail item-start>\n\n                         \n\n                          <ion-icon name="people"></ion-icon>\n\n                        </ion-thumbnail>\n\n\n\n                        <button ion-button clear item-end (click)="terminarPedidoNueve()">\n\n        \n\n                            <ion-icon name="checkmark-circle"></ion-icon>\n\n                          </button>\n\n                  \n\n              \n\n                        <h1 style="color:black;">Mesa nueve</h1>\n\n                 \n\n                      </ion-item>\n\n\n\n                    </ion-list>\n\n\n\n                    <ion-list>\n\n\n\n                      <ion-item *ngFor="let item of pedidosPruebaDiez">\n\n                          <ion-thumbnail item-start>\n\n                           \n\n                            <ion-icon name="people"></ion-icon>\n\n                          </ion-thumbnail>\n\n\n\n                          <button ion-button clear item-end (click)="terminarPedidoDiez()">\n\n        \n\n                              <ion-icon name="checkmark-circle"></ion-icon>\n\n                            </button>\n\n                    \n\n                \n\n                          <h1 style="color:black;">Mesa diez</h1>\n\n                   \n\n                        </ion-item>\n\n    \n\n      </ion-list>\n\n\n\n     <!-- <ion-list>\n\n\n\n          <ion-item *ngFor="let item of pedidosPruebaUno">\n\n            <ion-thumbnail item-start>\n\n             \n\n              <ion-icon name="people"></ion-icon>\n\n            </ion-thumbnail>\n\n  \n\n            <button ion-button clear item-end (click)="terminarPedidoUno()">\n\n          \n\n                <ion-icon name="checkmark-circle"></ion-icon>\n\n              </button>\n\n      \n\n  \n\n            <h1 style="color:black;">Mesa Uno </h1>\n\n     \n\n          </ion-item>\n\n\n\n          </ion-list>-->\n\n\n\n      \n\n        \n\n\n\n    </div>\n\n\n\n    <div *ngIf="vistaCliente" style="padding-top: 40px;background-color: lightblue;background-size: auto;">\n\n\n\n       <!-- <button ion-button clear item-end (click)="mostrarTiempoBarcode()">\n\n            <ion-icon name="expand"></ion-icon>\n\n          </button>-->\n\n\n\n          <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="mostrarTiempoBarcode()" >Escanear mesa</button>\n\n\n\n\n\n    </div>\n\n\n\n    </ion-content>\n\n\n\n\n\n    <div [ngClass]="{\'alert\':true,\'ocultar\':ocultarAlert}">\n\n\n\n      <div class="alert-message animation-target">\n\n        <h1>{{alertTitulo}}</h1>\n\n        <p>{{alertMensaje}}</p>\n\n        <div class="botones">\n\n    \n\n          <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>\n\n    \n\n          <button ion-button outline (click)="limpiar()">Cancelar</button>\n\n        </div>\n\n      </div>\n\n    \n\n    </div>\n\n\n\n\n\n      <!--<ion-footer *ngIf="cerrarqr">\n\n        <ion-toolbar>\n\n          <ion-title>Footer</ion-title>\n\n          <button ion-button color="red" class="close" (click)="OcultarLectorQR()">\n\n            <ion-icon name="close"></ion-icon>\n\n          </button>\n\n        </ion-toolbar>\n\n      </ion-footer>-->\n\n'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\pages\qr-de-la-mesa\qr-de-la-mesa.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["AngularFireAuth"], __WEBPACK_IMPORTED_MODULE_6__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
     ], QrDeLaMesaPage);
@@ -6959,7 +6871,7 @@ var TomarPedidoPage = /** @class */ (function () {
                         _this.vistaDeliveryCocinero = true;
                         for (var j in result[item][a]) {
                             // console.log(result[item][a][j]);
-                            if (result[item][a][j] == "tomado") {
+                            if (result[item][a][j] == "autorizado") {
                                 console.log("llegue aca");
                                 _this.pedidosDeliveryCocinero.push(item);
                                 //console.log(result[item]);
@@ -6989,7 +6901,7 @@ var TomarPedidoPage = /** @class */ (function () {
                         _this.vistaDeliveryBartender = true;
                         for (var j in result[item][a]) {
                             // console.log(result[item][a][j]);
-                            if (result[item][a][j] == "tomado") {
+                            if (result[item][a][j] == "autorizado") {
                                 console.log("llegue aca");
                                 _this.pedidosDeliveryBartender.push(item);
                                 //console.log(result[item]);
@@ -7014,13 +6926,16 @@ var TomarPedidoPage = /** @class */ (function () {
             for (var k in result) {
                 if (_this.usuario.tipo == "cocinero") {
                     if (k == "cocinero") {
+                        console.log("result[k].estado", result[k].estado);
                         if (result[k].estado != "aceptado") 
                         //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
                         {
                             _this.sinPedidos = true;
+                            console.log("cambie 1", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 2", _this.sinPedidos);
                         console.log("aca estoy");
                         _this.vistaCocinaMesaUno = true;
                         for (var a in result[k]) {
@@ -7036,9 +6951,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 3", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 4", _this.sinPedidos);
                         _this.vistaBartenderMesaUno = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7070,9 +6987,11 @@ var TomarPedidoPage = /** @class */ (function () {
                         //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
                         {
                             _this.sinPedidos = true;
+                            console.log("cambie 5 ", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 6", _this.sinPedidos);
                         _this.vistaCocinaMesaDos = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7087,9 +7006,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 8 ", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 9 ", _this.sinPedidos);
                         _this.vistaBartenderMesaDos = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7121,9 +7042,11 @@ var TomarPedidoPage = /** @class */ (function () {
                         //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
                         {
                             _this.sinPedidos = true;
+                            console.log("cambie 10", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 11", _this.sinPedidos);
                         _this.vistaCocinaMesaTres = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7138,9 +7061,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 12", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 13", _this.sinPedidos);
                         _this.vistaBartenderMesaTres = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7169,9 +7094,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 14", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 15", _this.sinPedidos);
                         _this.vistaCocinaMesaCuatro = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7186,9 +7113,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 16", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 17", _this.sinPedidos);
                         _this.vistaBartenderMesaCuatro = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7218,10 +7147,12 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 18", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
                         _this.vistaCocinaMesaCinco = true;
+                        console.log("cambie 19", _this.sinPedidos);
                         for (var a in result[k]) {
                             if (a != "estado") {
                                 if (result[k][a].terminado != "si") {
@@ -7235,9 +7166,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 20", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 21", _this.sinPedidos);
                         _this.vistaBartenderMesaCinco = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7266,9 +7199,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 22", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 23", _this.sinPedidos);
                         _this.vistaCocinaMesaSeis = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7283,9 +7218,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 24", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 25", _this.sinPedidos);
                         _this.vistaBartenderMesaSeis = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7314,9 +7251,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 26", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 27", _this.sinPedidos);
                         _this.vistaCocinaMesaSiete = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7331,9 +7270,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 28", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 29", _this.sinPedidos);
                         _this.vistaBartenderMesaSiete = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7362,10 +7303,12 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 30", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
                         _this.vistaCocinaMesaOcho = true;
+                        console.log("cambie 31", _this.sinPedidos);
                         for (var a in result[k]) {
                             if (a != "estado") {
                                 if (result[k][a].terminado != "si") {
@@ -7379,9 +7322,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 32", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 33", _this.sinPedidos);
                         _this.vistaBartenderMesaOcho = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7409,9 +7354,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 34", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 35", _this.sinPedidos);
                         _this.vistaCocinaMesaNueve = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7426,9 +7373,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 36", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 37", _this.sinPedidos);
                         _this.vistaBartenderMesaNueve = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7456,9 +7405,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "cocinero") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 38", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 39", _this.sinPedidos);
                         _this.vistaCocinaMesaDiez = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -7473,9 +7424,11 @@ var TomarPedidoPage = /** @class */ (function () {
                     if (k == "bartender") {
                         if (result[k].estado != "aceptado") {
                             _this.sinPedidos = true;
+                            console.log("cambie 40", _this.sinPedidos);
                             break;
                         }
                         _this.sinPedidos = false;
+                        console.log("cambie 41", _this.sinPedidos);
                         _this.vistaBartenderMesaDiez = true;
                         for (var a in result[k]) {
                             if (a != "estado") {
@@ -8392,8 +8345,8 @@ var TomarPedidoPage = /** @class */ (function () {
                     for (var a in result[item]) {
                         if (a == "cocinero") {
                             for (var j in result[item][a]) {
-                                if (result[item][a][j] == "tomado") {
-                                    console.log("llegue aca");
+                                if (result[item][a][j] == "autorizado") {
+                                    console.log("llegue aca", result[item][a].estado);
                                     console.log(result[item][a].estado);
                                     result[item][a].estado = "terminado";
                                     deliveryCocinero.child(item).child(a).update(result[item][a]);
@@ -8415,7 +8368,7 @@ var TomarPedidoPage = /** @class */ (function () {
                     for (var a in result[item]) {
                         if (a == "bartender") {
                             for (var j in result[item][a]) {
-                                if (result[item][a][j] == "tomado") {
+                                if (result[item][a][j] == "autorizado") {
                                     console.log("llegue aca");
                                     console.log(result[item][a].estado);
                                     result[item][a].estado = "terminado";
@@ -9176,7 +9129,7 @@ webpackEmptyAsyncContext.id = 274;
 
 var map = {
 	"../pages/alta-de-mesa/alta-de-mesa.module": [
-		818,
+		817,
 		20
 	],
 	"../pages/alta-duenio-supervisor/alta-duenio-supervisor.module": [
@@ -9184,15 +9137,15 @@ var map = {
 		19
 	],
 	"../pages/alta-empleado/alta-empleado.module": [
-		819,
+		818,
 		18
 	],
 	"../pages/cuenta/cuenta.module": [
-		820,
+		819,
 		17
 	],
 	"../pages/encuesta-de-empleado/encuesta-de-empleado.module": [
-		821,
+		820,
 		16
 	],
 	"../pages/encuesta-supervisor/encuesta-supervisor.module": [
@@ -9204,39 +9157,39 @@ var map = {
 		14
 	],
 	"../pages/juego-uno/juego-uno.module": [
-		823,
+		824,
 		13
 	],
 	"../pages/juego/juego.module": [
-		822,
+		823,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
-		812,
+		821,
 		11
 	],
 	"../pages/listado-supervisor/listado-supervisor.module": [
-		824,
+		822,
 		10
 	],
 	"../pages/login/login.module": [
-		825,
+		827,
 		9
 	],
 	"../pages/mapa-de-ruta/mapa-de-ruta.module": [
-		826,
+		825,
 		8
 	],
 	"../pages/mis-reservas/mis-reservas.module": [
-		813,
+		812,
 		7
 	],
 	"../pages/perfil/perfil.module": [
-		814,
+		813,
 		6
 	],
 	"../pages/principal/principal.module": [
-		827,
+		826,
 		5
 	],
 	"../pages/qr-de-la-mesa/qr-de-la-mesa.module": [
@@ -9244,15 +9197,15 @@ var map = {
 		4
 	],
 	"../pages/reserva/reserva.module": [
-		815,
+		814,
 		3
 	],
 	"../pages/sala-de-juegos/sala-de-juegos.module": [
-		816,
+		815,
 		2
 	],
 	"../pages/splash/splash.module": [
-		817,
+		816,
 		1
 	],
 	"../pages/tomar-pedido/tomar-pedido.module": [
@@ -9341,7 +9294,7 @@ var VerificarTipoProvider = /** @class */ (function () {
                 break;
             case "supervisor":
                 acciones = [
-                    { accion: "Confirmar reservas", img: "reserva.jpg", ruta: __WEBPACK_IMPORTED_MODULE_6__pages_listado_reservas_listado_reservas__["a" /* ListadoReservasPage */] },
+                    { accion: "Confirmar reservas / pedidos", img: "reserva.jpg", ruta: __WEBPACK_IMPORTED_MODULE_6__pages_listado_reservas_listado_reservas__["a" /* ListadoReservasPage */] },
                     { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: __WEBPACK_IMPORTED_MODULE_1__pages_alta_duenio_supervisor_alta_duenio_supervisor__["a" /* AltaDuenioSupervisorPage */] },
                     { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: __WEBPACK_IMPORTED_MODULE_2__pages_alta_empleado_alta_empleado__["a" /* AltaEmpleadoPage */] },
                     { accion: "Confeccionar y ver encuestas", img: "encuesta.jpg", ruta: __WEBPACK_IMPORTED_MODULE_3__pages_listado_supervisor_listado_supervisor__["a" /* ListadoSupervisorPage */] }
@@ -11101,7 +11054,6 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/alta-duenio-supervisor/alta-duenio-supervisor.module#AltaDuenioSupervisorPageModule', name: 'AltaDuenioSupervisorPage', segment: 'alta-duenio-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-supervisor/encuesta-supervisor.module#EncuestaSupervisorPageModule', name: 'EncuestaSupervisorPage', segment: 'encuesta-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-dos/juego-dos.module#JuegoQuinterosPageModule', name: 'JuegoDosPage', segment: 'juego-dos', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
@@ -11111,12 +11063,13 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-de-la-mesa/qr-de-la-mesa.module#QrDeLaMesaPageModule', name: 'QrDeLaMesaPage', segment: 'qr-de-la-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tomar-pedido/tomar-pedido.module#TomarPedidoPageModule', name: 'TomarPedidoPage', segment: 'tomar-pedido', priority: 'low', defaultHistory: [] }
                     ]

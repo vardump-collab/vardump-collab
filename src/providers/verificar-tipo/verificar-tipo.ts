@@ -46,7 +46,7 @@ export class VerificarTipoProvider {
 
       case "supervisor":
         acciones = [
-          { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservasPage },
+          { accion: "Confirmar reservas / pedidos", img: "reserva.jpg", ruta: ListadoReservasPage },
           { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
           { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
           { accion: "Confeccionar y ver encuestas", img: "encuesta.jpg", ruta: ListadoSupervisorPage }

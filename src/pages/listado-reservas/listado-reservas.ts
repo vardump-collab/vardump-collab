@@ -16,6 +16,7 @@ export class ListadoReservasPage {
   public reservas: Array<any>;
   public reservasPendientes: Array<any>;
   public reservasConfirmadas: Array<any>;
+  public pedidosPendientes: Array<any>;
   public mesas: Array<any>;
   public reservaSeleccionada;
   public reservaSeleccionadaParaCancelar;
@@ -36,12 +37,14 @@ export class ListadoReservasPage {
   public firebase = firebase;
   public usuario: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+   private toastCtrl: ToastController) {
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     this.reservas = [];
     this.reservasPendientes = [];
     this.reservasConfirmadas = [];
+    this.pedidosPendientes = [];
     this.mesas = [];
     this.ocultarInterfazMesas = true;
     this.ejecutarSetInterval = true;
@@ -90,10 +93,60 @@ export class ListadoReservasPage {
       }
 
       this.ocultarSpinner = true;
-    })
+    });
+
+    let clientesRef = this.firebase.database().ref("usuarios");
+
+    clientesRef.on("value", (snap)=>{ 
+      let data = snap.val();
+      let keyPedido;
+      let tomado:boolean= false;
+      for(let item in data){
+        console.log("data", data[item]);
+        if(data[item].estado == "delivery"){
+          keyPedido = data[item].correo.replace("@", "").replace(".","");
+          this.firebase.database().ref("pedidos").child(keyPedido).on("value",(snap)=>{
+            console.log("Pedido: ", snap.val());
+            if(snap.val() != null){            
+              if(snap.val().estado == "tomado"){
+                  this.pedidosPendientes.push(data[item]);
+              }
+            }
+          });
+        }
+      }
+
+      this.ocultarSpinner = true;
+    });
 
   }
 
+ConfirmarPedido(item){
+  console.log("item", item);
+  let keyPedido = item.correo.replace("@", "").replace(".","");
+  console.log("key", keyPedido);
+
+  this.firebase.database().ref("pedidos").child(keyPedido).update({estado: "autorizado"})
+  .then(()=>{
+    this.firebase.database().ref("pedidos").child(keyPedido).on("value",(span)=>{
+        let data = span.val();
+        for(let item in data){
+          console.log("item", item);
+          console.log("data item", data[item]);
+          if(item == "cocinero"){
+            data[item].estado = "autorizado";
+          }
+          if(item == "bartender"){
+            data[item].estado = "autorizado";
+          }
+        }
+        this.firebase.database().ref("pedidos").child(keyPedido).update(data);
+    });
+    this.MostrarAlert("Mensaje","El pedido fue aceptado","Aceptar",this.OcultarAlert);
+  }).catch((error)=>{
+    console.log(error);
+    this.presentToast("Tenemos problemas tecnicos, intente mas tarde...");});
+}
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListadoReservasPage');
   }

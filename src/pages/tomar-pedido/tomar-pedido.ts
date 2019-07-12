@@ -350,7 +350,7 @@ export class TomarPedidoPage {
 
                              // console.log(result[item][a][j]);
     
-                                if(result[item][a][j]=="tomado")
+                                if(result[item][a][j]=="autorizado")
                                 {
                                   console.log("llegue aca");
                                   this.pedidosDeliveryCocinero.push(item);
@@ -409,7 +409,7 @@ export class TomarPedidoPage {
 
                              // console.log(result[item][a][j]);
     
-                                if(result[item][a][j]=="tomado")
+                                if(result[item][a][j]=="autorizado")
                                 {
                                   console.log("llegue aca");
                                   this.pedidosDeliveryBartender.push(item);
@@ -460,15 +460,17 @@ export class TomarPedidoPage {
 
         if(k=="cocinero")
           {
-
+            console.log("result[k].estado", result[k].estado);
             if(result[k].estado != "aceptado")
             //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
+              console.log("cambie 1", this.sinPedidos);
               break;
             }
 
               this.sinPedidos=false;
+              console.log("cambie 2", this.sinPedidos);
               console.log("aca estoy");
               this.vistaCocinaMesaUno=true;
 
@@ -499,10 +501,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 3", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 4", this.sinPedidos);
             this.vistaBartenderMesaUno=true;
 
 
@@ -564,10 +568,12 @@ export class TomarPedidoPage {
            //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
+              console.log("cambie 5 ", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 6", this.sinPedidos);
             this.vistaCocinaMesaDos=true;
 
             for(let a in result[k])
@@ -596,10 +602,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 8 ", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 9 ", this.sinPedidos);
             this.vistaBartenderMesaDos=true;
 
 
@@ -664,11 +672,13 @@ export class TomarPedidoPage {
             //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
+              console.log("cambie 10", this.sinPedidos);
               break;
             }
             
 
             this.sinPedidos=false;
+              console.log("cambie 11", this.sinPedidos);
             this.vistaCocinaMesaTres=true;
 
 
@@ -702,10 +712,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 12", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 13", this.sinPedidos);
             this.vistaBartenderMesaTres=true;
 
 
@@ -767,10 +779,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 14", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 15", this.sinPedidos);
             this.vistaCocinaMesaCuatro=true;
 
 
@@ -801,10 +815,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 16", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 17", this.sinPedidos);
             this.vistaBartenderMesaCuatro=true;
 
 
@@ -869,11 +885,13 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 18", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
             this.vistaCocinaMesaCinco=true;
+              console.log("cambie 19", this.sinPedidos);
 
 
             for(let a in result[k])
@@ -902,10 +920,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 20", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 21", this.sinPedidos);
             this.vistaBartenderMesaCinco=true;
 
 
@@ -965,10 +985,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 22", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 23", this.sinPedidos);
             this.vistaCocinaMesaSeis=true;
 
 
@@ -999,10 +1021,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 24", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 25", this.sinPedidos);
             this.vistaBartenderMesaSeis=true;
 
 
@@ -1063,11 +1087,13 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 26", this.sinPedidos);
               break;
             }
 
 
             this.sinPedidos=false;
+              console.log("cambie 27", this.sinPedidos);
             this.vistaCocinaMesaSiete=true;
 
 
@@ -1097,10 +1123,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 28", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 29", this.sinPedidos);
             this.vistaBartenderMesaSiete=true;
 
 
@@ -1160,11 +1188,13 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 30", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
             this.vistaCocinaMesaOcho=true;
+              console.log("cambie 31", this.sinPedidos);
 
 
 
@@ -1194,10 +1224,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 32", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 33", this.sinPedidos);
             this.vistaBartenderMesaOcho=true;
 
 
@@ -1254,10 +1286,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 34", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 35", this.sinPedidos);
             this.vistaCocinaMesaNueve=true;
 
 
@@ -1287,10 +1321,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 36", this.sinPedidos);
               break;
             }
 
               this.sinPedidos=false;
+              console.log("cambie 37", this.sinPedidos);
               this.vistaBartenderMesaNueve=true;
 
             for(let a in result[k])
@@ -1345,10 +1381,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 38", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 39", this.sinPedidos);
             this.vistaCocinaMesaDiez=true;
 
             for(let a in result[k])
@@ -1377,10 +1415,12 @@ export class TomarPedidoPage {
             if(result[k].estado != "aceptado")
             {
               this.sinPedidos=true;
+              console.log("cambie 40", this.sinPedidos);
               break;
             }
 
             this.sinPedidos=false;
+              console.log("cambie 41", this.sinPedidos);
             this.vistaBartenderMesaDiez=true;
 
 
@@ -3043,9 +3083,9 @@ export class TomarPedidoPage {
               for(let j in result[item][a])
               {
               
-                  if(result[item][a][j]=="tomado")
+                  if(result[item][a][j]=="autorizado")
                   {
-                    console.log("llegue aca");
+                    console.log("llegue aca", result[item][a].estado);
                    
                     console.log(result[item][a].estado);
                     result[item][a].estado="terminado";
@@ -3099,7 +3139,7 @@ export class TomarPedidoPage {
               for(let j in result[item][a])
               {
               
-                  if(result[item][a][j]=="tomado")
+                  if(result[item][a][j]=="autorizado")
                   {
                     console.log("llegue aca");
                    

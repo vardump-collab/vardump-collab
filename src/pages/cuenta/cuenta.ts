@@ -199,7 +199,14 @@ export class CuentaPage {
       this.estadoBoton = true;
       this.ocultarSpinner = false;
 
-      pedidoRef.remove().then(() => {
+      pedidoRef.update({estado: "pagando"}).then(()=>{
+        clienteRef.update({estado: "pagando", cuenta: this.total}).then(()=>{
+              this.MostrarAlert("Éxito!", "Aguarde la confirmación del mozo, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+              this.ocultarSpinner = true;
+        }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+      }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+
+      /*pedidoRef.remove().then(() => {
 
         clienteRef.child("estado").update({estado: "pago"}).then(() => {
 
@@ -243,7 +250,7 @@ export class CuentaPage {
             }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
           }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
         }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-      }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+      }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));*/
     }
   }
 
