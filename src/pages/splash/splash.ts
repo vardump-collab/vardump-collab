@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { NativeAudio } from '@ionic-native/native-audio';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 /**
  * Generated class for the SplashPage page.

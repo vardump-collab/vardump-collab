@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
 import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
 import { Chart } from 'chart.js';

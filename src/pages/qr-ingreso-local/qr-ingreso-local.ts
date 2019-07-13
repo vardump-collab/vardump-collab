@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RegistroClientePage } from '../registro-cliente/registro-cliente';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as moment from 'moment';
 import { PrincipalPage } from '../principal/principal';
 

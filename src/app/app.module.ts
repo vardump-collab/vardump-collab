@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { NativeAudio } from '@ionic-native/native-audio';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -28,8 +28,8 @@ import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
 import { QrIngresoLocalPage } from '../pages/qr-ingreso-local/qr-ingreso-local';
 import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente';
 import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { SplashPage } from '../pages/splash/splash';
 import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
@@ -40,8 +40,8 @@ import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts';
 import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
-import { Camera } from '@ionic-native/camera';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Camera } from '@ionic-native/camera/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -49,7 +49,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { Firebase } from '@ionic-native/firebase';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { JuegoPage } from '../pages/juego/juego';
 
@@ -68,6 +68,7 @@ import { MapPage } from '../pages/map/map';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicRouteStrategy } from '@ionic/angular';
+import { Injectable } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -163,6 +164,7 @@ import { IonicRouteStrategy } from '@ionic/angular';
     Firebase,
     FcmProvider,
     RuteoProvider,
+    Injectable,
     FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ]

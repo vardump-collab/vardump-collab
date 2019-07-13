@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import firebase from "firebase";
 import { firebaseConfig } from '../../config';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import "firebase/firestore";
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LoginPage } from '../login/login';
 import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 /**

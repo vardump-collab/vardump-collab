@@ -14,6 +14,9 @@ import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
 
 import { ActivatedRoute } from '@angular/router';
 
+import { Injectable } from '@angular/core';
+
+@Injectable()
 @IonicPage()
 @Component({
   selector: 'page-login',

@@ -7,8 +7,8 @@ import { AngularFireAuth } from "angularfire2/auth";
 import firebase from "firebase";
 import "firebase/firestore";
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @IonicPage()
 @Component({

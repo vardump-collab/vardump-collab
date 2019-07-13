@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform , ModalController} from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { SplashPage } from '../pages/splash/splash';
 
 import { LoginPage } from "../pages/login/login";
@@ -11,7 +11,7 @@ import { FcmProvider } from '../providers/fcm/fcm';
 
 import { ToastController } from 'ionic-angular';
 
-import { NativeAudio } from '@ionic-native/native-audio';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 import { MapaDeRutaPage } from "../pages/mapa-de-ruta/mapa-de-ruta";
 //import { MapPage } from "../pages/map/map";
@@ -19,41 +19,39 @@ import { MapaDeRutaPage } from "../pages/mapa-de-ruta/mapa-de-ruta";
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Router } from '@angular/router';
 
+import { Injectable } from '@angular/core';
+
 @Component({
   templateUrl: 'app.html'
 })
+@Injectable()
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,modalCtrl: ModalController, toastCtrl: ToastController,private nativeAudio: NativeAudio, private fcm: FCM,
-  private router: Router) {
+  constructor(public platform: Platform, public statusBar: StatusBar,
+     public splashScreen: SplashScreen,public modalCtrl: ModalController,public toastCtrl: ToastController,
+     public nativeAudio: NativeAudio, public fcm: FCM,
+  public router: Router) {
+    
+    this.initializeApp();
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-
-      fcm.getToken();
 
       statusBar.styleDefault();
 
       if(localStorage.getItem("usuario")) {
         this.rootPage = PrincipalPage;
-      }
+      } 
       let splash = modalCtrl.create(SplashPage);
-            splash.present();
+      splash.present();
 
-            this.initializeApp();
-    });
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-
-      this.fcm.subscribeToTopic('people');
+            
 
       this.fcm.getToken().then(token => {
-        console.log(token);
+        console.log("Token: ",token);
+      });
+
+      this.fcm.onTokenRefresh().subscribe(token => {
+        console.log("Token: ",token);
       });
 
       this.fcm.onNotification().subscribe(data => {
@@ -67,12 +65,13 @@ export class MyApp {
         }
       });
 
-      this.fcm.onTokenRefresh().subscribe(token => {
-        console.log(token);
-      });
 
-      // this.fcm.unsubscribeFromTopic('marketing');
+
     });
+  }
+
+  initializeApp() {
+
   }
 
 }

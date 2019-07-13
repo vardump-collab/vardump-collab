@@ -21,8 +21,8 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: 'pedir-platos.html',
 })
 export class PedirPlatosPage {
-  @ViewChild('cant') cant:any;
-  @ViewChild('cant2') cant2:any;
+  @ViewChild('cant', {static:true}) cant:any;
+  @ViewChild('cant2', {static:true}) cant2:any;
   contErrores:number=0;
   usuarioDelivery;
   estadoActualCliente;

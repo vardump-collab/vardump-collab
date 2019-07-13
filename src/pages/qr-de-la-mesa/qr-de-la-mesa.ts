@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map'
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import * as moment from 'moment';
 import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 import { LoginPage } from '../login/login';

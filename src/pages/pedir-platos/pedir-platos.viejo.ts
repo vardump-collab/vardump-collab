@@ -28,7 +28,7 @@ export class PedirPlatosPage {
 
   firebase = firebase;
 
-  @ViewChild('cant') cant:any;
+  @ViewChild('cant', {static:true}) cant:any;
   contErrores:number=0;
   animacionMonto:boolean=true;
   mensaje:string;

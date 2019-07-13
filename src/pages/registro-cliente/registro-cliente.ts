@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
 import firebase from "firebase";
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the RegistroClientePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for m
- * import { BarcodeScanner } from '@ionic-native/barcode-scanner';ore info on
+ * import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';ore info on
  * Ionic pages and navigation.
  */
 //Descomentar linea 189 y 118 antes de hacer el push.

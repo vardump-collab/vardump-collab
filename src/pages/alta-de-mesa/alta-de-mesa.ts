@@ -3,12 +3,8 @@ import { IonicPage, NavController, NavParams , ToastController} from 'ionic-angu
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { LoginPage } from '../login/login';
-//import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
-
-//NANANANAN MUY CLAVE ESTE COMENTARIOOOOOOOOOOOOOO
-//LINEA 288 Y 291 FERNII
 
 /**
  * Generated class for the AltaDeMesaPage page.

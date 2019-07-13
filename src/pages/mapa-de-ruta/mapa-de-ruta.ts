@@ -30,7 +30,7 @@ export class MapaDeRutaPage {
   messagesList;
   nombre="lucas";
 
-  @ViewChild(Content) content: Content;
+  @ViewChild(Content, {static:true}) content: Content;
   
   firebase = firebase;
 

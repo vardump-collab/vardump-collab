@@ -6,7 +6,7 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
 
-import { NativeAudio } from '@ionic-native/native-audio';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 import firebase from "firebase";
 import "firebase/firestore";

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Alert, GESTURE_GO_BACK_SWIPE } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { NativeAudio } from '@ionic-native/native-audio';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 
 import firebase from "firebase";
