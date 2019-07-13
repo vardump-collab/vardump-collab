@@ -153,12 +153,11 @@ this.gano=false;
     //Aca muestro el alert de que perdio.
     this.mensaje="El tiempo se acabó, juego terminado, ustéd pierde";
     this.mostrarAlert=true;
-    setTimeout(()=>{
+ 
+    this.navCtrl.pop();
 
-      this.mostrarAlert=false;
-    
-      this.navCtrl.pop();
-    }, 4000);
+
+    this.mostrarAlert=false;
   }
   });
   }

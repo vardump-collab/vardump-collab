@@ -86,11 +86,11 @@ export class JuegoDosPage {
 
       if (this.segundos == 0) {
       
-        this.MostrarAlert("¡Perdió!", "Se le acabó el tiempo para responder.", "Aceptar", this.limpiar);
+        this.MostrarAlert("¡Perdió!", "Se le acabó el tiempo para responder.", "Aceptar", this.limpiarJuego);
         firebase.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true });
         //alert("Se acabo el tiempo");
         clearInterval(this.asd);
-        this.navCtrl.pop();
+        // this.navCtrl.pop();
         
         
         
@@ -210,8 +210,8 @@ export class JuegoDosPage {
 
             else {
 
-              this.MostrarAlert("¡Ganaste!", "", "Volver", this.limpiar);
-              this.navCtrl.pop();
+              this.MostrarAlert("¡Ganaste!", "", "Volver", this.limpiarJuego);
+              //this.navCtrl.pop();
             }
           }
 
@@ -222,10 +222,10 @@ export class JuegoDosPage {
       else 
       {
         //alert("respuesta incorrecta");
-        this.MostrarAlert("¡Perdió!", "¡Escribió un número incorrecto.", "Aceptar", this.limpiar);
+        this.MostrarAlert("¡Perdió!", "¡Escribió un número incorrecto.", "Aceptar", this.limpiarJuego);
         firebase.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true })
         clearInterval(this.asd);
-        this.navCtrl.pop();
+        //this.navCtrl.pop();
 
       
       }
@@ -238,14 +238,18 @@ export class JuegoDosPage {
     this.alertMensaje = mensaje;
     this.alertMensajeBoton = mensajeBoton;
     this.alertHandler = handler;
-
-   
   }
 
   limpiar()
   {
     this.ocultarAlert=true;
 
+  }
+
+  limpiarJuego()
+  {
+    this.ocultarAlert=true;
+    this.navCtrl.pop();
   }
 
   volver()

@@ -13,13 +13,15 @@ import { ToastController } from 'ionic-angular';
 
 import { NativeAudio } from '@ionic-native/native-audio';
 
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio, private httpClient: HttpClient) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

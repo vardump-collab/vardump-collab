@@ -144,13 +144,13 @@ export class LoginPage {
                   switch (tipo) {
 
                     // redirecciono a encuesta
-                    // case "mozo":
-                    // case "cocinero":
-                    // case "bartender":
-                    // case "metre":
-                    // case "repartidor":
-                    //   this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
-                    //   break;
+                    case "mozo":
+                    case "cocinero":
+                    case "bartender":
+                    case "metre":
+                    case "repartidor":
+                      this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+                      break;
 
                     case "cliente":
                       if (estado == "espera")

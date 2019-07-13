@@ -59,26 +59,6 @@
       <div class="asdasd" *ngIf="sinPedidos">
           SIN PEDIDOS
         </div>
-        
-        <div class="mapouter" *ngIf="!sinPedidos">
-          <div class="gmap_canvas">
-            <iframe width="600" height="500" id="gmap_canvas" src="{{urlSanit}}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-            </iframe>Google Maps by ASGARDIANOS</div>
-            <style>
-              .mapouter{
-                position:relative;
-                text-align:right;
-                height:500px;
-                width:600px;
-                }
-              .gmap_canvas {
-                overflow:hidden;
-                background:none!important;
-                height:500px;
-                width:600px;
-              }
-            </style>
-      </div>
 
     <ion-list>
 
@@ -160,6 +140,31 @@
     
     </ion-list>
 
+    </div>
+
+
+    <div *ngIf="chat">
+
+      <div class="mapouter" *ngIf="!sinPedidos">
+          <p class="queDos">Tiempo estimado de pedido: 30min</p>
+        <div class="gmap_canvas">
+          <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Mitre 750 Avellaneda&t=&z=19&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+          </iframe>Google Maps by ASGARDIANOS</div>
+          <style>
+            .mapouter{
+              position:relative;
+              text-align:right;
+              height:500px;
+              width:600px;
+              }
+            .gmap_canvas {
+              overflow:hidden;
+              background:none!important;
+              height:500px;
+              width:600px;
+            }
+          </style>
+    </div>
     </div>
 
     <div *ngIf="chat">

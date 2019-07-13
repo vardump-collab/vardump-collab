@@ -6,6 +6,7 @@ import { LoginPage } from '../login/login';
 
 import firebase from "firebase";
 import * as moment from 'moment';
+import { HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -35,7 +36,7 @@ export class ReservaPage {
   public alertMensajeBoton;
   public alertHandler;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public httpClient: HttpClient) {
 
     console.clear();
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -177,7 +178,20 @@ export class ReservaPage {
                 this.ocultarSpinner = true;
                 this.estadoBoton = false;
                 this.MostrarAlert("¡Éxito!", "Se registró tu reserva y te notificaremos cuando el encargado la confirme.", "Aceptar", this.Volver);
-      
+                
+                this.httpClient.get("http://wirepusher.com/send?id=mpgtP&title=COMANDA&message=Un cliente ha solicitado una reserva")
+                .subscribe(data => {
+                  console.log(data['_body']);
+                 }, error => {
+                  console.log(error);
+                });
+          
+                this.httpClient.get("http://wirepusher.com/send?id=mpgtm&title=COMANDA&message=Un cliente ha solicitado una reserva")
+                .subscribe(data => {
+                  console.log(data['_body']);
+                 }, error => {
+                  console.log(error);
+                });
               });
             } else {
   

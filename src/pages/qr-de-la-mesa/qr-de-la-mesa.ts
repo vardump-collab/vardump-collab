@@ -8,6 +8,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import * as moment from 'moment';
 import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 import { LoginPage } from '../login/login';
+import { HttpClient } from '@angular/common/http';
 
 //LINEA 698 Y 701
 /**
@@ -85,7 +86,7 @@ public mesa;
 
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private authInstance: AngularFireAuth,private barcode: BarcodeScanner)
+  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private authInstance: AngularFireAuth,private barcode: BarcodeScanner, public httpClient: HttpClient)
    {
    this.sinPersonasEnEspera=false;
    this.sinPersonasAtendidas=false;
@@ -1259,6 +1260,20 @@ public mesa;
 
                                 this.MostrarAlert("Éxito!", "El cobro fue realizado.", "Ok", this.limpiar);
                                
+                                this.httpClient.get("http://wirepusher.com/send?id=mpgtP&title=COMANDA&message=Un pago ha sido confirmado")
+                                .subscribe(data => {
+                                  console.log(data['_body']);
+                                 }, error => {
+                                  console.log(error);
+                                });
+                          
+                                this.httpClient.get("http://wirepusher.com/send?id=mpgtm&title=COMANDA&message=Un pago ha sido confirmado")
+                                .subscribe(data => {
+                                  console.log(data['_body']);
+                                 }, error => {
+                                  console.log(error);
+                                });
+
                               }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
                             }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
                           }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));;
@@ -1769,7 +1784,7 @@ ValidarPedido(){
   limpiar()
   {
     this.ocultarAlert=true;
-
+    // this.navCtrl.pop();
   }
 
   Logout() 

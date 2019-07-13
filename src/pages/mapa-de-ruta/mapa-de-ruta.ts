@@ -59,8 +59,6 @@ export class MapaDeRutaPage {
   public direccion;
   public localidad;
 
-  public url;
-  public urlSanit;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   	public alert: AlertController,private authInstance: AngularFireAuth,
   	public sanitizer: DomSanitizer) 
@@ -144,22 +142,7 @@ export class MapaDeRutaPage {
 					{
 						//console.log(a);
 						let pruebita=data[item].correo;
-						var refU = this.firebase.database().ref("usuarios");
-						             
-						    refU.once('value', (snap) => {
-						        var data = snap.val();
-						        for(var item in data){
-						         if (pruebita == data[item].correo) {
 
-						        	this.direccion = data[item].direccion.replace(" ", "%20");
-								 	this.localidad = data[item].localidad.replace(" ", "%20");
-								 	this.url = 'https://www.google.com/maps/embed/v1/directions?key=AIzaSyB63D2az3Guib3VGk7Auoie1fyG3lY1SzQ&origin=mitre%20750&destination='+ this.direccion + ',%20' + this.localidad;
-								 	console.log("url", this.url);
-								 	this.urlSanit = sanitizer.bypassSecurityTrustUrl(this.url);
-						            break;
-						            };                  
-						        }
-						    });
 						let patron ='@';
 						let nuevo= '';
 						let cadena=pruebita.replace(patron, nuevo);

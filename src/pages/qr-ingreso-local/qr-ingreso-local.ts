@@ -7,7 +7,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as moment from 'moment';
 import { PrincipalPage } from '../principal/principal';
-
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the QrIngresoLocalPage page.
@@ -54,7 +54,8 @@ options : any;
      public navParams: NavParams,
      private authInstance: AngularFireAuth,
      private barcodeScanner: BarcodeScanner,
-     private camera: Camera
+     private camera: Camera,
+     public httpClient: HttpClient
     ) 
     {
       this.imgAnonimo ="assets/imgs/beta/anonimo.png";
@@ -143,6 +144,20 @@ console.log("Dentro de observable ecnuesta");
         {
           this.mensaje="Bienvenido!! Se ha anunciado con éxito, en breve vendra el mozo a atenderlo";
           this.mostrarAlert3=true;
+
+          this.httpClient.get("http://wirepusher.com/send?id=mpgtP&title=COMANDA&message=Una persona se ha anunciado")
+          .subscribe(data => {
+            console.log(data['_body']);
+           }, error => {
+            console.log(error);
+          });
+    
+          this.httpClient.get("http://wirepusher.com/send?id=mpgtm&title=COMANDA&message=Una persona se ha anunciado")
+          .subscribe(data => {
+            console.log(data['_body']);
+           }, error => {
+            console.log(error);
+          });
           
             //Si es bienvenido y adémas no hay encuestas muestro la pagina negra y el relog de arena 
           

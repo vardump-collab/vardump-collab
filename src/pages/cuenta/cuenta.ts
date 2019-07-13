@@ -5,6 +5,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { LoginPage } from "../login/login";
 import { PrincipalPage } from "../principal/principal";
+import { HttpClient } from '@angular/common/http';
 
 import firebase from "firebase";
 
@@ -46,7 +47,7 @@ export class CuentaPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private barcodeScanner: BarcodeScanner,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController, public httpClient: HttpClient) {
 
     console.clear();
 
@@ -216,8 +217,23 @@ export class CuentaPage {
 
       pedidoRef.update({estado: estadoPedido}).then(()=>{
         clienteRef.update({estado: estadoPedido, cuenta: this.total}).then(()=>{
-              this.MostrarAlert("Éxito!", "Aguarde la confirmación del mozo, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+              this.MostrarAlert("Éxito!", "Aguarde la confirmación, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
               this.ocultarSpinner = true;
+
+              this.httpClient.get("http://wirepusher.com/send?id=mpgtP&title=COMANDA&message=Un cliente ha pagado su cuenta")
+              .subscribe(data => {
+                console.log(data['_body']);
+               }, error => {
+                console.log(error);
+              });
+        
+              this.httpClient.get("http://wirepusher.com/send?id=mpgtm&title=COMANDA&message=Un cliente ha pagado su cuenta")
+              .subscribe(data => {
+                console.log(data['_body']);
+               }, error => {
+                console.log(error);
+              });
+
         }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
       }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
 

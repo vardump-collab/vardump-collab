@@ -5,7 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import  {SpinnerComponent } from '../../components/spinner/spinner';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
-
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -88,6 +88,7 @@ contador;
        private authInstance: AngularFireAuth,
        private alertCtrl: AlertController,
        private toastCtrl: ToastController,
+       public httpClient: HttpClient
       )
        {
 
@@ -284,6 +285,20 @@ mensaje.once("value",(snap)=>{
 
           this.mostrarAlert3=false;
           this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
+
+          this.httpClient.get("http://wirepusher.com/send?id=mpgtP&title=COMANDA&message=Una persona ha realizado un pedido")
+          .subscribe(data => {
+            console.log(data['_body']);
+           }, error => {
+            console.log(error);
+          });
+    
+          this.httpClient.get("http://wirepusher.com/send?id=mpgtm&title=COMANDA&message=Una persona ha realizado un pedido")
+          .subscribe(data => {
+            console.log(data['_body']);
+           }, error => {
+            console.log(error);
+          });
         }, 3000);
         return;
       }
@@ -765,6 +780,7 @@ console.log("Le saco la selecccion a ");
      
        
         this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
+
       this.mostrarAlert3=true;
       setTimeout(()=>{
   
@@ -792,6 +808,22 @@ console.log("Le saco la selecccion a ");
      
        
         this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
+
+
+        this.httpClient.get("http://wirepusher.com/send?id=mpgtP&title=COMANDA&message=Se ha generado un pedido por delivery")
+        .subscribe(data => {
+          console.log(data['_body']);
+         }, error => {
+          console.log(error);
+        });
+  
+        this.httpClient.get("http://wirepusher.com/send?id=mpgtm&title=COMANDA&message=Se ha generado un pedido por delivery")
+        .subscribe(data => {
+          console.log(data['_body']);
+         }, error => {
+          console.log(error);
+        });
+
       this.mostrarAlert3=true;
       setTimeout(()=>{
   

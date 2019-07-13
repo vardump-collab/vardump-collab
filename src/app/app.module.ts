@@ -64,6 +64,8 @@ import { JuegoDosPage } from '../pages/juego-dos/juego-dos';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
 import { RuteoProvider } from '../providers/ruteo/ruteo';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -107,6 +109,7 @@ import { RuteoProvider } from '../providers/ruteo/ruteo';
     ChartsModule,
     ComponentsModule,
     HttpModule,
+    HttpClientModule,
     Ionic2RatingModule,
     AngularFirestoreModule
   ],
