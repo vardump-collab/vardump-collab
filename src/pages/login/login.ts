@@ -14,9 +14,7 @@ import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { Injectable } from '@angular/core';
 
-@Injectable()
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -37,15 +35,12 @@ export class LoginPage {
   public botonUsuarios = "";
 
 
-  public price: any = '';
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private authInstance: AngularFireAuth,
-    private toastCtrl: ToastController, private route: ActivatedRoute) {
-
-    this.price = this.route.snapshot.params['price'];
+    private toastCtrl: ToastController) {
     
     localStorage.setItem("anonimo", "false");
 

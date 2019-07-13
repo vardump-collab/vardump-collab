@@ -62,12 +62,9 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { JuegoDosPage } from '../pages/juego-dos/juego-dos';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
-import { RuteoProvider } from '../providers/ruteo/ruteo';
+//import { RuteoProvider } from '../providers/ruteo/ruteo';
 
 import { MapPage } from '../pages/map/map';
-import { FCM } from '@ionic-native/fcm/ngx';
-import { RouteReuseStrategy } from '@angular/router';
-import { IonicRouteStrategy } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 
 @NgModule({
@@ -163,10 +160,8 @@ import { Injectable } from '@angular/core';
     Camera,
     Firebase,
     FcmProvider,
-    RuteoProvider,
+   // RuteoProvider,
     Injectable,
-    FCM,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ]
 })
 export class AppModule {}
