@@ -26,7 +26,8 @@ export class FcmProvider {
     let token;
 
     if (this.platform.is('android')) {
-      token = await this.firebaseNative.getToken()
+      token = await this.firebaseNative.getToken();
+      console.log("token", token);
     } 
   
     if (this.platform.is('ios')) {

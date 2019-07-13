@@ -1922,6 +1922,7 @@ var FcmProvider = /** @class */ (function () {
                         return [4 /*yield*/, this.firebaseNative.getToken()];
                     case 1:
                         token = _a.sent();
+                        console.log("token", token);
                         _a.label = 2;
                     case 2:
                         if (!this.platform.is('ios')) return [3 /*break*/, 5];
@@ -9040,11 +9041,11 @@ var map = {
 		18
 	],
 	"../pages/cuenta/cuenta.module": [
-		822,
+		819,
 		17
 	],
 	"../pages/encuesta-de-empleado/encuesta-de-empleado.module": [
-		827,
+		820,
 		16
 	],
 	"../pages/encuesta-supervisor/encuesta-supervisor.module": [
@@ -9056,39 +9057,39 @@ var map = {
 		14
 	],
 	"../pages/juego-uno/juego-uno.module": [
-		819,
+		821,
 		13
 	],
 	"../pages/juego/juego.module": [
-		820,
+		822,
 		12
 	],
 	"../pages/listado-reservas/listado-reservas.module": [
-		821,
+		824,
 		11
 	],
 	"../pages/listado-supervisor/listado-supervisor.module": [
-		825,
+		823,
 		10
 	],
 	"../pages/login/login.module": [
-		824,
+		825,
 		9
 	],
 	"../pages/mapa-de-ruta/mapa-de-ruta.module": [
-		823,
+		826,
 		8
 	],
 	"../pages/mis-reservas/mis-reservas.module": [
-		812,
+		816,
 		7
 	],
 	"../pages/perfil/perfil.module": [
-		813,
+		812,
 		6
 	],
 	"../pages/principal/principal.module": [
-		826,
+		827,
 		5
 	],
 	"../pages/qr-de-la-mesa/qr-de-la-mesa.module": [
@@ -9096,15 +9097,15 @@ var map = {
 		4
 	],
 	"../pages/reserva/reserva.module": [
-		814,
+		813,
 		3
 	],
 	"../pages/sala-de-juegos/sala-de-juegos.module": [
-		816,
+		815,
 		2
 	],
 	"../pages/splash/splash.module": [
-		815,
+		814,
 		1
 	],
 	"../pages/tomar-pedido/tomar-pedido.module": [
@@ -10953,22 +10954,22 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/alta-duenio-supervisor/alta-duenio-supervisor.module#AltaDuenioSupervisorPageModule', name: 'AltaDuenioSupervisorPage', segment: 'alta-duenio-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/encuesta-supervisor/encuesta-supervisor.module#EncuestaSupervisorPageModule', name: 'EncuestaSupervisorPage', segment: 'encuesta-supervisor', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-dos/juego-dos.module#JuegoQuinterosPageModule', name: 'JuegoDosPage', segment: 'juego-dos', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reserva/reserva.module#ReservaPageModule', name: 'ReservaPage', segment: 'reserva', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash/splash.module#SplashPageModule', name: 'SplashPage', segment: 'splash', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sala-de-juegos/sala-de-juegos.module#SalaDeJuegosPageModule', name: 'SalaDeJuegosPage', segment: 'sala-de-juegos', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/mis-reservas/mis-reservas.module#MisReservasPageModule', name: 'MisReservasPage', segment: 'mis-reservas', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-de-mesa/alta-de-mesa.module#AltaDeMesaPageModule', name: 'AltaDeMesaPage', segment: 'alta-de-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/alta-empleado/alta-empleado.module#AltaEmpleadoPageModule', name: 'AltaEmpleadoPage', segment: 'alta-empleado', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego-uno/juego-uno.module#JuegoUnoPageModule', name: 'JuegoUnoPage', segment: 'juego-uno', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/juego/juego.module#JuegoPageModule', name: 'JuegoPage', segment: 'juego', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/cuenta/cuenta.module#CuentaPageModule', name: 'CuentaPage', segment: 'cuenta', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listado-supervisor/listado-supervisor.module#ListadoSupervisorPageModule', name: 'ListadoSupervisorPage', segment: 'listado-supervisor', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listado-reservas/listado-reservas.module#ListadoReservasPageModule', name: 'ListadoReservasPage', segment: 'listado-reservas', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/mapa-de-ruta/mapa-de-ruta.module#MapaDeRutaPageModule', name: 'MapaDeRutaPage', segment: 'mapa-de-ruta', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/principal/principal.module#PrincipalPageModule', name: 'PrincipalPage', segment: 'principal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/encuesta-de-empleado/encuesta-de-empleado.module#EncuestaDeEmpleadoPageModule', name: 'EncuestaDeEmpleadoPage', segment: 'encuesta-de-empleado', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-de-la-mesa/qr-de-la-mesa.module#QrDeLaMesaPageModule', name: 'QrDeLaMesaPage', segment: 'qr-de-la-mesa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tomar-pedido/tomar-pedido.module#TomarPedidoPageModule', name: 'TomarPedidoPage', segment: 'tomar-pedido', priority: 'low', defaultHistory: [] }
                     ]
@@ -11051,7 +11052,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_firestore__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_fcm_fcm__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_operators__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_operators__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__encuesta_de_empleado_encuesta_de_empleado__ = __webpack_require__(78);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11136,6 +11137,9 @@ var PrincipalPage = /** @class */ (function () {
                         case 'deliveryEntregado':
                             _this.acciones[0] = _this.accionesRespaldoCliente[7];
                             _this.acciones[1] = _this.accionesRespaldoCliente[0];
+                            break;
+                        case 'pagandoDelivery':
+                            _this.acciones[0] = _this.accionesRespaldoCliente[7];
                             break;
                         /*
                          *
@@ -11960,6 +11964,7 @@ var EncuestaDeEmpleadoPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_principal_principal__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_fcm_fcm__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_native_audio__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_operators__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11979,12 +11984,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen, modalCtrl, fcm, toastCtrl, nativeAudio) {
         var _this = this;
         this.nativeAudio = nativeAudio;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
         platform.ready().then(function () {
+            // Get a FCM token
+            fcm.getToken();
+            // Listen to incoming messages
+            fcm.listenToNotifications().pipe(Object(__WEBPACK_IMPORTED_MODULE_9_rxjs_operators__["tap"])(function (msg) {
+                // show a toast
+                var toast = toastCtrl.create({
+                    message: msg.body,
+                    duration: 3000
+                });
+                toast.present();
+            }))
+                .subscribe();
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
@@ -11998,7 +12016,8 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\javii\Documents\VarDumpCollab\vardump-collab\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_7__providers_fcm_fcm__["a" /* FcmProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_native_audio__["a" /* NativeAudio */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_7__providers_fcm_fcm__["a" /* FcmProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_native_audio__["a" /* NativeAudio */]])
     ], MyApp);
     return MyApp;
 }());
